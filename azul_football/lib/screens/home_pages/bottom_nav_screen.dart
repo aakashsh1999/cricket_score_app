@@ -23,9 +23,10 @@ class _BottomNavScreenState extends State<BottomNavScreen>
 
   int _indexPage;
   List<Widget> _listPages = [
-    NewsPage(),
+    HomePage(),
     EventsPage(),
-    FavoritesPage(),
+    NewsPage(),
+    
     AccountPage(),
   ];
 
@@ -156,10 +157,20 @@ class TabBottomMain extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(top: isSelected ? 15.0 : 0.0),
-      child: Icon(
-        icon,
-        size: 20.0,
-        color: Colors.white,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            size: 20.0,
+            color: Colors.white,
+          ),
+          if(!isSelected)
+          Text('Kuch',
+          style: TextStyle(
+            color: Colors.white,
+          ),),
+        ],
       ),
     );
   }

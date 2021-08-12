@@ -9,12 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
-class FavoritesPage extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  _FavoritesPageState createState() => _FavoritesPageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _FavoritesPageState extends State<FavoritesPage> {
+class _HomePageState extends State<HomePage> {
   bool _isEdit = false;
 
   @override
