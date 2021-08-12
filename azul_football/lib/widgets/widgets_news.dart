@@ -197,9 +197,9 @@ class CardFavoritTeam extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 230.0,
-        padding: EdgeInsets.symmetric(horizontal: 5.0),
-        margin: EdgeInsets.symmetric(horizontal: 3.0),
+        // width: 230.0,
+        padding: EdgeInsets.symmetric(vertical: 5.0),
+        margin: EdgeInsets.symmetric(vertical: 3.0),
         decoration: BoxDecoration(
           color: theme.backgroundColor,
           borderRadius: BorderRadius.circular(5),
@@ -223,7 +223,9 @@ class CardFavoritTeam extends StatelessWidget {
                 SizedBox(),
                 Text(
                   '$scoreHome : $scoreAway',
-                  style: theme.textTheme.headline1,
+                  style: theme.textTheme.headline1.copyWith(
+                    fontSize: 28
+                  ),
                 ),
                 Container(
                   decoration: BoxDecoration(
@@ -234,12 +236,13 @@ class CardFavoritTeam extends StatelessWidget {
                   child: Text(
                     getTranslated(context, 'live'),
                     style: TextStyle(
-                      fontSize: 8.0,
+                      fontSize: 15.0,
                       color: Colors.white,
                     ),
                   ),
                 ),
                 Container(
+                  width: 65,
                   decoration: BoxDecoration(
                     color: theme.primaryColorDark,
                     borderRadius: BorderRadius.only(
@@ -247,11 +250,13 @@ class CardFavoritTeam extends StatelessWidget {
                       topRight: Radius.circular(5.0),
                     ),
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 1),
+                  padding: EdgeInsets.symmetric(horizontal: 3.0, vertical: 3),
                   child: Text(
                     '$leagueName',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 8.0,
+                      
+                      fontSize: 10.0,
                       color: Colors.white,
                     ),
                   ),
@@ -279,33 +284,36 @@ class CardFavTeam extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Image(
-          width: 50.0,
-          height: 50.0,
-          fit: BoxFit.cover,
-          image: NetworkImage(logo),
-        ),
-        SizedBox(
-          width: 60.0,
-          child: Center(
-            child: RichText(
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.center,
-              text: TextSpan(
-                text: name,
-                style: theme.textTheme.subtitle2.copyWith(
-                  fontSize: 8.0,
-                  fontWeight: FontWeight.w800,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image(
+            width: 65.0,
+            height: 65.0,
+            fit: BoxFit.cover,
+            image: NetworkImage(logo),
+          ),
+          SizedBox(
+            width: 80.0,
+            child: Center(
+              child: RichText(
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  text: name,
+                  style: theme.textTheme.subtitle2.copyWith(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.w800,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

@@ -39,7 +39,7 @@ class _EventDetailsState extends State<EventDetails> {
   @override
   void initState() {
     _listPagesEvents = [
-      ChatsPage(),
+      // ChatsPage(),
       MatchStatsPage(),
       LineUpPage(
         homeName: EventsApi.eListEvents[widget.id].nameHome,
@@ -75,10 +75,21 @@ class _EventDetailsState extends State<EventDetails> {
               bottom: PreferredSize(
                 preferredSize: Size(mSize.size.width, 40.0),
                 child: CardTabsEvents(children: [
+                  // TabTileEvent(
+                  //   isSelected: _indexTabEvent == 0,
+                  //   label: getTranslated(context, 'chats'),
+                  //   icon: FontAwesomeIcons.solidComments,
+                  //   onTap: () {
+                  //     setState(() {
+                  //       _animateToPage(0);
+                  //       _indexTabEvent = 0;
+                  //     });
+                  //   },
+                  // ),
                   TabTileEvent(
                     isSelected: _indexTabEvent == 0,
-                    label: getTranslated(context, 'chats'),
-                    icon: FontAwesomeIcons.solidComments,
+                    label: getTranslated(context, 'match_stats'),
+                    icon: FontAwesomeIcons.chartPie,
                     onTap: () {
                       setState(() {
                         _animateToPage(0);
@@ -88,8 +99,8 @@ class _EventDetailsState extends State<EventDetails> {
                   ),
                   TabTileEvent(
                     isSelected: _indexTabEvent == 1,
-                    label: getTranslated(context, 'match_stats'),
-                    icon: FontAwesomeIcons.chartPie,
+                    label: getTranslated(context, 'lineup'),
+                    icon: FontAwesomeIcons.users,
                     onTap: () {
                       setState(() {
                         _animateToPage(1);
@@ -99,23 +110,12 @@ class _EventDetailsState extends State<EventDetails> {
                   ),
                   TabTileEvent(
                     isSelected: _indexTabEvent == 2,
-                    label: getTranslated(context, 'lineup'),
-                    icon: FontAwesomeIcons.users,
-                    onTap: () {
-                      setState(() {
-                        _animateToPage(2);
-                        _indexTabEvent = 2;
-                      });
-                    },
-                  ),
-                  TabTileEvent(
-                    isSelected: _indexTabEvent == 3,
                     label: getTranslated(context, 'commentary'),
                     icon: FontAwesomeIcons.alignJustify,
                     onTap: () {
                       setState(() {
-                        _animateToPage(3);
-                        _indexTabEvent = 3;
+                        _animateToPage(2);
+                        _indexTabEvent = 2;
                       });
                     },
                   ),
