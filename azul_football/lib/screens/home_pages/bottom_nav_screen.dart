@@ -23,9 +23,9 @@ class _BottomNavScreenState extends State<BottomNavScreen>
 
   int _indexPage;
   List<Widget> _listPages = [
-    FavoritesPage(),
+    HomePage(),
     EventsPage(),
-    NewsPage(),
+    NewsPage(),    
     AccountPage(),
   ];
 
