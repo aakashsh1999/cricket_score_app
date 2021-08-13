@@ -17,6 +17,7 @@ import 'package:azul_football/widgets/widgets_news.dart';
 import 'package:azul_football/screens/details/events_details.dart';
 import 'package:azul_football/api/events_api.dart';
 
+// some code
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
