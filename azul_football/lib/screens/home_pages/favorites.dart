@@ -31,84 +31,65 @@ class _HomePageState extends State<HomePage> {
     final mSize = MediaQuery.of(context);
     final theme = Theme.of(context);
 
-    return DefaultTabController(length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: theme.primaryColorDark,
-          automaticallyImplyLeading: false,
-          title: Text('Cricket Data',
-          style: TextStyle(fontSize: 24.0),
-          ),
-          centerTitle: false,
-           bottom: TabBar(
-            indicatorColor: Colors.white,
-            indicatorSize: TabBarIndicatorSize.label,
-            indicatorWeight: 5.0,
-            tabs: [
-              Tab(text: "Live",),
-              Tab(text: "Upcoming"),
-              Tab(text: "Finished"),
-            ],
-        ),
-        ),
-         body: TabBarView(
-          children: [
-            Container( child:  ListView(
-              // scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-              children: [
-                for (int i = 0; i < 4; i++)
-                  ShakeListTransition(
-                    duration: Duration(milliseconds: (i + 3) * 300),
-                    axis: Axis.vertical,
-                    child: CardFavoritTeam(
-                      scoreHome: EventsApi.eListEvents[i].scoreHome,
-                      scoreAway: EventsApi.eListEvents[i].scoreAway,
-                      logoAway: EventsApi.eListEvents[i].logoAway,
-                      logoHome: EventsApi.eListEvents[i].logoHome,
-                      nameAway: EventsApi.eListEvents[i].nameAway,
-                      nameHome: EventsApi.eListEvents[i].nameHome,
-                      leagueName: LeaguesApi.lLeaguesList[i].name,
-                      onTap: () {
-                        //TODO: Open Events Details
-                        Get.to(
-                          () => EventDetails(id: i, leagueId: i),
-                        );
-                      },
-                    ),
-                  ),
-              ],
-            ),),
-            Center( child: Text("Page 2")),
-              Center( child: Text("Page 3")),
-          ],
-        ),
-      body: ListView(
-              // scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-              children: [
-                for (int i = 0; i < 4; i++)
-                  ShakeListTransition(
-                    duration: Duration(milliseconds: (i + 3) * 300),
-                    axis: Axis.vertical,
-                    child: CardFavoritTeam(
-                      scoreHome: EventsApi.eListEvents[i].scoreHome,
-                      scoreAway: EventsApi.eListEvents[i].scoreAway,
-                      logoAway: EventsApi.eListEvents[i].logoAway,
-                      logoHome: EventsApi.eListEvents[i].logoHome,
-                      nameAway: EventsApi.eListEvents[i].nameAway,
-                      nameHome: EventsApi.eListEvents[i].nameHome,
-                      leagueName: LeaguesApi.lLeaguesList[i].name,
-                      onTap: () {
-                        //TODO: Open Events Details
-                        Get.to(
-                          () => EventDetails(id: i, leagueId: i),
-                        );
-                      },
-                    ),
-                  ),
+    return DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: theme.primaryColorDark,
+            automaticallyImplyLeading: false,
+            title: Text(
+              'Cricket Data',
+              style: TextStyle(fontSize: 24.0),
+            ),
+            centerTitle: false,
+            bottom: TabBar(
+              indicatorColor: Colors.white,
+              indicatorSize: TabBarIndicatorSize.label,
+              indicatorWeight: 5.0,
+              tabs: [
+                Tab(
+                  text: "Live",
+                ),
+                Tab(text: "Upcoming"),
+                Tab(text: "Finished"),
               ],
             ),
-    );
+          ),
+          body: TabBarView(
+            children: [
+              Container(
+                child: ListView(
+                  // scrollDirection: Axis.horizontal,
+                  padding:
+                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+                  children: [
+                    for (int i = 0; i < 4; i++)
+                      ShakeListTransition(
+                        duration: Duration(milliseconds: (i + 3) * 300),
+                        axis: Axis.vertical,
+                        child: CardFavoritTeam(
+                          scoreHome: EventsApi.eListEvents[i].scoreHome,
+                          scoreAway: EventsApi.eListEvents[i].scoreAway,
+                          logoAway: EventsApi.eListEvents[i].logoAway,
+                          logoHome: EventsApi.eListEvents[i].logoHome,
+                          nameAway: EventsApi.eListEvents[i].nameAway,
+                          nameHome: EventsApi.eListEvents[i].nameHome,
+                          leagueName: LeaguesApi.lLeaguesList[i].name,
+                          onTap: () {
+                            //TODO: Open Events Details
+                            Get.to(
+                              () => EventDetails(id: i, leagueId: i),
+                            );
+                          },
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+              Center(child: Text("Page 2")),
+              Center(child: Text("Page 3")),
+            ],
+          ),
+        ));
   }
 }
