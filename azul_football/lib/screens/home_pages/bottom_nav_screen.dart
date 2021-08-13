@@ -90,6 +90,8 @@ class _BottomNavScreenState extends State<BottomNavScreen>
                     _indexPage = index;
                   });
                 },
+                //TODO: bottom ball jumping transition
+                duration: Duration(milliseconds: 2000),
                 circleGradient: LinearGradient(
                   colors: [
                     theme.primaryColorDark,
@@ -133,7 +135,7 @@ class _BottomNavScreenState extends State<BottomNavScreen>
                   TabItemIcon(
                     buildWidget: (_, color) => TabBottomMain(
                       isSelected: _indexPage == 4,
-                      icon: FontAwesomeIcons.dotCircle,
+                      icon: Icons.menu_open,
                       label:'More'
                     ),
                     startColor: theme.backgroundColor,
@@ -161,7 +163,8 @@ class TabBottomMain extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(top: isSelected ? 15.0 : 5.0),
-      child: Column(
+      child:
+       Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
