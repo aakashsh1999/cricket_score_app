@@ -23,6 +23,8 @@ dependencies:
   readmore: ^2.0.0
   flutter_svg: ^0.21.0+1
   flutter_html: any
+  tabbar: ^0.1.1
+
 
 
   intl: ^0.17.0
