@@ -6,7 +6,7 @@ import 'package:jumping_bottom_nav_bar/jumping_bottom_nav_bar.dart';
 
 import 'account.dart';
 import 'events.dart';
-import 'favorites.dart';
+import 'home.dart';
 
 class BottomNavScreen extends StatefulWidget {
   final int indexPage;
