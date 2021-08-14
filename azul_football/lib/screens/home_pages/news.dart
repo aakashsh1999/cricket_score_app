@@ -92,7 +92,8 @@ class _NewsPageState extends State<NewsPage> {
                             screen: NewsDetails(
                               id: i,
                             ),
-                            indexPage: 1,
+                            //Todo: bouncing from need to resolve
+                            indexPage: 3,
                           ),
                           transition: Transition.fadeIn,
                         );
