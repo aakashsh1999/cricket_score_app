@@ -1,8 +1,10 @@
 import 'package:azul_football/api/events_api.dart';
+import 'dart:core';
 import 'package:azul_football/api/leagues_api.dart';
 import 'package:azul_football/api/news_api.dart';
 
 import 'package:azul_football/localizations/localization_constants.dart';
+import 'package:azul_football/models/news.dart';
 import 'package:azul_football/screens/details/events_details.dart';
 import 'package:azul_football/screens/details/news_details.dart';
 import 'package:azul_football/widgets/trensations_widgets.dart';
@@ -12,8 +14,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'bottom_nav_screen.dart';
+import 'dart:convert' as convert;
 
 class NewsPage extends StatefulWidget {
   @override
@@ -22,6 +26,25 @@ class NewsPage extends StatefulWidget {
 
 class _NewsPageState extends State<NewsPage> {
   int _selectedRecent = 0;
+  List <NewsModel> newsData = [];
+  var url = Uri.http('newsapi.org','/v2/everything', {'q':'cricket'} );
+      void initState(){
+        super.initState();
+        getNewsData();
+      } 
+
+
+      void dispose(){
+        super.dispose();
+      }
+
+    getNewsData() async{
+      var response = await http.get(url, headers: {
+        HttpHeaders.authorizationHeader:'88e4d8769a6342119a67b335cb2bec68'
+      });
+      print(response.body);
+    }
+
 
   @override
   Widget build(BuildContext context) {

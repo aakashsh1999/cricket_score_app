@@ -1,6 +1,33 @@
 import 'package:azul_football/models/news.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:io';
 class NewsApi {
+    var url = Uri.https('newsapi.org', '/v2/everything', {'q': 'cricket'});
+    getNews() async{
+    var response = await http.get(url, headers: {
+         HttpHeaders.authorizationHeader: '88e4d8769a6342119a67b335cb2bec68'
+      });
+      print(response.statusCode);
+        //   if(jsonData['status'] == "ok"){
+        //  jsonData["articles"].forEach((element, index){
+
+        // if(element['urlToImage'] != null && element['description'] != null){
+        //   NewsModel article = NewsModel(
+        //     title: element['title'],
+        //     id: index,
+        //     body: element['description'],
+        //     image: element['urlToImage'],
+        //     date: DateTime.parse(element['publishedAt']),
+        //     category: element["category"],
+        //   );
+        //   newsData.add(article);
+        //   print(newsData);
+        // }
+
+      // });
+
+      }
+  
   static List<NewsModel> aListNews = [
     NewsModel(
       id: '1',

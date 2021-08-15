@@ -18,33 +18,42 @@ class AccountPage extends StatefulWidget {
 
 class _AccountPageState extends State<AccountPage> {
   var _selectedLanguage = 'English';
-
-  File _imageFile;
-
+  
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final themeProv = Provider.of<ThemeProvider>(context);
-    return SafeArea(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('More', style: TextStyle(fontSize: 24.0),),
+        backgroundColor: theme.primaryColorDark,
+        
+      ),
+    body:  SafeArea(
       child: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
+        padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 0.0),
         children: [
-          SizedBox(height: 15),
-          //TODO: User info
-          CardUserProfile(
-            image: _imageFile,
-            onTap: () async {
-              final _image = await FunctionsHelper.pickImage();
+          // //TODO: User info
+          // CardUserProfile(
+          //   image: _imageFile,
+          //   onTap: () async {
+          //     final _image = await FunctionsHelper.pickImage();
 
-              if (_image != null) {
-                setState(() {
-                  _imageFile = _image;
-                });
-              }
-            },
-          ),
-          SizedBox(height: 15),
-          Divider(),
+          //     if (_image != null) {
+          //       setState(() {
+          //         _imageFile = _image;
+          //       });
+          //     }
+          //   },
+          // ),
+          // SizedBox(height: 15),
+          // Divider(),
           //TODO: Select Language
+           SizedBox(height: 15),
+            ShakeTransition(
+            duration: Duration(milliseconds: 2000),
+            child: Text('Settings', style: TextStyle(decoration:TextDecoration.underline,fontSize: 22.0, fontWeight: FontWeight.bold,),),
+            ),
           ShakeTransition(
             duration: Duration(milliseconds: 1200),
             child: CardSelectLanguage(
@@ -72,9 +81,20 @@ class _AccountPageState extends State<AccountPage> {
           ),
           Divider(),
           ShakeTransition(
+            duration: Duration(milliseconds: 2000),
+            child: Text('Support', style: TextStyle(decoration:TextDecoration.underline,fontSize: 22.0, fontWeight: FontWeight.bold,),),
+            ),
+           ShakeTransition(
             duration: Duration(milliseconds: 1800),
             child: CardTileSettings(
-              label: getTranslated(context, 'privacy'),
+              label: 'Check For Updates',
+              onTap: () {},
+            ),
+          ),
+          ShakeTransition(
+            duration: Duration(milliseconds: 1800),
+            child: CardTileSettings(
+              label: 'Report A Problem',
               onTap: () {},
             ),
           ),
@@ -99,6 +119,10 @@ class _AccountPageState extends State<AccountPage> {
             ),
           ),
           Divider(),
+            ShakeTransition(
+            duration: Duration(milliseconds: 2000),
+            child: Text('Visit', style: TextStyle(decoration:TextDecoration.underline,fontSize: 22.0, fontWeight: FontWeight.bold,),),
+            ),
           ShakeTransition(
             duration: Duration(milliseconds: 2600),
             child: CardTileSettings(
@@ -130,19 +154,70 @@ class _AccountPageState extends State<AccountPage> {
               },
             ),
           ),
-          Divider(),
+
+            Divider(),
+            ShakeTransition(
+            duration: Duration(milliseconds: 2000),
+            child: Text('About', style: TextStyle(decoration:TextDecoration.underline,fontSize: 22.0, fontWeight: FontWeight.bold,),),
+            ),
+
           ShakeTransition(
-            duration: Duration(milliseconds: 3200),
+            duration: Duration(milliseconds: 2000),
             child: CardTileSettings(
-              label: getTranslated(context, 'logout'),
-              icon: FontAwesomeIcons.signOutAlt,
-              onTap: () {
-                Get.toNamed('/');
-              },
+              label: 'About Us',
+              // onTap: () async {
+              //   await launch(
+              //       'https://play.google.com/store/apps/details?id=com.md.kooramd');
+              // },
             ),
           ),
+          ShakeTransition(
+            duration: Duration(milliseconds: 2400),
+            child: CardTileSettings(
+              label: 'Terms and Condition'
+              // onTap: () async {
+              //   await launch(
+              //       'https://play.google.com/store/apps/details?id=com.md.kooramd');
+              // },
+            ),
+          ),  
+           ShakeTransition(
+            duration: Duration(milliseconds: 2000),
+            child: CardTileSettings(
+              label: 'Privacy Policy',
+              // onTap: () async {
+              //   await launch(
+              //       'https://play.google.com/store/apps/details?id=com.md.kooramd');
+              // },
+            ),
+          ),
+           ShakeTransition(
+            duration: Duration(milliseconds: 2000),
+            child: CardTileSettings(
+              label: 'Contact Us',
+              // onTap: () async {
+              //   await launch(
+              //       'https://play.google.com/store/apps/details?id=com.md.kooramd');
+              // },
+            ),
+          ),
+
+          // Divider(),
+          // ShakeTransition(
+          //   duration: Duration(milliseconds: 3200),
+          //   child: CardTileSettings(
+          //     label: getTranslated(context, 'logout'),
+          //     icon: FontAwesomeIcons.signOutAlt,
+          //     onTap: () {
+          //       Get.toNamed('/');
+          //     },
+          //   ),
+          // ),
         ],
       ),
-    );
+    )
+    
+    )
+    ;
   }
 }

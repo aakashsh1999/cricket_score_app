@@ -13,8 +13,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-    _timer = Timer(Duration(seconds: 3), () {
-      Get.offAllNamed('/welcome');
+    _timer = Timer(Duration(seconds: 2), () {
+      Get.offAllNamed('/home');
     });
 
     super.initState();
@@ -31,9 +31,9 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Center(
         child: Image.asset(
-          'assets/images/icon_splash.png',
-          width: 140.0,
-          height: 140.0,
+          'assets/images/splashIcon.png',
+          width: 200.0,
+          height: 200.0,
         ),
       ),
     );
