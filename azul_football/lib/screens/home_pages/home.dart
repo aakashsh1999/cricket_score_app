@@ -27,6 +27,13 @@ class _HomePageState extends State<HomePage> {
   bool _isEdit = false;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    EventsApi.getData();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final mSize = MediaQuery.of(context);
     final theme = Theme.of(context);
@@ -58,32 +65,37 @@ class _HomePageState extends State<HomePage> {
           body: TabBarView(
             children: [
               Container(
-                child: ListView(
-                  // scrollDirection: Axis.horizontal,
-                  padding:
-                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                  children: [
-                    for (int i = 0; i < 4; i++)
-                      ShakeListTransition(
-                        duration: Duration(milliseconds: (i + 3) * 300),
-                        axis: Axis.vertical,
-                        child: CardFavoritTeam(
-                          scoreHome: EventsApi.eListEvents[i].scoreHome,
-                          scoreAway: EventsApi.eListEvents[i].scoreAway,
-                          logoAway: EventsApi.eListEvents[i].logoAway,
-                          logoHome: EventsApi.eListEvents[i].logoHome,
-                          nameAway: EventsApi.eListEvents[i].nameAway,
-                          nameHome: EventsApi.eListEvents[i].nameHome,
-                          leagueName: LeaguesApi.lLeaguesList[i].name,
-                          onTap: () {
-                            //TODO: Open Events Details
-                            Get.to(
-                              () => EventDetails(id: i, leagueId: i),
-                            );
-                          },
-                        ),
-                      ),
-                  ],
+                child: StreamBuilder<Object>(
+                  stream: EventsApi.getData().asStream(),
+                  builder: (context, snapshot) {
+                    return ListView(
+                      // scrollDirection: Axis.horizontal,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
+                      children: [
+                        for (int i = 0; i < EventsApi.eListEvents.length; i++)
+                          ShakeListTransition(
+                            duration: Duration(milliseconds: (i + 3) * 300),
+                            axis: Axis.vertical,
+                            child: CardFavoritTeam(
+                              scoreHome: EventsApi.eListEvents[i].teamOneScore,
+                              scoreAway: EventsApi.eListEvents[i].teamTwoScore,
+                              logoAway: EventsApi.eListEvents[i].teamTwoLogo,
+                              logoHome: EventsApi.eListEvents[i].teamOneLogo,
+                              nameAway: EventsApi.eListEvents[i].teamTwo,
+                              nameHome: EventsApi.eListEvents[i].teamOne,
+                              leagueName: LeaguesApi.lLeaguesList[i].name,
+                              onTap: () {
+                                //TODO: Open Events Details
+                                Get.to(
+                                  () => EventDetails(id: i, leagueId: i),
+                                );
+                              },
+                            ),
+                          ),
+                      ],
+                    );
+                  }
                 ),
               ),
               Center(child: Text("Page 2")),

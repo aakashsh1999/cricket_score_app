@@ -1,23 +1,44 @@
-class EventsModel {
-  final id;
-  final nameHome;
-  final nameAway;
-  final logoHome;
-  final logoAway;
-  final scoreHome;
-  final scoreAway;
-  final dateMatch;
-  final timeMatch;
+import 'package:flutter/cupertino.dart';
 
-  EventsModel({
-    this.id,
-    this.nameHome,
-    this.nameAway,
-    this.logoHome,
-    this.logoAway,
-    this.scoreHome,
-    this.scoreAway,
-    this.dateMatch,
-    this.timeMatch,
+class EventsModel {
+  final int id;
+  final String status;
+  final String dateMatch;
+  final String timeMatch;
+  final String teamOne;
+  final String teamTwo;
+  final String type;
+  final bool firstInningsFinished;
+  final int teamOneScore;
+  final int teamTwoScore;
+  final double teamOneOvers;
+  final double teamTwoOvers;
+  final int teamOneWicketsDown;
+  final int teamTwoWicketsDown;
+  final String teamOneLogo;
+  final String teamTwoLogo;
+  final String subtitle;
+  final bool teamOneBatting;
+
+  EventsModel(
+    {
+    @required  this.status,
+    @required this.teamOne,
+    @required this.teamTwo,
+    @required this.type,
+    @required this.firstInningsFinished,
+    @required this.teamOneScore,
+    @required this.teamTwoScore,
+    @required this.teamOneOvers,
+    @required this.teamTwoOvers,
+    @required this.teamOneWicketsDown,
+    @required this.teamTwoWicketsDown,
+    @required this.teamOneLogo,
+    @required this.teamTwoLogo,
+    @required this.subtitle,
+    @required this.teamOneBatting, 
+    @required this.id,
+    @required this.dateMatch,
+    @required this.timeMatch,
   });
 }
