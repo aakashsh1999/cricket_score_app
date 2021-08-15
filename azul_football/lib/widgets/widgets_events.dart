@@ -402,13 +402,13 @@ class BarEventDetails extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CardTeamEvent(
-              name: EventsApi.eListEvents[id].nameHome,
-              logo: EventsApi.eListEvents[id].logoHome,
+              name: EventsApi.eListEvents[id].teamOne,
+              logo: EventsApi.eListEvents[id].teamOneLogo,
             ),
             Column(
               children: [
                 Text(
-                  '${EventsApi.eListEvents[id].scoreHome}:${EventsApi.eListEvents[id].scoreAway}',
+                  '${EventsApi.eListEvents[id].teamOneScore}:${EventsApi.eListEvents[id].teamTwoScore}',
                   style: GoogleFonts.montserrat(
                     fontSize: 66.0,
                     fontWeight: FontWeight.bold,
@@ -426,8 +426,8 @@ class BarEventDetails extends StatelessWidget {
               ],
             ),
             CardTeamEvent(
-              logo: EventsApi.eListEvents[id].logoAway,
-              name: EventsApi.eListEvents[id].nameAway,
+              logo: EventsApi.eListEvents[id].teamTwoLogo,
+              name: EventsApi.eListEvents[id].teamTwo,
             ),
           ],
         ),

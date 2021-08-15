@@ -52,3 +52,5 @@ flutter:
     - assets/images/
     - assets/languages/
     - assets/images/leagues/
+    #data
+    - assets/dummyData/
