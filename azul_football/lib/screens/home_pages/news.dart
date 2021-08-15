@@ -32,39 +32,39 @@ class _NewsPageState extends State<NewsPage> {
       body: ListView(
         children: [
           SizedBox(height: 10.0),
-          //TODO: List Lives Favorites
-          Container(
-            width: mSize.size.width,
-            height: 100.0,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
-              children: [
-                for (int i = 0; i < 4; i++)
-                  ShakeListTransition(
-                    duration: Duration(milliseconds: (i + 3) * 300),
-                    axis: Axis.horizontal,
-                    child: CardFavoritTeam(
-                      scoreHome: EventsApi.eListEvents[i].scoreHome,
-                      scoreAway: EventsApi.eListEvents[i].scoreAway,
-                      logoAway: EventsApi.eListEvents[i].logoAway,
-                      logoHome: EventsApi.eListEvents[i].logoHome,
-                      nameAway: EventsApi.eListEvents[i].nameAway,
-                      nameHome: EventsApi.eListEvents[i].nameHome,
-                      leagueName: LeaguesApi.lLeaguesList[i].name,
-                      onTap: () {
-                        //TODO: Open Events Details
-                        Get.to(
-                          () => EventDetails(id: i, leagueId: i),
-                        );
-                      },
-                    ),
-                  ),
-              ],
-            ),
-          ),
+          // // TODO: List Lives Favorites
+          // Container(
+          //   width: mSize.size.width,
+          //   height: 100.0,
+          //   child: ListView(
+          //     scrollDirection: Axis.horizontal,
+          //     padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 5.0),
+          //     children: [
+          //       for (int i = 0; i < 4; i++)
+          //         ShakeListTransition(
+          //           duration: Duration(milliseconds: (i + 3) * 300),
+          //           axis: Axis.horizontal,
+          //           child: CardFavoritTeam(
+          //             scoreHome: EventsApi.eListEvents[i].scoreHome,
+          //             scoreAway: EventsApi.eListEvents[i].scoreAway,
+          //             logoAway: EventsApi.eListEvents[i].logoAway,
+          //             logoHome: EventsApi.eListEvents[i].logoHome,
+          //             nameAway: EventsApi.eListEvents[i].nameAway,
+          //             nameHome: EventsApi.eListEvents[i].nameHome,
+          //             leagueName: LeaguesApi.lLeaguesList[i].name,
+          //             onTap: () {
+          //               //TODO: Open Events Details
+          //               Get.to(
+          //                 () => EventDetails(id: i, leagueId: i),
+          //               );
+          //             },
+          //           ),
+          //         ),
+          //     ],
+          //   ),
+          // ),
 
-          SizedBox(height: 5.0),
+          // SizedBox(height: 5.0),
           //TODO: Carousel Recent's news
           Container(
             width: mSize.size.width,
@@ -92,7 +92,8 @@ class _NewsPageState extends State<NewsPage> {
                             screen: NewsDetails(
                               id: i,
                             ),
-                            indexPage: 1,
+                            //Todo: bouncing from need to resolve
+                            indexPage: 3,
                           ),
                           transition: Transition.fadeIn,
                         );

@@ -6,7 +6,7 @@ import 'package:jumping_bottom_nav_bar/jumping_bottom_nav_bar.dart';
 
 import 'account.dart';
 import 'events.dart';
-import 'favorites.dart';
+import 'home.dart';
 
 class BottomNavScreen extends StatefulWidget {
   final int indexPage;
@@ -23,9 +23,9 @@ class _BottomNavScreenState extends State<BottomNavScreen>
 
   int _indexPage;
   List<Widget> _listPages = [
-    NewsPage(),
+    HomePage(),
     EventsPage(),
-    FavoritesPage(),
+    NewsPage(),    
     AccountPage(),
   ];
 
@@ -90,6 +90,8 @@ class _BottomNavScreenState extends State<BottomNavScreen>
                     _indexPage = index;
                   });
                 },
+                //TODO: bottom ball jumping transition
+                duration: Duration(milliseconds: 2000),
                 circleGradient: LinearGradient(
                   colors: [
                     theme.primaryColorDark,
@@ -104,6 +106,7 @@ class _BottomNavScreenState extends State<BottomNavScreen>
                     buildWidget: (_, color) => TabBottomMain(
                       isSelected: _indexPage == 1,
                       icon: FontAwesomeIcons.home,
+                      label:'Home'
                     ),
                     startColor: theme.backgroundColor,
                     endColor: theme.backgroundColor,
@@ -112,7 +115,8 @@ class _BottomNavScreenState extends State<BottomNavScreen>
                   TabItemIcon(
                     buildWidget: (_, color) => TabBottomMain(
                       isSelected: _indexPage == 2,
-                      icon: FontAwesomeIcons.futbol,
+                      icon: FontAwesomeIcons.baseballBall,
+                      label:'Matches'
                     ),
                     startColor: theme.backgroundColor,
                     endColor: theme.backgroundColor,
@@ -121,7 +125,8 @@ class _BottomNavScreenState extends State<BottomNavScreen>
                   TabItemIcon(
                     buildWidget: (_, color) => TabBottomMain(
                       isSelected: _indexPage == 3,
-                      icon: FontAwesomeIcons.heart,
+                      icon: FontAwesomeIcons.newspaper,
+                      label:'News'
                     ),
                     startColor: theme.backgroundColor,
                     endColor: theme.backgroundColor,
@@ -130,7 +135,8 @@ class _BottomNavScreenState extends State<BottomNavScreen>
                   TabItemIcon(
                     buildWidget: (_, color) => TabBottomMain(
                       isSelected: _indexPage == 4,
-                      icon: FontAwesomeIcons.cog,
+                      icon: Icons.menu_open,
+                      label:'More'
                     ),
                     startColor: theme.backgroundColor,
                     endColor: theme.backgroundColor,
@@ -149,17 +155,30 @@ class _BottomNavScreenState extends State<BottomNavScreen>
 class TabBottomMain extends StatelessWidget {
   final bool isSelected;
   final IconData icon;
+  final String label;
 
-  TabBottomMain({this.isSelected = false, this.icon});
+  TabBottomMain({this.isSelected = false, this.icon, this.label});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: isSelected ? 15.0 : 0.0),
-      child: Icon(
-        icon,
-        size: 20.0,
-        color: Colors.white,
+      padding: EdgeInsets.only(top: isSelected ? 15.0 : 5.0),
+      child:
+       Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            icon,
+            size: 20.0,
+            color: Colors.white,
+          ),
+          if(!isSelected)
+           Padding(
+            padding: const EdgeInsets.only(top: 5.0),
+            child: Text(label, style: TextStyle(color: Colors.white,), textAlign: TextAlign.center,),
+          )
+          ,
+        ],
       ),
     );
   }
