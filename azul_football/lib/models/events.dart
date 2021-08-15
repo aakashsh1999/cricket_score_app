@@ -19,7 +19,7 @@ class EventsModel {
   final String teamTwoLogo;
   final String subtitle;
   final bool teamOneBatting;
-
+  final String leagueName;
   EventsModel(
     {
     @required  this.status,
@@ -40,5 +40,6 @@ class EventsModel {
     @required this.id,
     @required this.dateMatch,
     @required this.timeMatch,
+    @required this.leagueName, 
   });
 }
