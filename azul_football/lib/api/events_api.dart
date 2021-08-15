@@ -1,58 +1,63 @@
 import 'package:azul_football/models/events.dart';
+// import 'dart:async' show Future;
+// import 'package:flutter/services.dart' show rootBundle;
+// import 'dart:convert';
+// import 'package:flutter/services.dart';
 
 class EventsApi {
   static List<EventsModel> eListEvents = [
-    EventsModel(
-      id: '0',
-      logoAway:
-          'https://ssl.gstatic.com/onebox/media/sports/logos/-WjHLbBIQO9xE2e2MW3OPQ_48x48.png',
-      logoHome:
-          'https://ssl.gstatic.com/onebox/media/sports/logos/bXkiyIzsbDip3x2FFcUU3A_48x48.png',
-      nameAway: 'Wolves',
-      nameHome: 'West Ham',
-      scoreAway: 2,
-      scoreHome: 3,
-      dateMatch: 'Today, 9:24 PM',
-      timeMatch: '75:04',
-    ),
-    EventsModel(
-      id: '1',
-      logoAway:
-          'https://ssl.gstatic.com/onebox/media/sports/logos/udQ6ns69PctCv143h-GeYw_48x48.png',
-      logoHome:
-          'https://ssl.gstatic.com/onebox/media/sports/logos/EKIe0e-ZIphOcfQAwsuEEQ_48x48.png',
-      nameAway: 'Man United',
-      nameHome: 'Brighton',
-      scoreAway: 2,
-      scoreHome: 1,
-      dateMatch: 'Today, 12:30 PM',
-      timeMatch: '23:45',
-    ),
-    EventsModel(
-      id: '2',
-      logoAway:
-          'https://ssl.gstatic.com/onebox/media/sports/logos/wF8AgQsssfy3_GLyVR3dSg_48x48.png',
-      logoHome:
-          'https://ssl.gstatic.com/onebox/media/sports/logos/4us2nCgl6kgZc0t3hpW75Q_48x48.png',
-      nameAway: 'Sheffield United',
-      nameHome: 'Arsenal',
-      scoreAway: 0,
-      scoreHome: 0,
-      dateMatch: 'Today, 15:24 PM',
-      timeMatch: '',
-    ),
-    EventsModel(
-      id: '3',
-      logoAway:
-          'https://ssl.gstatic.com/onebox/media/sports/logos/C3J47ea36cMBc4XPbp9aaA_48x48.png',
-      logoHome:
-          'https://ssl.gstatic.com/onebox/media/sports/logos/8piQOzndGmApKYTcvyN9vA_48x48.png',
-      nameAway: 'Everton',
-      nameHome: 'Crystal Palace',
-      scoreAway: 1,
-      scoreHome: 1,
-      dateMatch: 'Today, 17:00 PM',
-      timeMatch: '90+6',
-    ),
+for(int i=0;i<4;i++)
+EventsModel(
+            status: "Tea Break",
+            teamOne: "India",
+            teamTwo: "England",
+            type:"Test",
+            firstInningsFinished: true,
+            teamOneScore: 364,
+            teamTwoScore: 310,
+            teamOneOvers: 126.1,
+            teamTwoOvers: 98.0,
+            teamOneWicketsDown: 11,
+            teamTwoWicketsDown: 5,
+            teamOneLogo: "https://upload.wikimedia.org/wikipedia/en/thumb/8/8d/Cricket_India_Crest.svg/1200px-Cricket_India_Crest.svg.png",
+            teamTwoLogo: "https://banner2.cleanpng.com/20180525/qgz/kisspng-england-cricket-team-australia-national-cricket-te-5b0818af5b12d6.4271737015272572633731.jpg",
+            subtitle: "Season 2: ENG trail by 54 runs",
+            teamOneBatting: false,
+            id: i+1,
+            timeMatch: "Now",
+            dateMatch: "Today",
+            leagueName:"India Tour of England 2021"),
+      
+
   ];
+
+  // static Future getData() async {
+  //   eListEvents = [];
+  //   var jsonText = await rootBundle.loadString('assets/dummyData/Live.json');
+  //   var data = json.decode(jsonText);
+  //    for (int i = 0; i < data["Matches"].length; i++) {
+  //      print(i);
+  //     eListEvents.add(
+  //       EventsModel(
+  //           status: data["Matches"][i]["Status"],
+  //           teamOne: data["Matches"][i]["TeamOne"],
+  //           teamTwo: data["Matches"][i]["TeamTwo"],
+  //           type: data["Matches"][i]["Type"],
+  //           firstInningsFinished: data["Matches"][i]["FirstInningsFinished"],
+  //           teamOneScore: data["Matches"][i]["TeamOneScore"],
+  //           teamTwoScore: data["Matches"][i]["TeamTwoScore"],
+  //           teamOneOvers: data["Matches"][i]["teamOneOvers"],
+  //           teamTwoOvers: data["Matches"][i]["teamTwoOvers"],
+  //           teamOneWicketsDown: data["Matches"][i]["teamOneWicketsDown"],
+  //           teamTwoWicketsDown: data["Matches"][i]["teamTwoWicketsDown"],
+  //           teamOneLogo: data["Matches"][i]["teamOneLogo"],
+  //           teamTwoLogo: data["Matches"][i]["teamTwoLogo"],
+  //           subtitle: data["Matches"][i]["subtitle"],
+  //           teamOneBatting: data["Matches"][i]["teamOneBatting"],
+  //           id: i+1,
+  //           timeMatch: "Now",
+  //           dateMatch: "Today"),
+  //     );
+  //   }
+  // }
 }

@@ -120,12 +120,12 @@ class _EventsPageState extends State<EventsPage> {
                       isSelected: i == _selectedPost,
                       dateMatch: EventsApi.eListEvents[i].dateMatch,
                       timeMatch: EventsApi.eListEvents[i].timeMatch,
-                      nameHome: EventsApi.eListEvents[i].nameHome,
-                      nameAway: EventsApi.eListEvents[i].nameAway,
-                      logoHome: EventsApi.eListEvents[i].logoHome,
-                      logoAway: EventsApi.eListEvents[i].logoAway,
-                      scoreAway: EventsApi.eListEvents[i].scoreAway,
-                      scoreHome: EventsApi.eListEvents[i].scoreHome,
+                      nameHome: EventsApi.eListEvents[i].teamOne,
+                      nameAway: EventsApi.eListEvents[i].teamTwo,
+                      logoHome: EventsApi.eListEvents[i].teamOneLogo,
+                      logoAway: EventsApi.eListEvents[i].teamTwoLogo,
+                      scoreAway: EventsApi.eListEvents[i].teamOneScore,
+                      scoreHome: EventsApi.eListEvents[i].teamTwoScore,
                       onTap: () {
                         Get.to(
                           () => EventDetails(
