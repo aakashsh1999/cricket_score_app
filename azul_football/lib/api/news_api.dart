@@ -2,98 +2,64 @@ import 'package:azul_football/models/news.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 class NewsApi {
-    var url = Uri.https('newsapi.org', '/v2/everything', {'q': 'cricket'});
-    getNews() async{
-    var response = await http.get(url, headers: {
-         HttpHeaders.authorizationHeader: '88e4d8769a6342119a67b335cb2bec68'
-      });
-      print(response.statusCode);
-        //   if(jsonData['status'] == "ok"){
-        //  jsonData["articles"].forEach((element, index){
 
-        // if(element['urlToImage'] != null && element['description'] != null){
-        //   NewsModel article = NewsModel(
-        //     title: element['title'],
-        //     id: index,
-        //     body: element['description'],
-        //     image: element['urlToImage'],
-        //     date: DateTime.parse(element['publishedAt']),
-        //     category: element["category"],
-        //   );
-        //   newsData.add(article);
-        //   print(newsData);
-        // }
-
-      // });
-
-      }
-  
   static List<NewsModel> aListNews = [
     NewsModel(
       id: '1',
       date: '2H AGO',
       title:
-          'Bayern Munich 2-3 PSG: Kylian Mbappe double gives Mauricio Pochettino first-leg advantage',
+          'England recall Moeen for second Test against India',
       category: 'PREMIER LEAGUE',
       image:
-          'https://le10static.com/img/cache/article/576x324/0000/0018/185382.jpeg',
+          	"https://ichef.bbci.co.uk/live-experience/cps/624/cpsprodpb/175B3/production/_119876659_tv069307074.jpg",
       body: _kBodyNews[0],
     ),
-    NewsModel(
+     NewsModel(
       id: '2',
-      date: '22, Mars',
-      title: 'Porto vs Chelsea preview, team news, stats, kick-off time',
-      category: 'NEWS',
+      date: '2H AGO',
+      title:
+          'England recall Moeen for second Test against India',
+      category: 'PREMIER LEAGUE',
       image:
-          'https://e0.365dm.com/21/04/768x432/skysports-christian-pulisic_5328530.jpg?20210403130827',
+          	"https://ichef.bbci.co.uk/live-experience/cps/624/cpsprodpb/175B3/production/_119876659_tv069307074.jpg",
       body: _kBodyNews[1],
     ),
-    NewsModel(
+     NewsModel(
       id: '3',
-      date: 'Yesterday',
+      date: '2H AGO',
       title:
-          'Birmingham City Women: PFA supports players over complaints to club board',
-      category: 'WOMEN',
+          'England recall Moeen for second Test against India',
+      category: 'PREMIER LEAGUE',
       image:
-          'https://e0.365dm.com/21/01/768x432/skysports-birmingham-city-women_5232125.jpg?20210109110547',
+          	"https://ichef.bbci.co.uk/live-experience/cps/624/cpsprodpb/175B3/production/_119876659_tv069307074.jpg",
       body: _kBodyNews[2],
     ),
-    NewsModel(
+     NewsModel(
       id: '4',
-      date: 'TODAY',
+      date: '2H AGO',
       title:
-          'Derby County: No Limits Sports consortium agrees takeover of Championship club',
-      category: 'SPORTS',
+          'England recall Moeen for second Test against India',
+      category: 'PREMIER LEAGUE',
       image:
-          'https://i.le360.ma/le360sport/sites/default/files/styles/img_742_454/public/assets/images/2020/01-reda/ffffffff.jpg?itok=pJH-qO8J',
+          	"https://ichef.bbci.co.uk/live-experience/cps/624/cpsprodpb/175B3/production/_119876659_tv069307074.jpg",
       body: _kBodyNews[3],
     ),
-    NewsModel(
+     NewsModel(
       id: '5',
-      date: '21 MARS',
+      date: '2H AGO',
       title:
-          'Jurgen Klopp: I know Trent Alexander-Arnold better than any coach, and he is world class',
-      category: 'COACHS',
+          'England recall Moeen for second Test against India',
+      category: 'PREMIER LEAGUE',
       image:
-          'https://images2.minutemediacdn.com/image/fetch/w_736,h_485,c_fill,g_auto,f_auto/https%3A%2F%2Fthetopflight.com%2Fwp-content%2Fuploads%2Fgetty-images%2F2020%2F05%2F1206596172-850x560.jpeg',
+          	"https://ichef.bbci.co.uk/live-experience/cps/624/cpsprodpb/175B3/production/_119876659_tv069307074.jpg",
       body: _kBodyNews[4],
     ),
+
   ];
 
   static List<String> _kBodyNews = [
     """
-    <div>
-    <p>Kylian Mbappe's double in a performance of real endeavour saw Paris Saint-Germain earn a surprise 3-2 Champions League quarter-final first-leg win at holders Bayern Munich.</p>
-<p>&nbsp;</p>
-<p>Mbappe's opener was fumbled by Manuel Neuer into the bottom corner with less than three minutes on the clock at a snow-covered Allianz Arena, as Mauricio Pochettino's side threw themselves at everything from first whistle to last in a match of incredible tempo and intensity.</p>
-<p>&nbsp;</p>
-<p>They doubled their advantage before half-time after Bayern switched off from a corner and left Marquinhos to turn Neymar's ball forward beyond Neuer, although the PSG captain was injured in the process and forced off moments later.</p>
-<p>&nbsp;</p>
-<p>Eric Maxim Choupo-Moting pulled a goal back with the interval approaching from Benjamin Pavard's cross with another, from Joshua Kimmich, allowing Thomas Muller to head past Keylor Navas and level up on the hour mark.</p>
-<p>Neymar and Mbappe had caused real problems when allowed to combine and punished Bayern again for PSG's third eight minutes later, with the latter's disguised finish inside Neuer's near post giving the French side a sensational first-leg advantage - and three away goals - ahead of Tuesday's second leg at the Parc des Princes.</p>
-<p>&nbsp;</p>
-<p>In the process, they stopped Bayern setting a new club record of 20 European Cup games without defeat, by inflicting their first in the Champions League since Liverpool won 3-1 at the Allianz Arena in March 2019.</p>
-    </div>
+  "Moeen Ali has played Twenty20 cricket for England this summer\r\nWorcestershire all-rounder Moeen Ali has been added to the England squad for the second Test against India."
     """,
     """
     <div>

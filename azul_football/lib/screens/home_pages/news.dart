@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:azul_football/api/events_api.dart';
 import 'dart:core';
 import 'package:azul_football/api/leagues_api.dart';
@@ -26,24 +28,14 @@ class NewsPage extends StatefulWidget {
 
 class _NewsPageState extends State<NewsPage> {
   int _selectedRecent = 0;
-  List <NewsModel> newsData = [];
-  var url = Uri.http('newsapi.org','/v2/everything', {'q':'cricket'} );
       void initState(){
         super.initState();
-        getNewsData();
       } 
 
 
       void dispose(){
         super.dispose();
       }
-
-    getNewsData() async{
-      var response = await http.get(url, headers: {
-        HttpHeaders.authorizationHeader:'88e4d8769a6342119a67b335cb2bec68'
-      });
-      print(response.body);
-    }
 
 
   @override
