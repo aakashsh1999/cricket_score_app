@@ -5,7 +5,7 @@
 
     <!--  TODO : name app   -->
    <application
-        android:label="azul football"
+        android:label="Cric Dice"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name="com.md.kooramd.MainActivity"
