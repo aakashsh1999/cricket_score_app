@@ -1,3 +1,4 @@
+
 import 'package:cric_dice/api/clubs_api.dart';
 import 'package:cric_dice/api/events_api.dart';
 import 'package:cric_dice/api/leagues_api.dart';
@@ -91,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                               teamOneBatting: EventsApi.eListEvents[i].teamOneBatting,
                               teamOneOvers: EventsApi.eListEvents[i].teamOneOvers,
                               teamTwoOvers: EventsApi.eListEvents[i].teamTwoOvers,
-teamOneWicketsDown: EventsApi.eListEvents[i].teamOneWicketsDown,
+                              teamOneWicketsDown: EventsApi.eListEvents[i].teamOneWicketsDown,
                               teamTwoWicketsDown: EventsApi.eListEvents[i].teamTwoWicketsDown,
                               onTap: () {
                                 //TODO: Open Events Details

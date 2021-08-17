@@ -109,8 +109,8 @@ class CardFavoritTeam extends StatelessWidget {
                       children: [
                         Visibility(
                           maintainSize: true,
-maintainAnimation: true,
-maintainState: true,
+                          maintainAnimation: true,
+                          maintainState: true,
                           child: Icon(Icons.sports_cricket_rounded),
                           visible: teamOneBatting,
                         ),
