@@ -1,7 +1,7 @@
-import 'package:azul_football/api/players_api.dart';
-import 'package:azul_football/helpers/colors.dart';
+import 'package:cric_dice/api/players_api.dart';
+import 'package:cric_dice/helpers/colors.dart';
 
-import 'package:azul_football/localizations/localization_constants.dart';
+import 'package:cric_dice/localizations/localization_constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

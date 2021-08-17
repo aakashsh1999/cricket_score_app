@@ -1,4 +1,4 @@
-import 'package:azul_football/api/events_api.dart';
+import 'package:cric_dice/api/events_api.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

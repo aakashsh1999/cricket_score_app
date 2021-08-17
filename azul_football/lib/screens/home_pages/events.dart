@@ -1,10 +1,10 @@
-import 'package:azul_football/api/events_api.dart';
-import 'package:azul_football/api/leagues_api.dart';
-import 'package:azul_football/helpers/constants.dart';
-import 'package:azul_football/screens/details/events_details.dart';
-import 'package:azul_football/widgets/trensations_widgets.dart';
-import 'package:azul_football/widgets/widget_calendar.dart';
-import 'package:azul_football/widgets/widgets_events.dart';
+import 'package:cric_dice/api/events_api.dart';
+import 'package:cric_dice/api/leagues_api.dart';
+import 'package:cric_dice/helpers/constants.dart';
+import 'package:cric_dice/screens/details/events_details.dart';
+import 'package:cric_dice/widgets/trensations_widgets.dart';
+import 'package:cric_dice/widgets/widget_calendar.dart';
+import 'package:cric_dice/widgets/widgets_events.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -1,4 +1,4 @@
-import 'package:azul_football/helpers/constants.dart';
+import 'package:cric_dice/helpers/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

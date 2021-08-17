@@ -1,4 +1,4 @@
-# azul_football
+# cric_dice
 
 A new Flutter application.
 

@@ -1,4 +1,4 @@
-import 'package:azul_football/screens/home_pages/news.dart';
+import 'package:cric_dice/screens/home_pages/news.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

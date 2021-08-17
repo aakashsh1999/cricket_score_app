@@ -1,4 +1,4 @@
-import 'package:azul_football/models/events.dart';
+import 'package:cric_dice/models/events.dart';
 // import 'dart:async' show Future;
 // import 'package:flutter/services.dart' show rootBundle;
 // import 'dart:convert';
