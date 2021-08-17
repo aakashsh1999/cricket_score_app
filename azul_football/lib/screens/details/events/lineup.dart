@@ -1,8 +1,8 @@
-import 'package:azul_football/api/players_api.dart';
+import 'package:cric_dice/api/players_api.dart';
 
-import 'package:azul_football/localizations/localization_constants.dart';
-import 'package:azul_football/widgets/trensations_widgets.dart';
-import 'package:azul_football/widgets/widgets_lineup.dart';
+import 'package:cric_dice/localizations/localization_constants.dart';
+import 'package:cric_dice/widgets/trensations_widgets.dart';
+import 'package:cric_dice/widgets/widgets_lineup.dart';
 import 'package:flutter/material.dart';
 
 class LineUpPage extends StatefulWidget {

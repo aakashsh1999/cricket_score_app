@@ -1,4 +1,4 @@
-import 'package:azul_football/models/news.dart';
+import 'package:cric_dice/models/news.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 class NewsApi {

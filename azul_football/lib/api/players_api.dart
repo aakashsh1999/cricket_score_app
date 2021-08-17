@@ -1,4 +1,4 @@
-import 'package:azul_football/models/players.dart';
+import 'package:cric_dice/models/players.dart';
 
 class PlayersApi {
   static List<PlayersModels> pListPlayers = [

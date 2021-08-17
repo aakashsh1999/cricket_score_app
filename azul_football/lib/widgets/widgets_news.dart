@@ -1,4 +1,4 @@
-import 'package:azul_football/localizations/localization_constants.dart';
+import 'package:cric_dice/localizations/localization_constants.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

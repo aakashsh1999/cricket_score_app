@@ -1,12 +1,12 @@
-import 'package:azul_football/api/events_api.dart';
-import 'package:azul_football/api/leagues_api.dart';
+import 'package:cric_dice/api/events_api.dart';
+import 'package:cric_dice/api/leagues_api.dart';
 
-import 'package:azul_football/localizations/localization_constants.dart';
-import 'package:azul_football/screens/details/events/chats.dart';
-import 'package:azul_football/screens/details/events/commentary.dart';
-import 'package:azul_football/screens/details/events/lineup.dart';
-import 'package:azul_football/screens/details/events/stats.dart';
-import 'package:azul_football/widgets/widgets_events.dart';
+import 'package:cric_dice/localizations/localization_constants.dart';
+import 'package:cric_dice/screens/details/events/chats.dart';
+import 'package:cric_dice/screens/details/events/commentary.dart';
+import 'package:cric_dice/screens/details/events/lineup.dart';
+import 'package:cric_dice/screens/details/events/stats.dart';
+import 'package:cric_dice/widgets/widgets_events.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

@@ -1,21 +1,21 @@
-import 'package:azul_football/api/clubs_api.dart';
-import 'package:azul_football/api/events_api.dart';
-import 'package:azul_football/api/leagues_api.dart';
-import 'package:azul_football/localizations/localization_constants.dart';
-import 'package:azul_football/screens/details/events_details.dart';
-import 'package:azul_football/api/hometab_api.dart';
-import 'package:azul_football/screens/favorites/favorites_clubs.dart';
-import 'package:azul_football/widgets/trensations_widgets.dart';
-import 'package:azul_football/widgets/widgets_home.dart';
-import 'package:azul_football/widgets/widgets_news.dart';
+import 'package:cric_dice/api/clubs_api.dart';
+import 'package:cric_dice/api/events_api.dart';
+import 'package:cric_dice/api/leagues_api.dart';
+import 'package:cric_dice/localizations/localization_constants.dart';
+import 'package:cric_dice/screens/details/events_details.dart';
+import 'package:cric_dice/api/hometab_api.dart';
+import 'package:cric_dice/screens/favorites/favorites_clubs.dart';
+import 'package:cric_dice/widgets/trensations_widgets.dart';
+import 'package:cric_dice/widgets/widgets_home.dart';
+import 'package:cric_dice/widgets/widgets_news.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:azul_football/api/leagues_api.dart';
-import 'package:azul_football/widgets/widgets_news.dart';
-import 'package:azul_football/screens/details/events_details.dart';
-import 'package:azul_football/api/events_api.dart';
+import 'package:cric_dice/api/leagues_api.dart';
+import 'package:cric_dice/widgets/widgets_news.dart';
+import 'package:cric_dice/screens/details/events_details.dart';
+import 'package:cric_dice/api/events_api.dart';
 
 // some code
 class HomePage extends StatefulWidget {

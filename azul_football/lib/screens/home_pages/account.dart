@@ -1,10 +1,10 @@
 import 'dart:io';
 
-import 'package:azul_football/helpers/functions.dart';
-import 'package:azul_football/localizations/localization_constants.dart';
-import 'package:azul_football/providers/theme_provider.dart';
-import 'package:azul_football/widgets/trensations_widgets.dart';
-import 'package:azul_football/widgets/widgets_settings.dart';
+import 'package:cric_dice/helpers/functions.dart';
+import 'package:cric_dice/localizations/localization_constants.dart';
+import 'package:cric_dice/providers/theme_provider.dart';
+import 'package:cric_dice/widgets/trensations_widgets.dart';
+import 'package:cric_dice/widgets/widgets_settings.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';

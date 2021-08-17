@@ -1,8 +1,8 @@
-import 'package:azul_football/api/chats_api.dart';
-import 'package:azul_football/helpers/constants.dart';
-import 'package:azul_football/models/chats.dart';
-import 'package:azul_football/widgets/trensations_widgets.dart';
-import 'package:azul_football/widgets/widgets_chats.dart';
+import 'package:cric_dice/api/chats_api.dart';
+import 'package:cric_dice/helpers/constants.dart';
+import 'package:cric_dice/models/chats.dart';
+import 'package:cric_dice/widgets/trensations_widgets.dart';
+import 'package:cric_dice/widgets/widgets_chats.dart';
 import 'package:flutter/material.dart';
 
 class ChatsPage extends StatefulWidget {

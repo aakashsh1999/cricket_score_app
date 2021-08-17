@@ -1,4 +1,4 @@
-import 'package:azul_football/models/home_tab.dart';
+import 'package:cric_dice/models/home_tab.dart';
 
 class HomeTabApi {
   static List<HomeTabModel> hometablist = [

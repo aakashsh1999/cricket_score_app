@@ -1,6 +1,6 @@
-import 'package:azul_football/helpers/constants.dart';
-import 'package:azul_football/localizations/localization_constants.dart';
-import 'package:azul_football/widgets/trensations_widgets.dart';
+import 'package:cric_dice/helpers/constants.dart';
+import 'package:cric_dice/localizations/localization_constants.dart';
+import 'package:cric_dice/widgets/trensations_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

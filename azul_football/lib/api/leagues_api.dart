@@ -1,4 +1,4 @@
-import 'package:azul_football/models/leagues.dart';
+import 'package:cric_dice/models/leagues.dart';
 
 class LeaguesApi {
   static List<LeaguesModels> lLeaguesList = [

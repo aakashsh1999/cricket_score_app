@@ -1,9 +1,9 @@
-import 'package:azul_football/api/clubs_api.dart';
-import 'package:azul_football/localizations/localization_constants.dart';
-import 'package:azul_football/widgets/trensations_widgets.dart';
+import 'package:cric_dice/api/clubs_api.dart';
+import 'package:cric_dice/localizations/localization_constants.dart';
+import 'package:cric_dice/widgets/trensations_widgets.dart';
 
-import 'package:azul_football/widgets/widgets_clubs.dart';
-import 'package:azul_football/widgets/widgets_user.dart';
+import 'package:cric_dice/widgets/widgets_clubs.dart';
+import 'package:cric_dice/widgets/widgets_user.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
