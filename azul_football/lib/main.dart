@@ -1,4 +1,5 @@
 import 'package:cric_dice/helpers/constants.dart';
+import 'package:cric_dice/providers/NewsProvider.dart';
 import 'package:cric_dice/screens/home_pages/bottom_nav_screen.dart';
 import 'package:cric_dice/screens/user/login.dart';
 import 'package:cric_dice/screens/user/register.dart';
@@ -42,6 +43,8 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
+        ChangeNotifierProvider<NewsProvider>(create: (context,
+        ) => NewsProvider())
       ],
       child: Consumer<ThemeProvider>(builder: (context, theme, child) {
         return GetMaterialApp(

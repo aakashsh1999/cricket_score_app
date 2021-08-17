@@ -14,5 +14,17 @@ class NewsModel {
     this.date,
     this.body,
   });
+
+  factory NewsModel.fromJson(Map<String, dynamic> json){
+    return NewsModel(
+       title: json['title'],
+       image: json['urlToImage'],
+       category: "No-category",
+       id: json['source']['id'],
+       date: json['publishedAt'],
+       body:json['description']
+    );
+  }
+
 }
 
