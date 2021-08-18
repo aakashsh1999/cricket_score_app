@@ -28,7 +28,7 @@ class NewsPage extends StatefulWidget {
 
 class _NewsPageState extends State<NewsPage> {
   var response;
-  List newsData;
+  List<NewsModel> _newsData=[];
   void initState() {
     super.initState();
     fetchData();
@@ -38,32 +38,30 @@ class _NewsPageState extends State<NewsPage> {
     super.dispose();
   }
 
-    Future<void> fetchData() async {
-     response = await http.get(Uri.https('newsapi.org', '/v2/everything', {'q': '{cricket}'}),
+  Future fetchData() async {
+    _newsData.clear();
+    response = await http.get(
+        Uri.https('newsapi.org', '/v2/everything', {'q': '{cricket}'}),
         headers: {'Authorization': '88e4d8769a6342119a67b335cb2bec68'});
-         print(response.body);
-         var result = convert.jsonDecode(response.body);
-         if(result['status'] == "ok"){
-         result["articles"].forEach((element){
-
-        if(element['urlToImage'] != null && element['description'] != null){
+    print(response.body);
+    var result = convert.jsonDecode(response.body);
+    if (result['status'] == "ok") {
+      result["articles"].forEach((element) {
+        if (element['urlToImage'] != null && element['description'] != null) {
           NewsModel newsModel = NewsModel(
-            title: element['title'],
-            image: element['urlToImage'],
-            category: "No-category",
-            id: element['source']['id'],
-            date: element['publishedAt'],
-            body:element['description']
-        
-           
-          );
-          newsData.add(newsModel);  
+              title: element['title'],
+              image: element['urlToImage'],
+              category: "No-category",
+              id: element['source']['id'],
+              date: element['publishedAt'],
+              body: element['description']);
+          _newsData.add(newsModel);
         }
-     });
-     print(newsData);
+      });
+      
     }
+    return _newsData;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -72,55 +70,65 @@ class _NewsPageState extends State<NewsPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title:ShakeTransition(
-            duration: Duration(milliseconds: 1600),
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              child: Row(
-                children: [
-                  Icon(
-                    FontAwesomeIcons.fire,
-                    size: 22.0,
+        title: ShakeTransition(
+          duration: Duration(milliseconds: 1600),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            child: Row(
+              children: [
+                Icon(
+                  FontAwesomeIcons.fire,
+                  size: 22.0,
+                  color: theme.primaryColor,
+                ),
+                SizedBox(width: 5.0),
+                Text(
+                  getTranslated(context, 'latest_stories'),
+                  style: theme.textTheme.headline1.copyWith(
                     color: theme.primaryColor,
                   ),
-                  SizedBox(width: 5.0),
-                  Text(
-                    getTranslated(context, 'latest_stories'),
-                    style: theme.textTheme.headline1.copyWith(
-                      color: theme.primaryColor,
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
+        ),
       ),
-      body:newsData!=null? ListView.builder(
-        itemCount: newsData.length,
-        itemBuilder: (BuildContext context, int index){
-        return  ShakeListTransition(
-                         duration: Duration(milliseconds: (index + 3) * 300),
-                          // axis: Axis.vertical,
-                            child: CardLatestNews(
-                              category: newsData[index].category,
-                              image: newsData[index].image,
-                              title: newsData[index].title,
-                              onTap: () {
-                                //TODO : Open News
-                                Get.to(
-                                  () => BottomNavScreen(
-                                    screen: NewsDetails(
-                                      id: index,
-                                    ),
-                                    indexPage: 1,
-                                  ),
-                                  transition: Transition.fadeIn,
-                                );
-                              },
+      body: StreamBuilder<Object>(
+        stream: fetchData().asStream(),
+        builder: (context, snapshot) {
+List<NewsModel>newsData=snapshot.data;
+
+          if (snapshot == null ||snapshot.data==null)
+              return Center(child: CircularProgressIndicator());
+
+              return ListView.builder(
+                  itemCount: newsData.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return ShakeListTransition(
+                      duration: Duration(milliseconds: (index + 3) * 300),
+                      // axis: Axis.vertical,
+                      child: CardLatestNews(
+                        category: newsData[index].category,
+                        image: newsData[index].image,
+                        title: newsData[index].title,
+                        onTap: () {
+                          //TODO : Open News
+                          Get.to(
+                            () => BottomNavScreen(
+                              screen: NewsDetails(
+                                id: index,
+                              ),
+                              indexPage: 1,
                             ),
-                          );     
-      }):Center(child: CircularProgressIndicator()),
-      );
+                            transition: Transition.fadeIn,
+                          );
+                        },
+                      ),
+                    );
+                  });
+        }
+      ),
+    );
   }
 }
 

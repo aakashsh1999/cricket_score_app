@@ -43,8 +43,8 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
-        ChangeNotifierProvider<NewsProvider>(create: (context,
-        ) => NewsProvider())
+        // ChangeNotifierProvider<NewsProvider>(create: (context,
+        // ) => NewsProvider())
       ],
       child: Consumer<ThemeProvider>(builder: (context, theme, child) {
         return GetMaterialApp(
