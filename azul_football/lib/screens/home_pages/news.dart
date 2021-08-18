@@ -96,8 +96,7 @@ class _NewsPageState extends State<NewsPage> {
       body: StreamBuilder<Object>(
         stream: fetchData().asStream(),
         builder: (context, snapshot) {
-List<NewsModel>newsData=snapshot.data;
-
+        List<NewsModel>newsData=snapshot.data;
           if (snapshot == null ||snapshot.data==null)
               return Center(child: CircularProgressIndicator());
 
@@ -105,7 +104,7 @@ List<NewsModel>newsData=snapshot.data;
                   itemCount: newsData.length,
                   itemBuilder: (BuildContext context, int index) {
                     return ShakeListTransition(
-                      duration: Duration(milliseconds: (index + 3) * 300),
+                      duration: Duration(milliseconds: (4+ 3) * 300),
                       // axis: Axis.vertical,
                       child: CardLatestNews(
                         category: newsData[index].category,
@@ -116,9 +115,10 @@ List<NewsModel>newsData=snapshot.data;
                           Get.to(
                             () => BottomNavScreen(
                               screen: NewsDetails(
-                                id: index,
+                                id:index,
+                                data: newsData[index],
                               ),
-                              indexPage: 1,
+                              indexPage: 3,
                             ),
                             transition: Transition.fadeIn,
                           );

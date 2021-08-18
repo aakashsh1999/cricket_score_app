@@ -1,6 +1,7 @@
 import 'package:cric_dice/api/news_api.dart';
 
 import 'package:cric_dice/localizations/localization_constants.dart';
+import 'package:cric_dice/models/news.dart';
 import 'package:cric_dice/widgets/trensations_widgets.dart';
 import 'package:cric_dice/widgets/widgets_news.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,16 +9,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class NewsDetails extends StatefulWidget {
+class NewsDetails extends StatelessWidget {
+  final data;
   final id;
 
-  NewsDetails({@required this.id});
+  NewsDetails({this.data, this.id});
 
-  @override
-  _NewsDetailsState createState() => _NewsDetailsState();
-}
 
-class _NewsDetailsState extends State<NewsDetails> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -34,11 +32,11 @@ class _NewsDetailsState extends State<NewsDetails> {
               background: Stack(
                 children: [
                   Hero(
-                    tag: NewsApi.aListNews[widget.id].image,
+                    tag: data.image,
                     child: Image(
                       width: double.infinity,
                       height: double.infinity,
-                      image: NetworkImage(NewsApi.aListNews[widget.id].image),
+                      image: NetworkImage(data.image),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -60,8 +58,7 @@ class _NewsDetailsState extends State<NewsDetails> {
               delegate: SliverChildListDelegate([
                 ShakeTransition(
                   duration: Duration(milliseconds: 900),
-                  child: Text(
-                    NewsApi.aListNews[widget.id].category,
+                  child: Text(data.category,
                     style: theme.textTheme.headline4.copyWith(
                       color: theme.primaryColor,
                     ),
@@ -70,8 +67,7 @@ class _NewsDetailsState extends State<NewsDetails> {
                 SizedBox(height: 10.0),
                 ShakeTransition(
                   duration: Duration(milliseconds: 1200),
-                  child: Text(
-                    NewsApi.aListNews[widget.id].title,
+                  child: Text(data.title,
                     style: theme.textTheme.headline3,
                   ),
                 ),
@@ -80,7 +76,7 @@ class _NewsDetailsState extends State<NewsDetails> {
                   duration: Duration(milliseconds: 1600),
                   axis: Axis.vertical,
                   child: Html(
-                    data: NewsApi.aListNews[widget.id].body,
+                    data: data.body,
                     defaultTextStyle: theme.textTheme.bodyText1,
                   ),
                 ),

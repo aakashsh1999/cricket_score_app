@@ -1,45 +1,52 @@
 import 'package:flutter/cupertino.dart';
 
 class EventsModel {
-  final int id;
-  final String status;
-  final String dateMatch;
-  final String timeMatch;
-  final String teamOne;
-  final String teamTwo;
-  final String type;
-  final bool firstInningsFinished;
-  final int teamOneScore;
-  final int teamTwoScore;
-  final double teamOneOvers;
-  final double teamTwoOvers;
-  final int teamOneWicketsDown;
-  final int teamTwoWicketsDown;
-  final String teamOneLogo;
-  final String teamTwoLogo;
-  final String subtitle;
-  final bool teamOneBatting;
-  final String leagueName;
-  EventsModel(
-    {
-    @required  this.status,
-    @required this.teamOne,
-    @required this.teamTwo,
-    @required this.type,
-    @required this.firstInningsFinished,
-    @required this.teamOneScore,
-    @required this.teamTwoScore,
-    @required this.teamOneOvers,
-    @required this.teamTwoOvers,
-    @required this.teamOneWicketsDown,
-    @required this.teamTwoWicketsDown,
-    @required this.teamOneLogo,
-    @required this.teamTwoLogo,
-    @required this.subtitle,
-    @required this.teamOneBatting, 
-    @required this.id,
-    @required this.dateMatch,
-    @required this.timeMatch,
-    @required this.leagueName, 
+ final int id;
+ final String name;
+ final String type;
+ final String status;
+ final String localTeamScore;
+ final String localTeamWicket;
+ final String visitorlTeamScore;
+ final String visitorTeamWicket;
+ final String note;
+ final int localTeamId;
+ final int visitorTeamId;
+ final String localTeamImage;
+ final String visitorTeamImage;
+
+
+  EventsModel({this.id,
+    this.name,
+    this.type,
+    this.status,
+    this.localTeamId,
+    this.visitorTeamId,
+    this.localTeamScore,
+    this.localTeamWicket, 
+    this.note,
+    this.visitorTeamWicket,
+    this.visitorlTeamScore, 
+    this.localTeamImage, this.visitorTeamImage
+    
   });
+
+  factory EventsModel.fromJson(Map<String, dynamic> json){
+    return EventsModel(
+      id: json['id'],
+      name:json['name'],
+      note: json['note'],
+      type:json['type'],
+      status: json['status'],
+      localTeamId: json['localteam_id'],
+      localTeamScore: json['localteam_dl_data']['score'],
+      localTeamWicket: json['localteam_dl_data']['wickets_out'],
+      visitorTeamId: json['visitorteam_id'],
+      visitorTeamWicket: json['visitorteam_dl_data']['wickets'],
+      visitorlTeamScore: json['visitorteam_dl_data']['score'],
+      localTeamImage: json['image_path'],
+      visitorTeamImage: json['image_path']
+
+    );
+  }
 }
