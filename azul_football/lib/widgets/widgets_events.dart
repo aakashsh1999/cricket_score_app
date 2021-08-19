@@ -313,7 +313,7 @@ class CardChipLeague extends StatelessWidget {
                     height: 26.0,
                   )
                 : Icon(
-                    FontAwesomeIcons.futbol,
+                    Icons.sports_cricket,
                     size: 20.0,
                     color: Colors.white,
                   ),

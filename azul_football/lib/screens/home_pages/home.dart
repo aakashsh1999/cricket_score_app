@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
     final theme = Theme.of(context);
 
     return DefaultTabController(
-        length: 3,
+        length: 4,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: theme.primaryColorDark,
@@ -70,6 +70,9 @@ class _HomePageState extends State<HomePage> {
               indicatorSize: TabBarIndicatorSize.label,
               indicatorWeight: 5.0,
               tabs: [
+                Tab(
+                  text: "All",
+                ),
                 Tab(
                   text: "Live",
                 ),
@@ -86,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                     if (teamsSnapshot == null || teamsSnapshot.data == null)
                       return Center(child: CircularProgressIndicator());
                     return Container(
-                      child: StreamBuilder<List<EventsModel>>(
+                      child: StreamBuilder(
                           stream: EventsApi.fetchData().asStream(),
                           builder: (context, snapshot) {
                             List<EventsModel> eventsData = snapshot.data;
@@ -173,8 +176,10 @@ class _HomePageState extends State<HomePage> {
                           }),
                     );
                   }),
-              Center(child: Text("Page 2")),
-              Center(child: Text("Page 3")),
+              Center(child: Text("Coming Soon")),
+              Center(child: Text("Coming Soon")),
+              Center(child: Text("Coming Soon")),
+
             ],
           ),
         ));

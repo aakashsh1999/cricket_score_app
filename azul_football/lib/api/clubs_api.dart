@@ -7,11 +7,13 @@ class TeamsApi {
   static Future fetchData() async {
     _listTeams.clear();
     var response = await http.get(
-        Uri.https('cricket.sportmonks.com', '/api/v2.0/teams/',
-            {'include': '{teams}'}),
-        headers: {
+        Uri.https('cricket.sportmonks.com', '/api/v2.0/teams/', {
+          'include': 'country',
           'api_token':
               'TdM0zdrcsHz7ruUlxgi37Qf7iHCgXqCvKpiLJMBaUClJkgIrDczPF7s3byiE'
+        }),
+        headers: {
+         
         });
     // print(response.body);
     var result = convert.jsonDecode(response.body);
@@ -27,11 +29,13 @@ class TeamsApi {
     //   });
 
     // }
-    result["data"].forEach((element) {
-      TeamsModel teamsModel = TeamsModel.fromJson(element);
+    if (result != null) {
+      result["data"].forEach((element) {
+        TeamsModel teamsModel = TeamsModel.fromJson(element);
 
-      _listTeams.add(teamsModel);
-    });
+        _listTeams.add(teamsModel);
+      });
+    }
     return _listTeams;
   }
 

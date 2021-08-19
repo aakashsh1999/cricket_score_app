@@ -120,7 +120,6 @@ class CardFavoritTeam extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: Colors.pink,
                             borderRadius: BorderRadius.circular(10.0),
-                          
                           ),
                           padding: EdgeInsets.symmetric(
                               horizontal: 5.0, vertical: 2.0),
@@ -134,9 +133,8 @@ class CardFavoritTeam extends StatelessWidget {
                         ),
                         Visibility(
                           maintainSize: true,
-maintainAnimation: true,
-maintainState: true,
-
+                          maintainAnimation: true,
+                          maintainState: true,
                           child: Icon(Icons.sports_cricket_rounded),
                           visible: !teamOneBatting,
                         ),
@@ -193,29 +191,28 @@ class CardFavTeam extends StatelessWidget {
           Image(
             width: 65.0,
             height: 65.0,
-            fit: BoxFit.cover,
+            fit: BoxFit.contain,
             image: NetworkImage(logo),
           ),
+          SizedBox(height: 12,),
           SizedBox(
             width: 80.0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+            child: 
+              
                 RichText(
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+                  // maxLines: 2,
+                  // overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
                   text: TextSpan(
                     text: name,
                     style: theme.textTheme.subtitle2.copyWith(
-                      fontSize: 18.0,
+                      fontSize: 14.0,
                       fontWeight: FontWeight.w800,
+                      height: 1
                     ),
                   ),
                 ),
-                if (batting ?? false) Icon(Icons.sports_cricket)
-              ],
-            ),
+              
           ),
         ],
       ),

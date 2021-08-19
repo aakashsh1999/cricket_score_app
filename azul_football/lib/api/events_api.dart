@@ -14,8 +14,8 @@ class EventsApi {
 static Future fetchData() async {
     _listEvents.clear();
     var response = await http.get(
-        Uri.https('cricket.sportmonks.com', '/api/v2.0/seasons/', {'include': '{fixtures,teams}'}),
-        headers: {'api_token': 'TdM0zdrcsHz7ruUlxgi37Qf7iHCgXqCvKpiLJMBaUClJkgIrDczPF7s3byiE'});
+        Uri.https('cricket.sportmonks.com', '/api/v2.0/seasons/507', {'include': 'fixtures','api_token': 'TdM0zdrcsHz7ruUlxgi37Qf7iHCgXqCvKpiLJMBaUClJkgIrDczPF7s3byiE'}),
+        headers: {});
     // print(response.body);
     var result = convert.jsonDecode(response.body);
     // print(result);
@@ -30,11 +30,13 @@ static Future fetchData() async {
     //   });
       
     // }
+    print(result);
+       if(result!=null){
     result["data"]["fixtures"].forEach((element){
       EventsModel eventsModel =EventsModel.fromJson(element);
 
       _listEvents.add(eventsModel);
-    });
+    });}
     return _listEvents;
   }
   static List<EventsModel> get  eListEvents=> _listEvents;

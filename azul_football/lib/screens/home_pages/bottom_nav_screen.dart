@@ -91,7 +91,7 @@ class _BottomNavScreenState extends State<BottomNavScreen>
                   });
                 },
                 //TODO: bottom ball jumping transition
-                duration: Duration(milliseconds: 2000),
+                duration: Duration(milliseconds: 1500),
                 circleGradient: LinearGradient(
                   colors: [
                     theme.primaryColorDark,
@@ -115,7 +115,8 @@ class _BottomNavScreenState extends State<BottomNavScreen>
                   TabItemIcon(
                     buildWidget: (_, color) => TabBottomMain(
                       isSelected: _indexPage == 2,
-                      icon: FontAwesomeIcons.baseballBall,
+                      icon: Icons.sports_cricket,
+                      // icon:ImageIcon(AssetImage(''),),
                       label:'Matches'
                     ),
                     startColor: theme.backgroundColor,

@@ -35,15 +35,15 @@ class EventsModel {
     return EventsModel(
       id: json['id'],
       // name:json['name'],
-      note: json['note'],
-      type:json['type'],
-      status: json['status'],
+      note: json['note']??"",
+      type:json['type']??"",
+      status: json['status']??"",
       localTeamId: json['localteam_id'],
-      localTeamScore: json['localteam_dl_data']['score'],
-      localTeamWicket: json['localteam_dl_data']['wickets_out'],
+      localTeamScore: (json['localteam_dl_data']??{})['score']??"",
+      localTeamWicket: (json['localteam_dl_data']??{})['wickets_out']??"",
       visitorTeamId: json['visitorteam_id'],
-      visitorTeamWicket: json['visitorteam_dl_data']['wickets'],
-      visitorTeamScore: json['visitorteam_dl_data']['score'],
+      visitorTeamWicket: (json['visitorteam_dl_data']??{})['wickets_out']??"",
+      visitorTeamScore: (json['visitorteam_dl_data']??{})['score']??""
       // localTeamImage: json['image_path'],
       // visitorTeamImage: json['image_path']
 
