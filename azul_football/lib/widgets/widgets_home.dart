@@ -7,30 +7,30 @@ class CardFavoritTeam extends StatelessWidget {
   final Function onTap;
   final String teamOneLogo, teamTwoLogo;
   final String teamOne, teamTwo;
-  final int teamOneScore, teamTwoScore;
+  final String teamOneScore, teamTwoScore;
   final String leagueName;
   final String status;
-  final double teamOneOvers, teamTwoOvers;
+  // final double teamOneOvers, teamTwoOvers;
   final String subtitle;
   final bool teamOneBatting;
-  final int teamOneWicketsDown, teamTwoWicketsDown;
+  final String teamOneWicketsDown, teamTwoWicketsDown;
 
   CardFavoritTeam({
-    this.onTap,
-    this.teamOneLogo,
-    this.teamTwoLogo,
-    this.teamOne,
-    this.teamTwo,
-    this.teamOneScore,
-    this.teamTwoScore,
-    this.leagueName,
-    this.status,
-    this.teamOneOvers,
-    this.teamTwoOvers,
-    this.subtitle,
-    this.teamOneBatting,
-    this.teamOneWicketsDown,
-    this.teamTwoWicketsDown,
+    @required this.onTap,
+    @required this.teamOneLogo,
+    @required this.teamTwoLogo,
+    @required this.teamOne,
+    @required this.teamTwo,
+    @required this.teamOneScore,
+    @required this.teamTwoScore,
+    @required this.leagueName,
+    @required this.status,
+    // @required this.teamOneOvers,
+    // @required this.teamTwoOvers,
+    @required this.subtitle,
+    @required this.teamOneBatting,
+    @required this.teamOneWicketsDown,
+    @required this.teamTwoWicketsDown,
   });
 
   @override

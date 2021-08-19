@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class TeamsModel {
   final id;
   final logo;
@@ -8,6 +10,19 @@ class TeamsModel {
     this.id,
     this.logo,
     this.name,
-    this.picked = false,
+    // this.picked = false,
   });
+
+
+
+  factory TeamsModel.fromJson(Map<String, dynamic> map) {
+    return TeamsModel(
+      name: map['name'],
+      // picked: map['picked'],
+      id: map['id'],
+      logo:map['image_path']
+    );
+  }
+
+
 }

@@ -402,32 +402,32 @@ class BarEventDetails extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             CardTeamEvent(
-              name: EventsApi.eListEvents[id].teamOne,
-              logo: EventsApi.eListEvents[id].teamOneLogo,
+              // name: EventsApi.eListEvents[id].teamOne,
+              // logo: EventsApi.eListEvents[id].teamOneLogo,
             ),
             Column(
               children: [
-                Text(
-                  '${EventsApi.eListEvents[id].teamOneScore}:${EventsApi.eListEvents[id].teamTwoScore}',
-                  style: GoogleFonts.montserrat(
-                    fontSize: 66.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                Text(
-                  '${EventsApi.eListEvents[id].timeMatch}',
-                  style: GoogleFonts.montserrat(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.grey.shade500,
-                  ),
-                ),
+                // Text(
+                //   '${EventsApi.eListEvents[id].teamOneScore}:${EventsApi.eListEvents[id].teamTwoScore}',
+                //   style: GoogleFonts.montserrat(
+                //     fontSize: 66.0,
+                //     fontWeight: FontWeight.bold,
+                //     color: Colors.white,
+                //   ),
+                // ),
+                // Text(
+                //   '${EventsApi.eListEvents[id].timeMatch}',
+                //   style: GoogleFonts.montserrat(
+                //     fontSize: 16.0,
+                //     fontWeight: FontWeight.bold,
+                //     color: Colors.grey.shade500,
+                //   ),
+                // ),
               ],
             ),
             CardTeamEvent(
-              logo: EventsApi.eListEvents[id].teamTwoLogo,
-              name: EventsApi.eListEvents[id].teamTwo,
+              // logo: EventsApi.eListEvents[id].teamTwoLogo,
+              // name: EventsApi.eListEvents[id].teamTwo,
             ),
           ],
         ),

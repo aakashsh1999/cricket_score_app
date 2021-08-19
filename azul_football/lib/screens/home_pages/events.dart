@@ -118,14 +118,14 @@ class _EventsPageState extends State<EventsPage> {
                     axis: Axis.vertical,
                     child: CardEventItemNew(
                       isSelected: i == _selectedPost,
-                      dateMatch: EventsApi.eListEvents[i].dateMatch,
-                      timeMatch: EventsApi.eListEvents[i].timeMatch,
-                      nameHome: EventsApi.eListEvents[i].teamOne,
-                      nameAway: EventsApi.eListEvents[i].teamTwo,
-                      logoHome: EventsApi.eListEvents[i].teamOneLogo,
-                      logoAway: EventsApi.eListEvents[i].teamTwoLogo,
-                      scoreAway: EventsApi.eListEvents[i].teamOneScore,
-                      scoreHome: EventsApi.eListEvents[i].teamTwoScore,
+                      // dateMatch: EventsApi.eListEvents[i].dateMatch,
+                      // timeMatch: EventsApi.eListEvents[i].timeMatch,
+                      // nameHome: EventsApi.eListEvents[i].teamOne,
+                      // nameAway: EventsApi.eListEvents[i].teamTwo,
+                      // logoHome: EventsApi.eListEvents[i].teamOneLogo,
+                      // logoAway: EventsApi.eListEvents[i].teamTwoLogo,
+                      // scoreAway: EventsApi.eListEvents[i].teamOneScore,
+                      // scoreHome: EventsApi.eListEvents[i].teamTwoScore,
                       onTap: () {
                         Get.to(
                           () => EventDetails(

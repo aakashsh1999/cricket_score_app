@@ -42,8 +42,8 @@ class _EventDetailsState extends State<EventDetails> {
       // ChatsPage(),
       MatchStatsPage(),
       LineUpPage(
-        homeName: EventsApi.eListEvents[widget.id].teamOne,
-        awayName: EventsApi.eListEvents[widget.id].teamTwo,
+        // homeName: EventsApi.eListEvents[widget.id].teamOne,
+        // awayName: EventsApi.eListEvents[widget.id].teamTwo,
       ),
       Commentary(),
     ];

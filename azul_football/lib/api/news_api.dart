@@ -1,143 +1,172 @@
 import 'package:cric_dice/models/news.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
+import 'dart:convert' as convert;
+
 class NewsApi {
-
-  static List<NewsModel> aListNews = [
-    NewsModel(
-      id: '1',
-      date: '2H AGO',
-      title:
-          'England recall Moeen for second Test against India',
-      category: 'PREMIER LEAGUE',
-      image:
-          	"https://ichef.bbci.co.uk/live-experience/cps/624/cpsprodpb/175B3/production/_119876659_tv069307074.jpg",
-      body: _kBodyNews[0],
-    ),
-     NewsModel(
-      id: '2',
-      date: '2H AGO',
-      title:
-          'England recall Moeen for second Test against India',
-      category: 'PREMIER LEAGUE',
-      image:
-          	"https://ichef.bbci.co.uk/live-experience/cps/624/cpsprodpb/175B3/production/_119876659_tv069307074.jpg",
-      body: _kBodyNews[1],
-    ),
-     NewsModel(
-      id: '3',
-      date: '2H AGO',
-      title:
-          'England recall Moeen for second Test against India',
-      category: 'PREMIER LEAGUE',
-      image:
-          	"https://ichef.bbci.co.uk/live-experience/cps/624/cpsprodpb/175B3/production/_119876659_tv069307074.jpg",
-      body: _kBodyNews[2],
-    ),
-     NewsModel(
-      id: '4',
-      date: '2H AGO',
-      title:
-          'England recall Moeen for second Test against India',
-      category: 'PREMIER LEAGUE',
-      image:
-          	"https://ichef.bbci.co.uk/live-experience/cps/624/cpsprodpb/175B3/production/_119876659_tv069307074.jpg",
-      body: _kBodyNews[3],
-    ),
-     NewsModel(
-      id: '5',
-      date: '2H AGO',
-      title:
-          'England recall Moeen for second Test against India',
-      category: 'PREMIER LEAGUE',
-      image:
-          	"https://ichef.bbci.co.uk/live-experience/cps/624/cpsprodpb/175B3/production/_119876659_tv069307074.jpg",
-      body: _kBodyNews[4],
-    ),
+  static  List<NewsModel> get aListNews=>_newsData;
+  static List<NewsModel> _newsData = [
+    // NewsModel(
+    //   id: '1',
+    //   date: '2H AGO',
+    //   title:
+    //       'England recall Moeen for second Test against India',
+    //   category: 'PREMIER LEAGUE',
+    //   image:
+    //       	"https://ichef.bbci.co.uk/live-experience/cps/624/cpsprodpb/175B3/production/_119876659_tv069307074.jpg",
+    //   body: _kBodyNews[0],
+    // ),
+    //  NewsModel(
+    //   id: '2',
+    //   date: '2H AGO',
+    //   title:
+    //       'England recall Moeen for second Test against India',
+    //   category: 'PREMIER LEAGUE',
+    //   image:
+    //       	"https://ichef.bbci.co.uk/live-experience/cps/624/cpsprodpb/175B3/production/_119876659_tv069307074.jpg",
+    //   body: _kBodyNews[1],
+    // ),
+    //  NewsModel(
+    //   id: '3',
+    //   date: '2H AGO',
+    //   title:
+    //       'England recall Moeen for second Test against India',
+    //   category: 'PREMIER LEAGUE',
+    //   image:
+    //       	"https://ichef.bbci.co.uk/live-experience/cps/624/cpsprodpb/175B3/production/_119876659_tv069307074.jpg",
+    //   body: _kBodyNews[2],
+    // ),
+    //  NewsModel(
+    //   id: '4',
+    //   date: '2H AGO',
+    //   title:
+    //       'England recall Moeen for second Test against India',
+    //   category: 'PREMIER LEAGUE',
+    //   image:
+    //       	"https://ichef.bbci.co.uk/live-experience/cps/624/cpsprodpb/175B3/production/_119876659_tv069307074.jpg",
+    //   body: _kBodyNews[3],
+    // ),
+    //  NewsModel(
+    //   id: '5',
+    //   date: '2H AGO',
+    //   title:
+    //       'England recall Moeen for second Test against India',
+    //   category: 'PREMIER LEAGUE',
+    //   image:
+    //       	"https://ichef.bbci.co.uk/live-experience/cps/624/cpsprodpb/175B3/production/_119876659_tv069307074.jpg",
+    //   body: _kBodyNews[4],
+    // ),
 
   ];
 
-  static List<String> _kBodyNews = [
-    """
-  "Moeen Ali has played Twenty20 cricket for England this summer\r\nWorcestershire all-rounder Moeen Ali has been added to the England squad for the second Test against India."
-    """,
-    """
-    <div>
-    <p><em>Christian Pulisic and N'Golo Kante are available for Chelsea's Champions League quarter-final first leg against Porto; follow Porto vs Chelsea via our dedicated live blog on Sky Sports website and app on Wednesday; kick-off at 8pm</em></p>
-<p>&nbsp;</p>
-<p>Team news, stats, kick-off time ahead of the Champions League quarter-final first leg between Porto and Chelsea on Wednesday.</p>
-<h3>Team news</h3>
-<p><strong>Chelsea&nbsp;</strong>will have Christian Pulisic and N'Golo Kante fit after hamstring issues for Wednesday's first-leg last-eight clash with Porto.</p>
-<p>&nbsp;</p>
-<p>Thomas Tuchel confirmed Tammy Abraham will also be in the squad, though Kante is unlikely to start after his latest muscle complaint.</p>
-<div class="sdc-article-widget sdc-site-oddschecker" data-component-name="sdc-site-oddschecker">
-<div class="ocw QXJ0aWNsZSBQcm9tbw==" data-oc-no="1">&nbsp;</div>
-</div>
-<p><strong>Porto&nbsp;</strong>will take on Chelsea without their suspended two top goalscorers, Sergio Oliveira and Mehdi Taremi, for Wednesday's match in Seville.</p>
-    </div>
-    """,
-    """
-    <div>
-    <p>Birmingham's players sent a letter to the club's board last week detailing grievances with facilities, travel, and budget restrictions; the WSL side were beaten 6-0 by league leaders Chelsea on Sunday; Fran Kirby, Beth Mead, Katie McCabe, and others speak out in support of Blues players</p>
-<p>&nbsp;</p>
-<p><strong>The PFA is supporting Birmingham City Women players after they wrote a letter to the club's board raising issues around facilities, travel, and budget restrictions.</strong></p>
-<p>The FA is looking into whether Birmingham City have breached the terms of their WSL licence, following the concerns raised in the letter.</p>
-<p>&nbsp;</p>
-<p>In the letter first, which was reported by the&nbsp;<em>Sunday Telegraph,</em>&nbsp;the players said they were experiencing working conditions that "prevent us from performing our jobs to the best of our ability".</p>
-<div class="sdc-article-widget sdc-site-oddschecker" data-component-name="sdc-site-oddschecker">
-<div class="ocw QXJ0aWNsZSBQcm9tbw==" data-oc-no="1">&nbsp;</div>
-</div>
-<p>The PFA says it has been "in close dialogue" with senior representatives from the Birmingham City squad throughout the season.</p>
-<p>"There have been concerns regarding the squad's size throughout the campaign, particularly the potential impact on the players' health and fitness," a statement read.</p>
-<p>&nbsp;</p>
-<p>"Following injuries in January, the PFA contacted The FA ahead of a Women's Super League fixture with Tottenham Hotspur.</p>
-<div class="ad ad--teads">
-<div class="sdc-site-au " data-ad-format="teads" data-type="" aria-hidden="true">&nbsp;</div>
-</div>
-<p>"Due to the limited number of players available, we felt there was a potential risk to those who were not fully match-fit or carrying injuries if the match went ahead. The game was subsequently cancelled.</p>
-    </div>
-    """,
-    """
-    <div>
-    <p>"We are privileged to take ownership of one of the founding members of the Football League and to build a fresh future for the fans, staff and players of Derby County. We are looking forward to working with Wayne Rooney and his team."</p>
-<p><em>Derby County have confirmed a deal to allow No Limit Sports to become the new owners of the club has been agreed.</em></p>
-<p>The sale needs to be cleared by the EFL's Owners and Directors Test but a transaction has been agreed with the buyers and current owner Mel Morris.</p>
-<p>&nbsp;</p>
-<p>No Limit Sports is fronted by Spanish businessman Erik Alonso, who had an offer to buy Sheffield Wednesday rejected earlier this year after working as an advisor to their owner Dejphon Chansiri.</p>
-<div class="sdc-article-widget sdc-site-oddschecker" data-component-name="sdc-site-oddschecker">
-<div class="ocw QXJ0aWNsZSBQcm9tbw==" data-oc-no="1">&nbsp;</div>
-</div>
-<p>The Derventio group - led by Sheikh Khaled, a member of the Abu Dhabi royal family - agreed a deal to buy the club in November but it stalled, with several expected completion dates missed.</p>
-<p>Derby County will make no further comment until the deal with No Limit Sports has been completed but the prospective new owners issued a statement speaking of their 'privilege' at taking over the club.</p>
-<p>&nbsp;</p>
-<h4>"We are proud and delighted to announce No Limits Sports Limited have approached the EFL for approval to be the new owners of Derby County Football Club, following agreement with the club's current owner Mel Morris," the statement said.</h4>
-<h2>"We are privileged to take ownership of one of the founding members of the Football League and to build a fresh future for the fans, staff and players of Derby County.</h2>
-    </div>
-    """,
-    """
-    <div>
-    <p>The right-back, who was in the Premier League Team of the Year last season for title winners Liverpool, was left out of Gareth Southgate's squad for the recent internationals following a drop in form this season for Jurgen Klopp's side.</p>
-<p>&nbsp;</p>
-<p><strong>Trent Alexander-Arnold answered his critics following his recent England snub with a superb display in Liverpool's 3-0 win at Arsenal on Saturday Night Football.</strong></p>
-<p>The right-back, who was in the Premier League Team of the Year last season for title winners Liverpool, was left out of Gareth Southgate's squad for the recent internationals following a drop in form this season for Jurgen Klopp's side.</p>
-<p>&nbsp;</p>
-<p>But he reacted on Saturday with an unplayable cross for Diogo Jota's opener in the second half, putting in an impressive all-round display as Liverpool started their late charge for the top four.</p>
-<div class="sdc-article-widget sdc-site-oddschecker" data-component-name="sdc-site-oddschecker">
-<div class="ocw QXJ0aWNsZSBQcm9tbw==" data-oc-no="1">&nbsp;</div>
-</div>
-<p>Here's what his manager and the Sky Sports pundits had to say about the 22-year-old right back as he looks to work his way back into Southgate's plans for Euro 2020.</p>
-<ul>
-<li><strong><a href="https://www.skysports.com/football/arsenal-vs-liverpool/report/429127">Arsenal 0-3 Liverpool - Match report and free highlights</a></strong></li>
-<li><strong><a href="https://www.skysports.com/football/news/11095/12264856/mikel-arteta-issues-apology-to-arsenal-supporters-after-liverpool-defeat">Arteta in shock after loss | Nev: Arsenal fed like lions</a></strong></li>
-<li><strong><a href="https://www.skysports.com/football/news/11669/12265306/liverpools-return-to-form-against-arsenal-suggests-they-could-finish-a-difficult-season-on-a-high">Are Liverpool back?</a>&nbsp;|&nbsp;<a href="https://www.skysports.com/football/arsenal-vs-liverpool/teams/429127">How the teams lined up</a>&nbsp;|&nbsp;<a href="https://www.skysports.com/football/arsenal-vs-liverpool/stats/429127">Match stats</a></strong></li>
-</ul>
-<p>&nbsp;</p>
-<h4>"Trent Alexander-Arnold showed his class, again. I don't want to make another discussion about Trent or stuff like that. I said it was Gareth [Southgate's] decision.</h4>
-<div class="ad ad--teads">
-<div class="sdc-site-au " data-ad-format="teads" data-type="" aria-hidden="true">&nbsp;</div>
-</div>
-<p>"He is blessed with the choice he has in that position especially, but Trent is in a good shape. If somebody says he is not then I have to say he is wrong, that is all. But I am not responsible for [Southgate's] decisions."</p>
-    </div>
-    """,
-  ];
+//   static List<String> _kBodyNews = [
+//     """
+//   "Moeen Ali has played Twenty20 cricket for England this summer\r\nWorcestershire all-rounder Moeen Ali has been added to the England squad for the second Test against India."
+//     """,
+//     """
+//     <div>
+//     <p><em>Christian Pulisic and N'Golo Kante are available for Chelsea's Champions League quarter-final first leg against Porto; follow Porto vs Chelsea via our dedicated live blog on Sky Sports website and app on Wednesday; kick-off at 8pm</em></p>
+// <p>&nbsp;</p>
+// <p>Team news, stats, kick-off time ahead of the Champions League quarter-final first leg between Porto and Chelsea on Wednesday.</p>
+// <h3>Team news</h3>
+// <p><strong>Chelsea&nbsp;</strong>will have Christian Pulisic and N'Golo Kante fit after hamstring issues for Wednesday's first-leg last-eight clash with Porto.</p>
+// <p>&nbsp;</p>
+// <p>Thomas Tuchel confirmed Tammy Abraham will also be in the squad, though Kante is unlikely to start after his latest muscle complaint.</p>
+// <div class="sdc-article-widget sdc-site-oddschecker" data-component-name="sdc-site-oddschecker">
+// <div class="ocw QXJ0aWNsZSBQcm9tbw==" data-oc-no="1">&nbsp;</div>
+// </div>
+// <p><strong>Porto&nbsp;</strong>will take on Chelsea without their suspended two top goalscorers, Sergio Oliveira and Mehdi Taremi, for Wednesday's match in Seville.</p>
+//     </div>
+//     """,
+//     """
+//     <div>
+//     <p>Birmingham's players sent a letter to the club's board last week detailing grievances with facilities, travel, and budget restrictions; the WSL side were beaten 6-0 by league leaders Chelsea on Sunday; Fran Kirby, Beth Mead, Katie McCabe, and others speak out in support of Blues players</p>
+// <p>&nbsp;</p>
+// <p><strong>The PFA is supporting Birmingham City Women players after they wrote a letter to the club's board raising issues around facilities, travel, and budget restrictions.</strong></p>
+// <p>The FA is looking into whether Birmingham City have breached the terms of their WSL licence, following the concerns raised in the letter.</p>
+// <p>&nbsp;</p>
+// <p>In the letter first, which was reported by the&nbsp;<em>Sunday Telegraph,</em>&nbsp;the players said they were experiencing working conditions that "prevent us from performing our jobs to the best of our ability".</p>
+// <div class="sdc-article-widget sdc-site-oddschecker" data-component-name="sdc-site-oddschecker">
+// <div class="ocw QXJ0aWNsZSBQcm9tbw==" data-oc-no="1">&nbsp;</div>
+// </div>
+// <p>The PFA says it has been "in close dialogue" with senior representatives from the Birmingham City squad throughout the season.</p>
+// <p>"There have been concerns regarding the squad's size throughout the campaign, particularly the potential impact on the players' health and fitness," a statement read.</p>
+// <p>&nbsp;</p>
+// <p>"Following injuries in January, the PFA contacted The FA ahead of a Women's Super League fixture with Tottenham Hotspur.</p>
+// <div class="ad ad--teads">
+// <div class="sdc-site-au " data-ad-format="teads" data-type="" aria-hidden="true">&nbsp;</div>
+// </div>
+// <p>"Due to the limited number of players available, we felt there was a potential risk to those who were not fully match-fit or carrying injuries if the match went ahead. The game was subsequently cancelled.</p>
+//     </div>
+//     """,
+//     """
+//     <div>
+//     <p>"We are privileged to take ownership of one of the founding members of the Football League and to build a fresh future for the fans, staff and players of Derby County. We are looking forward to working with Wayne Rooney and his team."</p>
+// <p><em>Derby County have confirmed a deal to allow No Limit Sports to become the new owners of the club has been agreed.</em></p>
+// <p>The sale needs to be cleared by the EFL's Owners and Directors Test but a transaction has been agreed with the buyers and current owner Mel Morris.</p>
+// <p>&nbsp;</p>
+// <p>No Limit Sports is fronted by Spanish businessman Erik Alonso, who had an offer to buy Sheffield Wednesday rejected earlier this year after working as an advisor to their owner Dejphon Chansiri.</p>
+// <div class="sdc-article-widget sdc-site-oddschecker" data-component-name="sdc-site-oddschecker">
+// <div class="ocw QXJ0aWNsZSBQcm9tbw==" data-oc-no="1">&nbsp;</div>
+// </div>
+// <p>The Derventio group - led by Sheikh Khaled, a member of the Abu Dhabi royal family - agreed a deal to buy the club in November but it stalled, with several expected completion dates missed.</p>
+// <p>Derby County will make no further comment until the deal with No Limit Sports has been completed but the prospective new owners issued a statement speaking of their 'privilege' at taking over the club.</p>
+// <p>&nbsp;</p>
+// <h4>"We are proud and delighted to announce No Limits Sports Limited have approached the EFL for approval to be the new owners of Derby County Football Club, following agreement with the club's current owner Mel Morris," the statement said.</h4>
+// <h2>"We are privileged to take ownership of one of the founding members of the Football League and to build a fresh future for the fans, staff and players of Derby County.</h2>
+//     </div>
+//     """,
+//     """
+//     <div>
+//     <p>The right-back, who was in the Premier League Team of the Year last season for title winners Liverpool, was left out of Gareth Southgate's squad for the recent internationals following a drop in form this season for Jurgen Klopp's side.</p>
+// <p>&nbsp;</p>
+// <p><strong>Trent Alexander-Arnold answered his critics following his recent England snub with a superb display in Liverpool's 3-0 win at Arsenal on Saturday Night Football.</strong></p>
+// <p>The right-back, who was in the Premier League Team of the Year last season for title winners Liverpool, was left out of Gareth Southgate's squad for the recent internationals following a drop in form this season for Jurgen Klopp's side.</p>
+// <p>&nbsp;</p>
+// <p>But he reacted on Saturday with an unplayable cross for Diogo Jota's opener in the second half, putting in an impressive all-round display as Liverpool started their late charge for the top four.</p>
+// <div class="sdc-article-widget sdc-site-oddschecker" data-component-name="sdc-site-oddschecker">
+// <div class="ocw QXJ0aWNsZSBQcm9tbw==" data-oc-no="1">&nbsp;</div>
+// </div>
+// <p>Here's what his manager and the Sky Sports pundits had to say about the 22-year-old right back as he looks to work his way back into Southgate's plans for Euro 2020.</p>
+// <ul>
+// <li><strong><a href="https://www.skysports.com/football/arsenal-vs-liverpool/report/429127">Arsenal 0-3 Liverpool - Match report and free highlights</a></strong></li>
+// <li><strong><a href="https://www.skysports.com/football/news/11095/12264856/mikel-arteta-issues-apology-to-arsenal-supporters-after-liverpool-defeat">Arteta in shock after loss | Nev: Arsenal fed like lions</a></strong></li>
+// <li><strong><a href="https://www.skysports.com/football/news/11669/12265306/liverpools-return-to-form-against-arsenal-suggests-they-could-finish-a-difficult-season-on-a-high">Are Liverpool back?</a>&nbsp;|&nbsp;<a href="https://www.skysports.com/football/arsenal-vs-liverpool/teams/429127">How the teams lined up</a>&nbsp;|&nbsp;<a href="https://www.skysports.com/football/arsenal-vs-liverpool/stats/429127">Match stats</a></strong></li>
+// </ul>
+// <p>&nbsp;</p>
+// <h4>"Trent Alexander-Arnold showed his class, again. I don't want to make another discussion about Trent or stuff like that. I said it was Gareth [Southgate's] decision.</h4>
+// <div class="ad ad--teads">
+// <div class="sdc-site-au " data-ad-format="teads" data-type="" aria-hidden="true">&nbsp;</div>
+// </div>
+// <p>"He is blessed with the choice he has in that position especially, but Trent is in a good shape. If somebody says he is not then I have to say he is wrong, that is all. But I am not responsible for [Southgate's] decisions."</p>
+//     </div>
+//     """,
+//   ];
+
+static Future fetchData() async {
+    _newsData.clear();
+    var response = await http.get(
+        Uri.https('newsapi.org', '/v2/everything', {'q': '{cricket}'}),
+        headers: {'Authorization': '88e4d8769a6342119a67b335cb2bec68'});
+    print(response.body);
+    var result = convert.jsonDecode(response.body);
+    if (result['status'] == "ok") {
+      result["articles"].forEach((element) {
+        if (element['urlToImage'] != null && element['description'] != null) {
+          NewsModel newsModel = NewsModel(
+              title: element['title'],
+              image: element['urlToImage'],
+              category: "No-category",
+              id: element['source']['id'],
+              date: element['publishedAt'],
+              body: element['description']);
+          _newsData.add(newsModel);
+        }
+      });
+      
+    }
+    return _newsData;
+  }
+
+
 }

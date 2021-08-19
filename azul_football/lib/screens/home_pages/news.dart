@@ -19,7 +19,6 @@ import 'package:get/get.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'bottom_nav_screen.dart';
-import 'dart:convert' as convert;
 
 class NewsPage extends StatefulWidget {
   @override
@@ -27,41 +26,18 @@ class NewsPage extends StatefulWidget {
 }
 
 class _NewsPageState extends State<NewsPage> {
-  var response;
-  List<NewsModel> _newsData=[];
+  // var response;
+  // List<NewsModel> _newsData=[];
   void initState() {
     super.initState();
-    fetchData();
+    NewsApi.fetchData();
   }
 
   void dispose() {
     super.dispose();
   }
 
-  Future fetchData() async {
-    _newsData.clear();
-    response = await http.get(
-        Uri.https('newsapi.org', '/v2/everything', {'q': '{cricket}'}),
-        headers: {'Authorization': '88e4d8769a6342119a67b335cb2bec68'});
-    print(response.body);
-    var result = convert.jsonDecode(response.body);
-    if (result['status'] == "ok") {
-      result["articles"].forEach((element) {
-        if (element['urlToImage'] != null && element['description'] != null) {
-          NewsModel newsModel = NewsModel(
-              title: element['title'],
-              image: element['urlToImage'],
-              category: "No-category",
-              id: element['source']['id'],
-              date: element['publishedAt'],
-              body: element['description']);
-          _newsData.add(newsModel);
-        }
-      });
-      
-    }
-    return _newsData;
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +70,7 @@ class _NewsPageState extends State<NewsPage> {
         ),
       ),
       body: StreamBuilder<Object>(
-        stream: fetchData().asStream(),
+        stream: NewsApi.fetchData().asStream(),
         builder: (context, snapshot) {
         List<NewsModel>newsData=snapshot.data;
           if (snapshot == null ||snapshot.data==null)
