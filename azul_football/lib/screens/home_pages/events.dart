@@ -30,16 +30,16 @@ class _EventsPageState extends State<EventsPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //TODO: Bar League
-          CardBarMain(
-            isDropped: _barDrop,
-            name: LeaguesApi.lLeaguesList[_selectedLeague].name,
-            logo: LeaguesApi.lLeaguesList[_selectedLeague].logo,
-            onTap: () {
-              setState(() {
-                _barDrop = !_barDrop;
-              });
-            },
-          ),
+          // CardBarMain(
+          //   isDropped: _barDrop,
+          //   name: LeaguesApi.lLeaguesList[_selectedLeague].name,
+          //   logo: LeaguesApi.lLeaguesList[_selectedLeague].logo,
+          //   onTap: () {
+          //     setState(() {
+          //       _barDrop = !_barDrop;
+          //     });
+          //   },
+          // ),
           //TODO: Bar List Leagues
           AnimatedContainer(
             width: mSize.size.width,
@@ -63,22 +63,22 @@ class _EventsPageState extends State<EventsPage> {
                     },
                   ),
                 ),
-                for (int i = 0; i < LeaguesApi.lLeaguesList.length; i++)
-                  ShakeTransition(
-                    duration: Duration(milliseconds: (i + 5) * 300),
-                    axis: Axis.horizontal,
-                    child: CardChipLeague(
-                      image: LeaguesApi.lLeaguesList[i].logo,
-                      label: LeaguesApi.lLeaguesList[i].name,
-                      onTap: () {
-                        //TODO: selected League
-                        setState(() {
-                          _selectedLeague = i;
-                          _barDrop = false;
-                        });
-                      },
-                    ),
-                  ),
+                // for (int i = 0; i < LeaguesApi.lLeaguesList.length; i++)
+                //   ShakeTransition(
+                //     duration: Duration(milliseconds: (i + 5) * 300),
+                //     axis: Axis.horizontal,
+                //     child: CardChipLeague(
+                //       image: LeaguesApi.lLeaguesList[i].logo,
+                //       label: LeaguesApi.lLeaguesList[i].name,
+                //       onTap: () {
+                //         //TODO: selected League
+                //         setState(() {
+                //           _selectedLeague = i;
+                //           _barDrop = false;
+                //         });
+                //       },
+                //     ),
+                //   ),
               ],
             ),
           ),
@@ -108,42 +108,43 @@ class _EventsPageState extends State<EventsPage> {
             ),
           ),
           //TODO: List Events
-          Flexible(
-            child: ListView(
-              padding: EdgeInsets.symmetric(vertical: 0.0),
-              children: [
-                for (int i = 0; i < EventsApi.eListEvents.length; i++)
-                  ShakeListTransition(
-                    duration: Duration(milliseconds: (i + 3) * 200),
-                    axis: Axis.vertical,
-                    child: CardEventItemNew(
-                      isSelected: i == _selectedPost,
-                      dateMatch: EventsApi.eListEvents[i].dateMatch,
-                      timeMatch: EventsApi.eListEvents[i].timeMatch,
-                      nameHome: EventsApi.eListEvents[i].teamOne,
-                      nameAway: EventsApi.eListEvents[i].teamTwo,
-                      logoHome: EventsApi.eListEvents[i].teamOneLogo,
-                      logoAway: EventsApi.eListEvents[i].teamTwoLogo,
-                      scoreAway: EventsApi.eListEvents[i].teamOneScore,
-                      scoreHome: EventsApi.eListEvents[i].teamTwoScore,
-                      onTap: () {
-                        Get.to(
-                          () => EventDetails(
-                            id: i,
-                            leagueId: _selectedLeague,
-                          ),
-                          transition: Transition.downToUp,
-                        ).then((value) {
-                          setState(() {
-                            _selectedPost = i;
-                          });
-                        });
-                      },
-                    ),
-                  ),
-              ],
-            ),
-          ),
+          
+          // Flexible(
+          //   child: ListView(
+          //     padding: EdgeInsets.symmetric(vertical: 0.0),
+          //     children: [
+          //       for (int i = 0; i < EventsApi.eListEvents.length; i++)
+          //         ShakeListTransition(
+          //           duration: Duration(milliseconds: (i + 3) * 200),
+          //           axis: Axis.vertical,
+          //           child: CardEventItemNew(
+          //             isSelected: i == _selectedPost,
+          //             // dateMatch: EventsApi.eListEvents[i].dateMatch,
+          //             // timeMatch: EventsApi.eListEvents[i].timeMatch,
+          //             // nameHome: EventsApi.eListEvents[i].teamOne,
+          //             // nameAway: EventsApi.eListEvents[i].teamTwo,
+          //             // logoHome: EventsApi.eListEvents[i].teamOneLogo,
+          //             // logoAway: EventsApi.eListEvents[i].teamTwoLogo,
+          //             // scoreAway: EventsApi.eListEvents[i].teamOneScore,
+          //             // scoreHome: EventsApi.eListEvents[i].teamTwoScore,
+          //             onTap: () {
+          //               Get.to(
+          //                 () => EventDetails(
+          //                   id: i,
+          //                   leagueId: _selectedLeague,
+          //                 ),
+          //                 transition: Transition.downToUp,
+          //               ).then((value) {
+          //                 setState(() {
+          //                   _selectedPost = i;
+          //                 });
+          //               });
+          //             },
+          //           ),
+          //         ),
+          //     ],
+          //   ),
+          // ),
         ],
       ),
     );

@@ -103,8 +103,8 @@ class _AccountPageState extends State<AccountPage> {
             child: CardTileSettings(
               label: getTranslated(context, 'rate_app'),
               onTap: () async {
-                await launch(
-                    'https://play.google.com/store/apps/details?id=com.md.kooramd');
+                // await launch(
+                //     'https://play.google.com/store/apps/details?id=com.md.kooramd');
               },
             ),
           ),
@@ -113,8 +113,8 @@ class _AccountPageState extends State<AccountPage> {
             child: CardTileSettings(
               label: getTranslated(context, 'share_app'),
               onTap: () async {
-                await launch(
-                    'https://play.google.com/store/apps/details?id=com.md.kooramd');
+                // await launch(
+                //     'https://play.google.com/store/apps/details?id=com.md.kooramd');
               },
             ),
           ),
@@ -129,8 +129,8 @@ class _AccountPageState extends State<AccountPage> {
               label: getTranslated(context, 'twitter'),
               icon: FontAwesomeIcons.twitter,
               onTap: () async {
-                await launch(
-                    'https://www.linkedin.com/in/mouad-azul-8061a7176/?originalSubdomain=ma');
+                // await launch(
+                //     'https://www.linkedin.com/in/mouad-azul-8061a7176/?originalSubdomain=ma');
               },
             ),
           ),
@@ -140,7 +140,7 @@ class _AccountPageState extends State<AccountPage> {
               label: getTranslated(context, 'facebook'),
               icon: FontAwesomeIcons.facebookF,
               onTap: () async {
-                await launch('https://www.facebook.com/mouad.azul');
+                // await launch('https://www.facebook.com/mouad.azul');
               },
             ),
           ),
@@ -150,7 +150,7 @@ class _AccountPageState extends State<AccountPage> {
               label: getTranslated(context, 'instagram'),
               icon: FontAwesomeIcons.instagram,
               onTap: () async {
-                await launch('https://www.instagram.com/azul_mouad/');
+                // await launch('https://www.instagram.com/azul_mouad/');
               },
             ),
           ),

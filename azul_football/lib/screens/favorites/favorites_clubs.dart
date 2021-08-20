@@ -63,17 +63,17 @@ class _FavoritesClubsScreenState extends State<FavoritesClubsScreen> {
                   mainAxisSpacing: 5,
                   padding: EdgeInsets.symmetric(vertical: 10.0),
                   children: [
-                    for (int i = 0; i < ClubsApi.cListClubs.length; i++)
+                    for (int i = 0; i < TeamsApi.tListTeams.length; i++)
                       ShakeListTransition(
                         duration: Duration(milliseconds: (i + 5) * 200),
                         axis: Axis.vertical,
                         child: CardClubTeam(
-                          image: ClubsApi.cListClubs[i].logo,
-                          isSelected: ClubsApi.cListClubs[i].picked,
+                          image: TeamsApi.tListTeams[i].logo,
+                          isSelected: TeamsApi.tListTeams[i].picked,
                           onTap: () {
                             setState(() {
-                              ClubsApi.cListClubs[i].picked =
-                                  !ClubsApi.cListClubs[i].picked;
+                              TeamsApi.tListTeams[i].picked =
+                                  !TeamsApi.tListTeams[i].picked;
                             });
                           },
                         ),

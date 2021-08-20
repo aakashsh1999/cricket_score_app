@@ -7,30 +7,30 @@ class CardFavoritTeam extends StatelessWidget {
   final Function onTap;
   final String teamOneLogo, teamTwoLogo;
   final String teamOne, teamTwo;
-  final int teamOneScore, teamTwoScore;
+  final String teamOneScore, teamTwoScore;
   final String leagueName;
   final String status;
-  final double teamOneOvers, teamTwoOvers;
+  // final double teamOneOvers, teamTwoOvers;
   final String subtitle;
   final bool teamOneBatting;
-  final int teamOneWicketsDown, teamTwoWicketsDown;
+  final String teamOneWicketsDown, teamTwoWicketsDown;
 
   CardFavoritTeam({
-    this.onTap,
-    this.teamOneLogo,
-    this.teamTwoLogo,
-    this.teamOne,
-    this.teamTwo,
-    this.teamOneScore,
-    this.teamTwoScore,
-    this.leagueName,
-    this.status,
-    this.teamOneOvers,
-    this.teamTwoOvers,
-    this.subtitle,
-    this.teamOneBatting,
-    this.teamOneWicketsDown,
-    this.teamTwoWicketsDown,
+    @required this.onTap,
+    @required this.teamOneLogo,
+    @required this.teamTwoLogo,
+    @required this.teamOne,
+    @required this.teamTwo,
+    @required this.teamOneScore,
+    @required this.teamTwoScore,
+    @required this.leagueName,
+    @required this.status,
+    // @required this.teamOneOvers,
+    // @required this.teamTwoOvers,
+    @required this.subtitle,
+    @required this.teamOneBatting,
+    @required this.teamOneWicketsDown,
+    @required this.teamTwoWicketsDown,
   });
 
   @override
@@ -120,7 +120,6 @@ class CardFavoritTeam extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: Colors.pink,
                             borderRadius: BorderRadius.circular(10.0),
-                          
                           ),
                           padding: EdgeInsets.symmetric(
                               horizontal: 5.0, vertical: 2.0),
@@ -134,9 +133,8 @@ class CardFavoritTeam extends StatelessWidget {
                         ),
                         Visibility(
                           maintainSize: true,
-maintainAnimation: true,
-maintainState: true,
-
+                          maintainAnimation: true,
+                          maintainState: true,
                           child: Icon(Icons.sports_cricket_rounded),
                           visible: !teamOneBatting,
                         ),
@@ -193,29 +191,28 @@ class CardFavTeam extends StatelessWidget {
           Image(
             width: 65.0,
             height: 65.0,
-            fit: BoxFit.cover,
+            fit: BoxFit.contain,
             image: NetworkImage(logo),
           ),
+          SizedBox(height: 12,),
           SizedBox(
             width: 80.0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+            child: 
+              
                 RichText(
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+                  // maxLines: 2,
+                  // overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
                   text: TextSpan(
                     text: name,
                     style: theme.textTheme.subtitle2.copyWith(
-                      fontSize: 18.0,
+                      fontSize: 14.0,
                       fontWeight: FontWeight.w800,
+                      height: 1
                     ),
                   ),
                 ),
-                if (batting ?? false) Icon(Icons.sports_cricket)
-              ],
-            ),
+              
           ),
         ],
       ),
