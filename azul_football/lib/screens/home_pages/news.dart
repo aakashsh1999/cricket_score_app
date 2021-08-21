@@ -70,7 +70,8 @@ class _NewsPageState extends State<NewsPage> {
         ),
       ),
       body: StreamBuilder<Object>(
-        stream: NewsApi.fetchData().asStream(),
+        stream: Stream.periodic(Duration(seconds: 5))
+          .asyncMap((i) async =>await NewsApi.fetchData()??[]),
         builder: (context, snapshot) {
         List<NewsModel>newsData=snapshot.data;
           if (snapshot == null ||snapshot.data==null)

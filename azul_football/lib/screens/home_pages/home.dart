@@ -29,25 +29,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // bool _isEdit = false;
-  // List<EventsModel> _eventsModel = [];
+
   var response;
 
   @override
   void initState() {
     super.initState();
-    EventsApi.fetchData();
-    TeamsApi.fetchData();
-    // fetchData();
+
   }
 
-  // Future fetchData() async {
-  //   _eventsModel.clear();
-  //   response = await http.get(Uri.parse(
-  //       'https://cricket.sportmonks.com/api/v2.0/seasons/507?api_token=TdM0zdrcsHz7ruUlxgi37Qf7iHCgXqCvKpiLJMBaUClJkgIrDczPF7s3byiE&include=fixtures,teams&filter[visitorteam_id]=10'));
-  //   print(response.body);
-  //   var result = jsonDecode(response.body);
-  // }
+
 
   @override
   Widget build(BuildContext context) {
@@ -84,13 +75,15 @@ class _HomePageState extends State<HomePage> {
           body: TabBarView(
             children: [
               StreamBuilder(
-                  stream: TeamsApi.fetchData().asStream(),
+                  stream: Stream.periodic(Duration(seconds: 5))
+                      .asyncMap((i) async => await TeamsApi.fetchData()),
                   builder: (context, teamsSnapshot) {
                     if (teamsSnapshot == null || teamsSnapshot.data == null)
                       return Center(child: CircularProgressIndicator());
                     return Container(
                       child: StreamBuilder(
-                          stream: EventsApi.fetchData().asStream(),
+                          stream: Stream.periodic(Duration(seconds: 5))
+                              .asyncMap((i) async => await EventsApi.fetchData()),
                           builder: (context, snapshot) {
                             List<EventsModel> eventsData = snapshot.data;
                             if (snapshot == null || snapshot.data == null)
@@ -113,20 +106,45 @@ class _HomePageState extends State<HomePage> {
                                                 id: 1, leagueId: 1),
                                           );
                                         },
-                                        leagueName: eventsData[index].type??"",
-                                        status: eventsData[index].status??"",
-                                        subtitle: eventsData[index].note??"",
-                                        teamOne: TeamsApi.getTeam(eventsData[index].localTeamId).name??"",
+                                        leagueName:
+                                            eventsData[index].type ?? "",
+                                        status: eventsData[index].status ?? "",
+                                        subtitle: eventsData[index].note ?? "",
+                                        teamOne: TeamsApi.getTeam(
+                                                    eventsData[index]
+                                                        .localTeamId)
+                                                .name ??
+                                            "",
                                         teamOneBatting: false,
-                                        teamOneLogo: TeamsApi.getTeam(eventsData[index].localTeamId).logo??"",
+                                        teamOneLogo: TeamsApi.getTeam(
+                                                    eventsData[index]
+                                                        .localTeamId)
+                                                .logo ??
+                                            "",
                                         // teamOneOvers: ,
-                                        teamOneScore: eventsData[index].localTeamScore??"",
-                                        teamOneWicketsDown: eventsData[index].localTeamWicket??"",
-                                        teamTwo: TeamsApi.getTeam(eventsData[index].visitorTeamId).name??"",
-                                        teamTwoLogo: TeamsApi.getTeam(eventsData[index].visitorTeamId).logo??"",
+                                        teamOneScore:
+                                            eventsData[index].localTeamScore ??
+                                                "",
+                                        teamOneWicketsDown:
+                                            eventsData[index].localTeamWicket ??
+                                                "",
+                                        teamTwo: TeamsApi.getTeam(
+                                                    eventsData[index]
+                                                        .visitorTeamId)
+                                                .name ??
+                                            "",
+                                        teamTwoLogo: TeamsApi.getTeam(
+                                                    eventsData[index]
+                                                        .visitorTeamId)
+                                                .logo ??
+                                            "",
                                         // teamTwoOvers: null??"",
-                                        teamTwoScore: eventsData[index].visitorTeamScore??"",
-                                        teamTwoWicketsDown: eventsData[index].visitorTeamWicket??"",
+                                        teamTwoScore: eventsData[index]
+                                                .visitorTeamScore ??
+                                            "",
+                                        teamTwoWicketsDown: eventsData[index]
+                                                .visitorTeamWicket ??
+                                            "",
                                       ));
                                 });
                             // return ListView(
@@ -179,7 +197,6 @@ class _HomePageState extends State<HomePage> {
               Center(child: Text("Coming Soon")),
               Center(child: Text("Coming Soon")),
               Center(child: Text("Coming Soon")),
-
             ],
           ),
         ));
