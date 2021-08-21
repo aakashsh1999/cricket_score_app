@@ -80,7 +80,7 @@ class _NewsPageState extends State<NewsPage> {
                   itemCount: newsData.length,
                   itemBuilder: (BuildContext context, int index) {
                     return ShakeListTransition(
-                      duration: Duration(milliseconds: (4+ 3) * 300),
+                      duration: Duration(milliseconds: (index + 3) * 300),
                       // axis: Axis.vertical,
                       child: CardLatestNews(
                         category: newsData[index].category,
