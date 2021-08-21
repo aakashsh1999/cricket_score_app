@@ -70,34 +70,32 @@ class _NewsPageState extends State<NewsPage> {
         ),
       ),
       body: StreamBuilder<Object>(
-        stream: Stream.periodic(Duration(seconds: 5))
-          .asyncMap((i) async =>await NewsApi.fetchData()??[]),
+        stream:  NewsApi.fetchData().asStream(),
         builder: (context, snapshot) {
         List<NewsModel>newsData=snapshot.data;
           if (snapshot == null ||snapshot.data==null)
               return Center(child: CircularProgressIndicator());
 
               return ListView.builder(
+                  
                   itemCount: newsData.length,
                   itemBuilder: (BuildContext context, int index) {
                     return ShakeListTransition(
-                      duration: Duration(milliseconds: (index + 3) * 300),
+                      duration: Duration(milliseconds: 1800),
                       // axis: Axis.vertical,
                       child: CardLatestNews(
+                        id:index,
                         category: newsData[index].category,
                         image: newsData[index].image,
                         title: newsData[index].title,
                         onTap: () {
                           //TODO : Open News
                           Get.to(
-                            () => BottomNavScreen(
-                              screen: NewsDetails(
+                            () =>  NewsDetails(
                                 id:index,
                                 data: newsData[index],
+                                
                               ),
-                              indexPage: 3,
-                            ),
-                            transition: Transition.fadeIn,
                           );
                         },
                       ),

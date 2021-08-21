@@ -90,7 +90,6 @@ class _BottomNavScreenState extends State<BottomNavScreen>
                     _indexPage = index;
                   });
                 },
-                //TODO: bottom ball jumping transition
                 duration: Duration(milliseconds: 1500),
                 circleGradient: LinearGradient(
                   colors: [
