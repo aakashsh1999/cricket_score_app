@@ -1,3 +1,4 @@
+import 'package:cric_dice/constants.dart';
 import 'package:cric_dice/models/teams.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
@@ -7,10 +8,10 @@ class TeamsApi {
   static Future fetchData() async {
     _listTeams.clear();
     var response = await http.get(
-        Uri.https('cricket.sportmonks.com', '/api/v2.0/teams/', {
+        Uri.https(kBaseUrl, '/api/v2.0/teams/', {
           'include': 'country',
           'api_token':
-              'TdM0zdrcsHz7ruUlxgi37Qf7iHCgXqCvKpiLJMBaUClJkgIrDczPF7s3byiE'
+              kApiKey
         }),
         headers: {
          

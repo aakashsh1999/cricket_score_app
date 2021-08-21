@@ -9,7 +9,10 @@ class CardLatestNews extends StatelessWidget {
   final String category;
   final Function onTap;
 
+  final id;
+
   CardLatestNews({
+    @required this.id,
     @required this.image,
     @required this.title,
     @required this.category,
@@ -31,7 +34,7 @@ class CardLatestNews extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(5.0),
               child: Hero(
-                tag: image,
+                tag: '$image+$id',
                 child: Image(
                   width: 155,
                   fit: BoxFit.cover,

@@ -32,7 +32,7 @@ class NewsDetails extends StatelessWidget {
               background: Stack(
                 children: [
                   Hero(
-                    tag: data.image,
+                    tag: '${data.image}+${id}',
                     child: Image(
                       width: double.infinity,
                       height: double.infinity,
