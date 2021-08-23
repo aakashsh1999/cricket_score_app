@@ -99,6 +99,7 @@ class NewsDetails extends StatelessWidget {
                         duration: Duration(milliseconds: (i + 3) * 300),
                         axis: Axis.vertical,
                         child: CardLatestNews(
+                          id:id,
                           title: NewsApi.aListNews[i].title,
                           image: NewsApi.aListNews[i].image,
                           category: NewsApi.aListNews[i].category,

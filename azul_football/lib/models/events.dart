@@ -16,6 +16,9 @@ class EventsModel {
   final String visitorTeamImage;
   final String localTeamName;
   final String visitorTeamName;
+  final String startAt;
+
+  final String round, name;
 
   EventsModel({
     this.id,
@@ -33,6 +36,9 @@ class EventsModel {
     this.visitorTeamImage,
     this.localTeamName,
     this.visitorTeamName,
+    this.startAt,
+    this.round,
+    this.name
   });
 
   factory EventsModel.fromJson(Map<String, dynamic> json) {
@@ -49,9 +55,14 @@ class EventsModel {
         visitorTeamWicket:
             (json['visitorteam_dl_data'] ?? {})['wickets_out'] ?? "",
         visitorTeamScore: (json['visitorteam_dl_data'] ?? {})['score'] ?? "",
-        localTeamImage: (json["localteam"]??{})['image_path']??"",
-        visitorTeamImage: (json["visitorteam"]??{})['image_path']??"",
-        localTeamName: (json["localteam"]??{})['name']??"",
-        visitorTeamName: (json["visitorteam"]??{})['name'])??"";
+        localTeamImage: (json["localteam"] ?? {})['image_path'] ?? "",
+        visitorTeamImage: (json["visitorteam"] ?? {})['image_path'] ?? "",
+        localTeamName: (json["localteam"] ?? {})['name'] ?? "",
+        visitorTeamName: (json["visitorteam"] ?? {})['name'] ?? "",
+        startAt: json['starting_at']?? "",
+        name:(json['stage']?? {})['name'] ?? "",
+        round: json['round']?? "",
+        
+        );
   }
 }

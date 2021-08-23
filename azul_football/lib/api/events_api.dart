@@ -15,7 +15,7 @@ class EventsApi {
     _listEvents.clear();
 
     Map<String,dynamic> params = {
-      'include': 'visitorteam,localteam',
+      'include': 'visitorteam,localteam,stage',
       'api_token': kApiKey,
       // 'filter[starts_between]': '2019-03-03,2019-03-15'
     };
