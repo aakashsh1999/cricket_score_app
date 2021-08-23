@@ -109,7 +109,10 @@ class HomePageTab extends StatelessWidget {
                             () => EventDetails(id: 1, leagueId: 1),
                           );
                         },
-                        leagueName: eventsData[index].type ?? "",
+                        homeTab:tab,
+                        leagueName: eventsData[index].name ?? "" ,
+
+                        // leagueName: eventsData[index].type ?? "",
                         status: eventsData[index].status ?? "",
                         subtitle: eventsData[index].note ?? "",
                         teamOne: eventsData[index].localTeamName ?? "",
@@ -123,6 +126,7 @@ class HomePageTab extends StatelessWidget {
                         teamTwoScore: eventsData[index].visitorTeamScore ?? "",
                         teamTwoWicketsDown:
                             eventsData[index].visitorTeamWicket ?? "",
+                        startAt:eventsData[index].startAt??""
                       ));
                 });
           }),
