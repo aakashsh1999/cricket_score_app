@@ -1,3 +1,4 @@
+import 'package:cric_dice/api/events_api.dart';
 import 'package:cric_dice/localizations/localization_constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,10 @@ class CardFavoritTeam extends StatelessWidget {
   final bool teamOneBatting;
   final String teamOneWicketsDown, teamTwoWicketsDown;
 
+  final HomeTab homeTab;
+
+  final String startAt;
+
   CardFavoritTeam({
     @required this.onTap,
     @required this.teamOneLogo,
@@ -28,9 +33,11 @@ class CardFavoritTeam extends StatelessWidget {
     // @required this.teamOneOvers,
     // @required this.teamTwoOvers,
     @required this.subtitle,
+    @required this.homeTab,
     @required this.teamOneBatting,
     @required this.teamOneWicketsDown,
     @required this.teamTwoWicketsDown,
+    this.startAt,
   });
 
   @override
@@ -69,6 +76,7 @@ class CardFavoritTeam extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 3.0, vertical: 3),
               child: Text(
                 '$leagueName',
+                overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 18.0,
@@ -87,23 +95,31 @@ class CardFavoritTeam extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(),
-                    RichText(
-                      // textstyle: theme.textTheme.headline1.copyWith(fontSize: 28),
-                      // text: '$teamOneScore : $teamTwoScore',
-                      text: TextSpan(
-                          style:
-                              theme.textTheme.headline1.copyWith(fontSize: 22),
-                          children: [
-                            TextSpan(text: '$teamOneScore'),
-                            TextSpan(
-                                text: '/$teamOneWicketsDown',
-                                style: theme.textTheme.headline3),
-                            TextSpan(text: ' : $teamTwoScore'),
-                            TextSpan(
-                                text: '/$teamTwoWicketsDown',
-                                style: theme.textTheme.headline3),
-                          ]),
-                    ),
+                    homeTab == HomeTab.upcoming
+                        ? Text(
+                            'Match Starting in\n${DateTime.parse(startAt).difference(DateTime.now()).inDays} days',
+                            style: theme.textTheme.headline1
+                                .copyWith(fontSize: 16),
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.ellipsis,
+                          )
+                        : RichText(
+                            // textstyle: theme.textTheme.headline1.copyWith(fontSize: 28),
+                            // text: '$teamOneScore : $teamTwoScore',
+                            text: TextSpan(
+                                style: theme.textTheme.headline1
+                                    .copyWith(fontSize: 22),
+                                children: [
+                                  TextSpan(text: '$teamOneScore'),
+                                  TextSpan(
+                                      text: '/$teamOneWicketsDown',
+                                      style: theme.textTheme.headline3),
+                                  TextSpan(text: ' : $teamTwoScore'),
+                                  TextSpan(
+                                      text: '/$teamTwoWicketsDown',
+                                      style: theme.textTheme.headline3),
+                                ]),
+                          ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -112,7 +128,7 @@ class CardFavoritTeam extends StatelessWidget {
                           maintainAnimation: true,
                           maintainState: true,
                           child: Icon(Icons.sports_cricket_rounded),
-                          visible: teamOneBatting,
+                          visible: teamOneBatting && homeTab == HomeTab.today,
                         ),
                         Container(
                           margin: EdgeInsets.symmetric(
@@ -136,7 +152,7 @@ class CardFavoritTeam extends StatelessWidget {
                           maintainAnimation: true,
                           maintainState: true,
                           child: Icon(Icons.sports_cricket_rounded),
-                          visible: !teamOneBatting,
+                          visible: !teamOneBatting && homeTab == HomeTab.today,
                         ),
                       ],
                     ),
@@ -194,25 +210,21 @@ class CardFavTeam extends StatelessWidget {
             fit: BoxFit.contain,
             image: NetworkImage(logo),
           ),
-          SizedBox(height: 12,),
+          SizedBox(
+            height: 12,
+          ),
           SizedBox(
             width: 80.0,
-            child: 
-              
-                RichText(
-                  // maxLines: 2,
-                  // overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    text: name,
-                    style: theme.textTheme.subtitle2.copyWith(
-                      fontSize: 14.0,
-                      fontWeight: FontWeight.w800,
-                      height: 1
-                    ),
-                  ),
-                ),
-              
+            child: RichText(
+              // maxLines: 2,
+              // overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                text: name,
+                style: theme.textTheme.subtitle2.copyWith(
+                    fontSize: 14.0, fontWeight: FontWeight.w800, height: 1),
+              ),
+            ),
           ),
         ],
       ),
