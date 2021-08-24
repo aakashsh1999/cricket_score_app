@@ -116,7 +116,7 @@ class _BottomNavScreenState extends State<BottomNavScreen>
                       isSelected: _indexPage == 1,
                       icon: FontAwesomeIcons.home,
                       // icon:ImageIcon(AssetImage(''),),
-                      label:'Bets'
+                      label:'Odds'
                     ),
                     startColor: theme.backgroundColor,
                     endColor: theme.backgroundColor,
