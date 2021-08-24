@@ -24,32 +24,31 @@ class _AccountPageState extends State<AccountPage> {
     final theme = Theme.of(context);
     final themeProv = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text('More', style: TextStyle(fontSize: 24.0),),
-        backgroundColor: theme.primaryColorDark,
-        
+     appBar:AppBar(
+        title: ShakeTransition(
+          duration: Duration(milliseconds: 1600),
+            child: Row(
+              children: [
+                Icon(
+                  FontAwesomeIcons.cog,
+                  size: 22.0,
+                  color: theme.primaryColor,
+                ),
+                SizedBox(width: 5.0),
+                Text('More',
+                  style: theme.textTheme.headline1.copyWith(
+                    color: theme.primaryColor,
+                  ),
+                ),
+              ],
+            ),
+        ),
       ),
     body:  SafeArea(
       child: ListView(
         padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 0.0),
         children: [
-          // //TODO: User info
-          // CardUserProfile(
-          //   image: _imageFile,
-          //   onTap: () async {
-          //     final _image = await FunctionsHelper.pickImage();
-
-          //     if (_image != null) {
-          //       setState(() {
-          //         _imageFile = _image;
-          //       });
-          //     }
-          //   },
-          // ),
-          // SizedBox(height: 15),
-          // Divider(),
-          //TODO: Select Language
-           SizedBox(height: 15),
+             SizedBox(height: 15),
             ShakeTransition(
             duration: Duration(milliseconds: 2000),
             child: Text('Settings', style: TextStyle(decoration:TextDecoration.underline,fontSize: 22.0, fontWeight: FontWeight.bold,),),

@@ -42,15 +42,26 @@ class _HomePageState extends State<HomePage> {
     final theme = Theme.of(context);
 
     return Scaffold(
-       appBar: AppBar(
-            backgroundColor: theme.primaryColorDark,
-            automaticallyImplyLeading: false,
-            title: Text(
-              'Cricket Data',
-              style: TextStyle(fontSize: 24.0),
+       appBar:AppBar(
+        title: ShakeTransition(
+          duration: Duration(milliseconds: 1600),
+                    child: Row(
+              children: [
+                Icon(
+                  FontAwesomeIcons.diceThree,
+                  size: 22.0,
+                  color: theme.primaryColor,
+                ),
+                SizedBox(width: 5.0),
+                Text('Cric Dice',
+                  style: theme.textTheme.headline1.copyWith(
+                    color: theme.primaryColor,
+                  ),
+                ),
+              ],
             ),
-            centerTitle: false,
-       ),
+        ),
+      ),
        body: Container(
         child: Text('Home Screen'),
 
