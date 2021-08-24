@@ -71,7 +71,7 @@ class _MyAppState extends State<MyApp> {
           initialRoute: '/',
           routes: {
             '/': (_) => SplashScreen(),
-            '/home': (_) => EventDetails(),
+            '/home': (_) => BottomNavScreen(),
           },
         );
       }),
