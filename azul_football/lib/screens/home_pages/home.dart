@@ -41,10 +41,8 @@ class _HomePageState extends State<HomePage> {
     final mSize = MediaQuery.of(context);
     final theme = Theme.of(context);
 
-    return DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          appBar: AppBar(
+    return Scaffold(
+       appBar: AppBar(
             backgroundColor: theme.primaryColorDark,
             automaticallyImplyLeading: false,
             title: Text(
@@ -52,33 +50,49 @@ class _HomePageState extends State<HomePage> {
               style: TextStyle(fontSize: 24.0),
             ),
             centerTitle: false,
-            bottom: TabBar(
-              indicatorColor: Colors.white,
-              indicatorSize: TabBarIndicatorSize.label,
-              indicatorWeight: 5.0,
-              tabs: [
-                Tab(
-                  text: "Today",
-                ),
-                Tab(text: "Upcoming"),
-                Tab(text: "Finished"),
-              ],
-            ),
-          ),
-          body: TabBarView(
-            children: [
-              HomePageTab(
-                tab: HomeTab.today,
-              ),
-              HomePageTab(
-                tab: HomeTab.upcoming,
-              ),
-              HomePageTab(
-                tab: HomeTab.finished,
-              ),
-            ],
-          ),
-        ));
+       ),
+       body: Container(
+        child: Text('Home Screen'),
+
+       ),
+    );
+
+    // return DefaultTabController(
+    //     length: 3,
+    //     child: Scaffold(
+    //       appBar: AppBar(
+    //         backgroundColor: theme.primaryColorDark,
+    //         automaticallyImplyLeading: false,
+    //         title: Text(
+    //           'Cricket Data',
+    //           style: TextStyle(fontSize: 24.0),
+    //         ),
+    //         centerTitle: false,
+    //         bottom: TabBar(
+    //           indicatorColor: Colors.white,
+    //           indicatorSize: TabBarIndicatorSize.label,
+    //           indicatorWeight: 5.0,
+    //           tabs: [
+    //             Tab(text: "Today",),
+    //             Tab(text: "Upcoming"),
+    //             Tab(text: "Finished"),
+    //           ],
+    //         ),
+    //       ),
+    //       body: TabBarView(
+    //         children: [
+    //           HomePageTab(
+    //             tab: HomeTab.today,
+    //           ),
+    //           HomePageTab(
+    //             tab: HomeTab.upcoming,
+    //           ),
+    //           HomePageTab(
+    //             tab: HomeTab.finished,
+    //           ),
+    //         ],
+    //       ),
+        // ));
   }
 }
 
@@ -105,14 +119,11 @@ class HomePageTab extends StatelessWidget {
                       child: CardFavoritTeam(
                         onTap: () {
                           //TODO: Open Events Details
-                          Get.to(
-                            () => EventDetails(id: 1, leagueId: 1),
-                          );
+                          // Get.to(
+                          //   () => EventDetails(id: 1, leagueId: 1),
+                          // );
                         },
-                        homeTab:tab,
-                        leagueName: eventsData[index].name ?? "" ,
-
-                        // leagueName: eventsData[index].type ?? "",
+                        leagueName: eventsData[index].type ?? "",
                         status: eventsData[index].status ?? "",
                         subtitle: eventsData[index].note ?? "",
                         teamOne: eventsData[index].localTeamName ?? "",
@@ -126,7 +137,6 @@ class HomePageTab extends StatelessWidget {
                         teamTwoScore: eventsData[index].visitorTeamScore ?? "",
                         teamTwoWicketsDown:
                             eventsData[index].visitorTeamWicket ?? "",
-                        startAt:eventsData[index].startAt??""
                       ));
                 });
           }),

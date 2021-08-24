@@ -495,7 +495,7 @@ class CardBarEvent extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 5.0, vertical: 8.0),
               child: Image(
                 width: 40.0,
-                image: AssetImage(logo),
+                image: NetworkImage(logo),
               ),
             ),
             SizedBox(width: 5.0),
