@@ -105,9 +105,9 @@ class HomePageTab extends StatelessWidget {
                       child: CardFavoritTeam(
                         onTap: () {
                           //TODO: Open Events Details
-                          Get.to(
-                            () => EventDetails(id: 1, leagueId: 1),
-                          );
+                          // Get.to(
+                          //   () => EventDetails(id: 1, leagueId: 1),
+                          // );
                         },
                         leagueName: eventsData[index].type ?? "",
                         status: eventsData[index].status ?? "",

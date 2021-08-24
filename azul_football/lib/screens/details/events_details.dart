@@ -10,14 +10,15 @@ import 'package:cric_dice/widgets/widgets_events.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+  
 class EventDetails extends StatefulWidget {
-  final id;
-  final int leagueId;
+  // final id;
+  // final int leagueId;
 
-  EventDetails({
-    @required this.id,
-    @required this.leagueId,
-  });
+  // EventDetails({
+  //   // @required this.id,
+  //   // @required this.leagueId,
+  // });
 
   @override
   _EventDetailsState createState() => _EventDetailsState();
@@ -26,6 +27,7 @@ class EventDetails extends StatefulWidget {
 class _EventDetailsState extends State<EventDetails> {
   ScrollController _controller = ScrollController();
   PageController _pageController = PageController();
+
 
   int _indexTabEvent = 0;
 
@@ -55,94 +57,49 @@ class _EventDetailsState extends State<EventDetails> {
     final mSize = MediaQuery.of(context);
     final theme = Theme.of(context);
 
-    return Scaffold(
-      body: NestedScrollView(
-        controller: _controller,
-        headerSliverBuilder: (context, isScrolled) {
-          return [
-            SliverAppBar(
-              expandedHeight: 250,
-              title: CardBarEvent(
-                name: LeaguesApi.lLeaguesList[widget.leagueId].name,
-                logo: LeaguesApi.lLeaguesList[widget.leagueId].logo,
-              ),
-              pinned: true,
-              backgroundColor: theme.primaryColorDark,
-              automaticallyImplyLeading: false,
-              flexibleSpace: BarEventDetails(
-                id: widget.id,
-              ),
-              bottom: PreferredSize(
-                preferredSize: Size(mSize.size.width, 40.0),
-                child: CardTabsEvents(children: [
-                  // TabTileEvent(
-                  //   isSelected: _indexTabEvent == 0,
-                  //   label: getTranslated(context, 'chats'),
-                  //   icon: FontAwesomeIcons.solidComments,
-                  //   onTap: () {
-                  //     setState(() {
-                  //       _animateToPage(0);
-                  //       _indexTabEvent = 0;
-                  //     });
-                  //   },
-                  // ),
-                  TabTileEvent(
-                    isSelected: _indexTabEvent == 0,
-                    label: getTranslated(context, 'match_stats'),
-                    icon: FontAwesomeIcons.chartPie,
-                    onTap: () {
-                      setState(() {
-                        _animateToPage(0);
-                        _indexTabEvent = 0;
-                      });
-                    },
-                  ),
-                  TabTileEvent(
-                    isSelected: _indexTabEvent == 1,
-                    label: getTranslated(context, 'lineup'),
-                    icon: FontAwesomeIcons.users,
-                    onTap: () {
-                      setState(() {
-                        _animateToPage(1);
-                        _indexTabEvent = 1;
-                      });
-                    },
-                  ),
-                  TabTileEvent(
-                    isSelected: _indexTabEvent == 2,
-                    label: getTranslated(context, 'commentary'),
-                    icon: FontAwesomeIcons.alignJustify,
-                    onTap: () {
-                      setState(() {
-                        _animateToPage(2);
-                        _indexTabEvent = 2;
-                      });
-                    },
-                  ),
-                ]),
-              ),
+    return DefaultTabController(
+        length: 5,
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: theme.primaryColorDark,
+            automaticallyImplyLeading: false,
+            title: Text(
+              'India Vs Pakistan',
+              style: TextStyle(fontSize: 18.0),
             ),
+            centerTitle: false,
+            actions: [
+              IconButton(onPressed: (){
 
-            // SliverList(
-            //     delegate: SliverChildListDelegate([
-            //   Column(
-            //     children: [
-            //
-            //     ],
-            //   )
-            // ])),
-          ];
-        },
-        body: PageView(
-          onPageChanged: (val) {
-            setState(() {
-              _indexTabEvent = val;
-            });
-          },
-          controller: _pageController,
-          children: _listPagesEvents,
-        ),
-      ),
+              }, 
+              icon:Icon(FontAwesomeIcons.chevronRight),
+              color: Colors.white,
+              ),
+            ],
+            bottom: TabBar(
+              indicatorColor: Colors.white,
+              indicatorSize: TabBarIndicatorSize.tab,
+              indicatorWeight: 5.0,
+
+              tabs: [
+                Tab(text: "Info"),
+                Tab(text: "Live"),
+                Tab(text: "Scorecard"),
+                Tab(text:'History'),
+                Tab(text:'Points Table'),
+              ],
+            ),
+          ),
+     body:
+          TabBarView(children: [
+            Text('Info'),
+            Text('Live'),
+            Text('ScoreCard'),
+            Text('History'),
+            Text('Points Table'),
+
+          ],)
+      )
     );
   }
 }
