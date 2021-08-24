@@ -114,7 +114,7 @@ class _BottomNavScreenState extends State<BottomNavScreen>
                   TabItemIcon(
                     buildWidget: (_, color) => TabBottomMain(
                       isSelected: _indexPage == 1,
-                      icon: FontAwesomeIcons.home,
+                      icon: FontAwesomeIcons.diceThree,
                       // icon:ImageIcon(AssetImage(''),),
                       label:'Odds'
                     ),
