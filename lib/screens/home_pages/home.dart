@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:convert';
+import 'package:cric_dice/api/bets_api.dart';
 import 'package:cric_dice/api/clubs_api.dart';
 import 'package:cric_dice/api/events_api.dart';
 import 'package:cric_dice/api/leagues_api.dart';
@@ -21,6 +22,7 @@ import 'package:cric_dice/widgets/widgets_news.dart';
 import 'package:cric_dice/screens/details/events_details.dart';
 import 'package:cric_dice/api/events_api.dart';
 import 'package:http/http.dart' as http;
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 // some code
 class HomePage extends StatefulWidget {
@@ -29,7 +31,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var response;
+  final _channel = WebSocketChannel.connect(
+    Uri.parse('ws://148.251.21.118:5570'),
+  );
+  // _HomePageState() {
+  //   _channel.sink.add(json.encode({
+  //     'requestType': 1,
+  //     'data': {
+  //       'Firm': 'APITEST',
+  //       'PrivateKey': 'ABHI@1022',
+  //       'ApiKey': 'CRIC@20'
+  //     }
+  //   }));
+  // }
 
   @override
   void initState() {
@@ -37,35 +51,45 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    _channel.sink.close();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final mSize = MediaQuery.of(context);
     final theme = Theme.of(context);
 
     return Scaffold(
-       appBar:AppBar(
+      appBar: AppBar(
         title: ShakeTransition(
           duration: Duration(milliseconds: 1600),
-                    child: Row(
-              children: [
-                Icon(
-                  FontAwesomeIcons.diceThree,
-                  size: 22.0,
+          child: Row(
+            children: [
+              Icon(
+                FontAwesomeIcons.diceThree,
+                size: 22.0,
+                color: theme.primaryColor,
+              ),
+              SizedBox(width: 5.0),
+              Text(
+                'Cric Dice',
+                style: theme.textTheme.headline1.copyWith(
                   color: theme.primaryColor,
                 ),
-                SizedBox(width: 5.0),
-                Text('Cric Dice',
-                  style: theme.textTheme.headline1.copyWith(
-                    color: theme.primaryColor,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
+          ),
         ),
       ),
-       body: Container(
-        child: Text('Home Screen'),
-
-       ),
+      body: Container(
+          child: StreamBuilder(
+        stream: _channel.stream,
+        builder: (context, snapshot) {
+          // return Text(snapshot.hasData ? '${snapshot.connectionState}' : '!');
+          return Text('${snapshot.data}');
+        },
+      )),
     );
 
     // return DefaultTabController(
@@ -103,7 +127,7 @@ class _HomePageState extends State<HomePage> {
     //           ),
     //         ],
     //       ),
-        // ));
+    // ));
   }
 }
 

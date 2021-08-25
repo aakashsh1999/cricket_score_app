@@ -1,60 +1,19 @@
-import 'package:cric_dice/api/events_api.dart';
-import 'package:cric_dice/api/leagues_api.dart';
-
-import 'package:cric_dice/localizations/localization_constants.dart';
-import 'package:cric_dice/screens/details/events/chats.dart';
-import 'package:cric_dice/screens/details/events/commentary.dart';
-import 'package:cric_dice/screens/details/events/lineup.dart';
-import 'package:cric_dice/screens/details/events/stats.dart';
-import 'package:cric_dice/widgets/widgets_events.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-  
 class EventDetails extends StatefulWidget {
-  // final id;
-  // final int leagueId;
-
-  // EventDetails({
-  //   // @required this.id,
-  //   // @required this.leagueId,
-  // });
-
   @override
   _EventDetailsState createState() => _EventDetailsState();
 }
 
 class _EventDetailsState extends State<EventDetails> {
-  ScrollController _controller = ScrollController();
-  PageController _pageController = PageController();
-
-
-  int _indexTabEvent = 0;
-
-  List<Widget> _listPagesEvents = [];
-
-  _animateToPage(int page) {
-    _pageController.animateToPage(page,
-        duration: Duration(milliseconds: 300), curve: Curves.easeOutSine);
-  }
-
   @override
   void initState() {
-    _listPagesEvents = [
-      // ChatsPage(),
-      MatchStatsPage(),
-      LineUpPage(
-        // homeName: EventsApi.eListEvents[widget.id].teamOne,
-        // awayName: EventsApi.eListEvents[widget.id].teamTwo,
-      ),
-      Commentary(),
-    ];
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final mSize = MediaQuery.of(context);
     final theme = Theme.of(context);
 
     return DefaultTabController(
