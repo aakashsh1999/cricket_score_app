@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "901030436118",
+    "project_id": "cric-dice",
+    "storage_bucket": "cric-dice.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:901030436118:android:832e8796cdab7e7bf18437",
+        "android_client_info": {
+          "package_name": "com.example.cric_dice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "901030436118-alsnngqmu1trn74417sm6b8kugbp3cqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD75-7HMrCztpSQ2sz5pgSgJvdVb7p21xg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "901030436118-alsnngqmu1trn74417sm6b8kugbp3cqo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
