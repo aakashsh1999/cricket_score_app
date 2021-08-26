@@ -27,3 +27,8 @@ Color kFontPrimaryDarkColor = Color(0xffDEDEDE);
 Color kFontSecondaryDarkColor = Color(0xff999999);
 
 Color kYellow01 = Color(0xffffea48);
+
+//bet Colors
+Color kBetDarkColor = Color(0xff1D1E2C);
+Color kBetlightColor = Color(0xffffffff);
+
