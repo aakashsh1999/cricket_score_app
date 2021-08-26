@@ -1,7 +1,9 @@
+import 'package:cric_dice/screens/Bets/bet_details.dart';
 import 'package:cric_dice/widgets/trensations_widgets.dart';
 import 'package:cric_dice/widgets/widgets_bets.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'dart:convert';
 
@@ -11,7 +13,7 @@ class BetPage extends StatefulWidget {
 }
 
 class _BetPageState extends State<BetPage> {
- final List _matches = [];
+  final List _matches = [];
   final _channel = WebSocketChannel.connect(
     Uri.parse('wss://cric-dice-api.herokuapp.com'),
   );
@@ -26,7 +28,6 @@ class _BetPageState extends State<BetPage> {
     super.dispose();
     _channel.sink.close();
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -56,12 +57,13 @@ class _BetPageState extends State<BetPage> {
       ),
       body: Container(
           child: StreamBuilder(
-           stream: _channel.stream,
+        stream: _channel.stream,
         builder: (context, snapshot) {
-       if (snapshot.hasData) {
+          if (snapshot.hasData) {
             final dataObj = jsonDecode(snapshot.data);
             final idx = _matches.indexWhere(
-              (elem) => elem['matchInfo']['MatchId'] == dataObj['data']['MatchId'],
+              (elem) =>
+                  elem['matchInfo']['MatchId'] == dataObj['data']['MatchId'],
             );
             if (idx == -1) {
               if (dataObj['responseType'] == 4) {
@@ -71,7 +73,6 @@ class _BetPageState extends State<BetPage> {
               switch (dataObj['responseType']) {
                 case 4:
                   _matches[idx]['matchInfo'] = dataObj['data'];
-                     print(_matches[idx]['matchInfo']);
                   break;
 
                 case 5:
@@ -79,7 +80,7 @@ class _BetPageState extends State<BetPage> {
                   break;
 
                 case 6:
-                  if (_matches[idx]['testScore']) {
+                  if (_matches[idx]['testScore'] ?? [].length != 0) {
                     final teamIdx = _matches[idx]['testScore'].indexWhere(
                       (elem) => elem['Name'] == dataObj['data']['Name'],
                     );
@@ -114,35 +115,38 @@ class _BetPageState extends State<BetPage> {
             }
             print(dataObj['responseType']);
 
-            var _matchStr = '';
-            _matches.forEach((m) => _matchStr += jsonEncode(m) + '\n\n');
-
-          return ListView.builder(
-            itemCount: int.parse('${_matches.length}'),
-            itemBuilder: (BuildContext context, int index){
-            return Column(
-              children: [
-                ShakeListTransition(
-                  duration: Duration(milliseconds: 1600),
-                  child: BetCard(
-                    matchType:_matches[index]["matchInfo"]["MatchType"].toString(),
-                    date:_matches[index]["matchInfo"]["StartTime"].toString(),
-                    time: "",
-                    team:_matches[index]["matchInfo"]["Teams"].toString(),
-                    price: '20',
-                    volume:_matches[index]["matchInfo"]["Volume"].toString(),
-                    status:_matches[index]["matchInfo"]["Status"].toString(),
-                  )),
-
-                  SizedBox(height: 20.0,)
-              ],
-            );
+            return ListView.builder(
+                itemCount: int.parse('${_matches.length}'),
+                itemBuilder: (BuildContext context, int index) {
+                  return Column(
+                    children: [
+                      ShakeListTransition(
+                          duration: Duration(milliseconds: 1600),
+                          child: BetCard(
+                            matchType: _matches[index]["matchInfo"]["MatchType"]
+                                .toString(),
+                            team: _matches[index]["matchInfo"]["Teams"]
+                                .toString(),
+                            price: '20',
+                            volume: _matches[index]["matchInfo"]["Volume"]
+                                .toString(),
+                            status: _matches[index]["matchInfo"]["Status"]
+                                .toString(),
+                            onTap: () {
+                              Get.to(() => BetDetails(
+                                    matchData: _matches[index],
+                                  ));
+                            },
+                          )),
+                      SizedBox(
+                        height: 20.0,
+                      )
+                    ],
+                  );
+                });
+          } else {
+            return Center(child: CircularProgressIndicator());
           }
-          );
-          }
-            else{
-              return Center(child: CircularProgressIndicator());
-            }
         },
       )),
     );

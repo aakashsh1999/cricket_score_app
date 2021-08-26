@@ -68,10 +68,10 @@ class _BottomNavScreenState extends State<BottomNavScreen>
             width: double.infinity,
             height: 55.0,
             decoration: BoxDecoration(
-                //color: theme.primaryColorDark,
+                // color: theme.primaryColorDark,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10.0),
-                  topRight: Radius.circular(10.0),
+                  topLeft: Radius.circular(5.0),
+                  topRight: Radius.circular(5.0),
                 ),
                 gradient: LinearGradient(
                   end: Alignment.bottomCenter,
