@@ -138,6 +138,7 @@ class _BetPageState extends State<BetPage> {
                                   ));
                             },
                           )),
+                          
                       SizedBox(
                         height: 20.0,
                       )
