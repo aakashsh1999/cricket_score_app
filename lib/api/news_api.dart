@@ -11,7 +11,6 @@ class NewsApi {
     var response = await http.get(
         Uri.https('newsapi.org', '/v2/everything', {'q': '{cricket}'}),
         headers: {'Authorization': '88e4d8769a6342119a67b335cb2bec68'});
-    print(response.body);
     var result = convert.jsonDecode(response.body);
     if (result['status'] == "ok") {
       result["articles"].forEach((element) {
