@@ -90,6 +90,7 @@ class _HomePageState extends State<HomePage> {
               switch (dataObj['responseType']) {
                 case 4:
                   _matches[idx]['matchInfo'] = dataObj['data'];
+                  print(_matches[idx]['matchInfo']);
                   break;
 
                 case 5:

@@ -11,20 +11,10 @@ class BetPage extends StatefulWidget {
 }
 
 class _BetPageState extends State<BetPage> {
+ final List _matches = [];
   final _channel = WebSocketChannel.connect(
-    Uri.parse('ws://148.251.21.118:5570'),
+    Uri.parse('wss://cric-dice-api.herokuapp.com'),
   );
-    _BetPageState() {
-    _channel.sink.add(json.encode({
-      'requestType': 1,
-      'data': {
-        'Firm': 'APITEST',
-        'PrivateKey': 'ABHI@1022',
-        'ApiKey': 'CRIC@20'
-      }
-    }));
-  }
-
 
   @override
   void initState() {
@@ -66,26 +56,84 @@ class _BetPageState extends State<BetPage> {
       ),
       body: Container(
           child: StreamBuilder(
-        stream: _channel.stream,
+           stream: _channel.stream,
         builder: (context, snapshot) {
-          if(snapshot.hasData){
-            var data = snapshot.data;
-          return ListView.builder(
-            itemCount: snapshot.data.length,
-            itemBuilder: (BuildContext context, int index){
+       if (snapshot.hasData) {
+            final dataObj = jsonDecode(snapshot.data);
+            final idx = _matches.indexWhere(
+              (elem) => elem['matchInfo']['MatchId'] == dataObj['data']['MatchId'],
+            );
+            if (idx == -1) {
+              if (dataObj['responseType'] == 4) {
+                _matches.add({'matchInfo': dataObj['data']});
+              }
+            } else {
+              switch (dataObj['responseType']) {
+                case 4:
+                  _matches[idx]['matchInfo'] = dataObj['data'];
+                     print(_matches[idx]['matchInfo']);
+                  break;
 
+                case 5:
+                  _matches[idx]['odiScore'] = dataObj['data'];
+                  break;
+
+                case 6:
+                  if (_matches[idx]['testScore']) {
+                    final teamIdx = _matches[idx]['testScore'].indexWhere(
+                      (elem) => elem['Name'] == dataObj['data']['Name'],
+                    );
+                    if (teamIdx == -1) {
+                      _matches[idx]['testScore'].add(dataObj['data']);
+                    }
+                  } else {
+                    _matches[idx]['testScore'] = [dataObj['data']];
+                  }
+                  break;
+
+                case 7:
+                  _matches[idx]['overRuns'] = dataObj['data'];
+                  break;
+
+                case 8:
+                  _matches[idx]['liveCommentry'] = dataObj['data'];
+                  break;
+
+                case 9:
+                  _matches[idx]['marketRateInfo'] = dataObj['data'];
+                  break;
+
+                case 10:
+                  _matches[idx]['marketRate'] = dataObj['data'];
+                  break;
+
+                case 11:
+                  _matches[idx]['session'] = dataObj['data'];
+                  break;
+              }
+            }
+            print(dataObj['responseType']);
+
+            var _matchStr = '';
+            _matches.forEach((m) => _matchStr += jsonEncode(m) + '\n\n');
+
+          return ListView.builder(
+            itemCount: int.parse('${_matches.length}'),
+            itemBuilder: (BuildContext context, int index){
             return Column(
               children: [
                 ShakeListTransition(
                   duration: Duration(milliseconds: 1600),
                   child: BetCard(
-                    matchType:"T20",
-                    date: '21 Sep 2021',
-                    time: '02:00',
-                    team: 'India Vs England',
+                    matchType:_matches[index]["matchInfo"]["MatchType"].toString(),
+                    date:_matches[index]["matchInfo"]["StartTime"].toString(),
+                    time: "",
+                    team:_matches[index]["matchInfo"]["Teams"].toString(),
                     price: '20',
-                    volume:'30'
+                    volume:_matches[index]["matchInfo"]["Volume"].toString(),
+                    status:_matches[index]["matchInfo"]["Status"].toString(),
                   )),
+
                   SizedBox(height: 20.0,)
               ],
             );
