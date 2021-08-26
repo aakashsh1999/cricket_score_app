@@ -128,6 +128,7 @@ BetCard({this.matchType, this.date, this.time, this.team, this.price, this.volum
                       color: Color(0xffD7CDCC),
                       ),
                       child: Center(child: Text('$volume', style: theme.textTheme.bodyText2.copyWith(fontSize: 16.0),textAlign: TextAlign.center,),)),
+                      
                     ],
                   )
                 ],)
