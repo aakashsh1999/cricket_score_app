@@ -1,4 +1,4 @@
-import 'package:cric_dice/screens/Bets/bet_details.dart';
+import 'package:cric_dice/screens/bets/bet_details.dart';
 import 'package:cric_dice/widgets/trensations_widgets.dart';
 import 'package:cric_dice/widgets/widgets_bets.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 import 'dart:convert';
+import 'package:expandable/expandable.dart';
 
 class BetPage extends StatefulWidget {
   @override
@@ -121,8 +122,10 @@ class _BetPageState extends State<BetPage> {
                   return Column(
                     children: [
                       ShakeListTransition(
-                          duration: Duration(milliseconds: 1600),
-                          child: BetCard(
+                        duration: Duration(milliseconds: 1600),
+                        child: ExpandablePanel(
+                          // header: Text(article.title),
+                          collapsed: BetCard(
                             matchType: _matches[index]["matchInfo"]["MatchType"]
                                 .toString(),
                             team: _matches[index]["matchInfo"]["Teams"]
@@ -132,12 +135,20 @@ class _BetPageState extends State<BetPage> {
                                 .toString(),
                             status: _matches[index]["matchInfo"]["Status"]
                                 .toString(),
-                            onTap: () {
-                              Get.to(() => BetDetails(
-                                    matchData: _matches[index],
-                                  ));
-                            },
-                          )),
+                            // onTap: () {
+                            //   Get.to(() => BetDetails(
+                            //         matchData: _matches[index],
+                            //       ));
+                            // },
+                          ),
+                          expanded: Text(
+                            _matches[index].toString(),
+                            softWrap: true,
+                          ),
+                          // tapHeaderToExpand: true,
+                          // hasIcon: true,
+                        ),
+                      ),
                       SizedBox(
                         height: 20.0,
                       )

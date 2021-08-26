@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:cric_dice/helpers/functions.dart';
 import 'package:cric_dice/localizations/localization_constants.dart';
 import 'package:cric_dice/providers/theme_provider.dart';
 import 'package:cric_dice/widgets/trensations_widgets.dart';
