@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "331215136685",
-    "project_id": "cric-dice-01",
-    "storage_bucket": "cric-dice-01.appspot.com"
+    "project_number": "901030436118",
+    "project_id": "cric-dice",
+    "storage_bucket": "cric-dice.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:331215136685:android:b738a64c4f3aad1060a324",
+        "mobilesdk_app_id": "1:901030436118:android:832e8796cdab7e7bf18437",
         "android_client_info": {
           "package_name": "com.example.cric_dice"
         }
       },
       "oauth_client": [
         {
-          "client_id": "331215136685-k453ijjcg63hei23brrhja43729k4e5a.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.cric_dice",
-            "certificate_hash": "e404598adbc2b075a17d0c29a4d464847591cb77"
-          }
-        },
-        {
-          "client_id": "331215136685-crdr0a2c5dh1d67pp6bhpc9jdjtcglt6.apps.googleusercontent.com",
+          "client_id": "901030436118-alsnngqmu1trn74417sm6b8kugbp3cqo.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCqieC5qeA1_pIWGndb6sHg8s-60UIdiuY"
+          "current_key": "AIzaSyD75-7HMrCztpSQ2sz5pgSgJvdVb7p21xg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "331215136685-crdr0a2c5dh1d67pp6bhpc9jdjtcglt6.apps.googleusercontent.com",
+              "client_id": "901030436118-alsnngqmu1trn74417sm6b8kugbp3cqo.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
