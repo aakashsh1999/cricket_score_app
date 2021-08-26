@@ -22,7 +22,7 @@ BetCard({this.matchType, this.date, this.time, this.team, this.price, this.volum
       padding: EdgeInsets.symmetric(horizontal: 10.0),
       child: Container(
         width: double.infinity,
-        height: 200,
+        height: 210,
         decoration: BoxDecoration(
           color: Color(0xff6c757d),
              borderRadius: BorderRadius.circular(10)),
@@ -45,12 +45,12 @@ BetCard({this.matchType, this.date, this.time, this.team, this.price, this.volum
                       ),
                     ),
                   ),
-                  label: Text('Live'),
+                  label: Text('$status'),
                   ),
                 ],
               ),
               Text('$matchType',
-                  style: theme.textTheme.bodyText1.copyWith(fontSize: 20.0, fontWeight: FontWeight.bold),
+                  style: theme.textTheme.bodyText1.copyWith(fontSize:26.0, fontWeight: FontWeight.bold),
                   ),
                     SizedBox(
                     height: 2.0,
@@ -60,69 +60,69 @@ BetCard({this.matchType, this.date, this.time, this.team, this.price, this.volum
                  SizedBox(
                     height: 5.0,
                   ),
-              Text('$team', style: theme.textTheme.bodyText1.copyWith(fontSize:30, fontWeight: FontWeight.bold),),                               
+              Text('$team', style: theme.textTheme.bodyText1.copyWith(fontSize:20, fontWeight: FontWeight.bold),),                               
               SizedBox(
                     height: 10.0,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                Column(children: [
-                  Row(
-                    children: [
-                      Container(
-                      width: 40,
-                      height: 30,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(4.0),
-                      color: Color(0xff9C528B),
-                      ),
-                      child: Center(child: Text('$price', style: theme.textTheme.bodyText2.copyWith(fontSize: 16.0),textAlign: TextAlign.center,),)),
-                      SizedBox(width: 8.0,),
-                      Container(
-                      width: 40,
-                      height: 30,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(4.0),
-                      color: Color(0xffD7CDCC),
-                      ),
-                      child: Center(child: Text('$volume',  style: theme.textTheme.bodyText2.copyWith(fontSize: 16.0),textAlign: TextAlign.center,),),)
-                    ],
-                  )
-                ],),
-                Column(children: [
-                  Row(
-                    children: [
-                      Container(
-                      width: 40,
-                      height: 30,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(4.0),
-                      color: Color(0xff9C528B),
-                      ),
-                      child: Center(child: Text('$price', style: theme.textTheme.bodyText2.copyWith(fontSize: 16.0),textAlign: TextAlign.center,),)),
-                      SizedBox(width: 8.0,),
-                      Container(
-                       width: 40,
-                      height: 30,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(4.0),
-                      color: Color(0xffD7CDCC),
-                      ),
-                      child: Container(child: Center(child: Text('$volume',  style: theme.textTheme.bodyText2.copyWith(fontSize: 16.0),textAlign: TextAlign.center,),)),)
-                    ],
-                  )
-                ],),
+                // Column(children: [
+                //   Row(
+                //     children: [
+                //       // Container(
+                //       // width: 40,
+                //       // height: 30,
+                //       // decoration: BoxDecoration(borderRadius: BorderRadius.circular(4.0),
+                //       // color: Color(0xff9C528B),
+                //       // ),
+                //       // child: Center(child: Text('$price', style: theme.textTheme.bodyText2.copyWith(fontSize: 16.0),textAlign: TextAlign.center,),)),
+                //       // SizedBox(width: 8.0,),
+                //       Container(
+                //       width: 90,
+                //       height: 30,
+                //       decoration: BoxDecoration(borderRadius: BorderRadius.circular(4.0),
+                //       color: Color(0xffD7CDCC),
+                //       ),
+                //       child: Center(child: Text('$volume',  style: theme.textTheme.bodyText2.copyWith(fontSize: 16.0),textAlign: TextAlign.center,),),)
+                //     ],
+                //   )
+                // ],),
+                // Column(children: [
+                //   Row(
+                //     children: [
+                //       // Container(
+                //       // width: 40,
+                //       // height: 30,
+                //       // decoration: BoxDecoration(borderRadius: BorderRadius.circular(4.0),
+                //       // color: Color(0xff9C528B),
+                //       // ),
+                //       // child: Center(child: Text('$price', style: theme.textTheme.bodyText2.copyWith(fontSize: 16.0),textAlign: TextAlign.center,),)),
+                //       // SizedBox(width: 8.0,),
+                //       Container(
+                //        width: 90,
+                //       height: 30,
+                //       decoration: BoxDecoration(borderRadius: BorderRadius.circular(4.0),
+                //       color: Color(0xffD7CDCC),
+                //       ),
+                //       child: Container(child: Center(child: Text('$volume',  style: theme.textTheme.bodyText2.copyWith(fontSize: 16.0),textAlign: TextAlign.center,),)),)
+                //     ],
+                //   )
+                // ],),
 
                 Column(children: [
                   Row(
                     children: [
+                      // Container(
+                      // width: 40,
+                      // height: 30,
+                      // decoration: BoxDecoration(borderRadius: BorderRadius.circular(4.0),
+                      // color: Color(0xff9C528B),
+                      // ),
+                      // child: Center(child: Text('$price',  style: theme.textTheme.bodyText2.copyWith(fontSize: 16.0),textAlign: TextAlign.center,),)),
+                      // SizedBox(width: 8.0,),
                       Container(
-                      width: 40,
-                      height: 30,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(4.0),
-                      color: Color(0xff9C528B),
-                      ),
-                      child: Center(child: Text('$price',  style: theme.textTheme.bodyText2.copyWith(fontSize: 16.0),textAlign: TextAlign.center,),)),
-                      SizedBox(width: 8.0,),
-                      Container(
-                       width: 40,
+                       width: 100,
                       height: 30,
                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(4.0),
                       color: Color(0xffD7CDCC),
