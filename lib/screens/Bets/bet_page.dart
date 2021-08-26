@@ -36,6 +36,7 @@ class _BetPageState extends State<BetPage> {
     super.dispose();
     _channel.sink.close();
   }
+  
 
   @override
   Widget build(BuildContext context) {
