@@ -19,91 +19,276 @@ class _BetDetailsState extends State<BetDetails> {
     final theme = Theme.of(context);
 
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Column(
         children: [
-          TabBar(
-            indicatorColor: theme.primaryColor,
-            unselectedLabelColor: theme.primaryColor,
-            labelColor: theme.primaryColor,
-            labelStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-            tabs: [
-              Tab(
-                text: 'Top Bids',
-              ),
-              Tab(
-                text: 'Market Rate',
-              ),
-            ],
+          SizedBox(height: 10),
+          Container(
+            color: Colors.blueGrey.shade100,
+            child: TabBar(
+              indicatorColor: theme.primaryColor,
+              indicatorWeight: 2.5,
+              unselectedLabelColor: theme.primaryColor,
+              labelColor: theme.primaryColor,
+              labelStyle: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              tabs: [
+                Tab(
+                  text: 'Live Info',
+                ),
+                Tab(
+                  text: 'Top Bids',
+                ),
+                Tab(
+                  text: 'Market Rate',
+                ),
+              ],
+            ),
           ),
+          SizedBox(height: 5),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.5,
+            height: MediaQuery.of(context).size.height * 0.3,
             child: TabBarView(children: [
+              // Text(widget.matchData.toString()),
+              liveInfoTab(),
               topBidsTab(),
-              Text(widget.matchData['marketRate'].toString()),
+              marketRateTab(),
             ]),
           ),
-          // Text(widget.matchData.toString()),
         ],
       ),
-      // child: Column(
-      //   children: [
-      //     Text(
-      //       'Market Rate',
-      //       style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-      //       textAlign: TextAlign.center,
-      //     ),
-      //     TabBarView(
-      //       children: [
-      //         Text(widget.matchData.toString()),
-      //         Text(widget.matchData.toString()),
-      //       ],
-      //     ),
-      //   ],
-      // ),
     );
   }
 
-  List<Text> getMapList(Map m) {
-    List<Text> mapList = [];
-
-    //   for (var k in m.keys) {
-    //   // print("Key : $k, value : ${numMap[k]}");
-    //   mapList.add(Text(k+':'));
-    //     mapList.add(Text(m[k]));
-    // }
-    m.forEach((k, v) {
-      mapList.add(Text(k));
-      mapList.add(Text(v.toString()));
-    });
-    return mapList;
-  }
-
   Widget topBidsTab() {
-    var matchData = widget.matchData['marketRateInfo'].length == 0 ||
-            widget.matchData['marketRateInfo'] == null
-        ? {}
-        : widget.matchData['marketRateInfo'][0];
-    return Column(
-      children: [
-        Text(widget.matchData['marketRateInfo'].toString()),
-        Container(
-          padding: const EdgeInsets.all(10.0),
-          child: GridView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 5,
-              mainAxisSpacing: 10.0,
-              crossAxisSpacing: 10.0,
+    List topBidsData = widget.matchData['marketRateInfo'];
+    List<Widget> topBidsView = [];
+
+    Widget styledValues(String value) {
+      return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+        child: Container(
+          width: double.maxFinite,
+          color: Colors.cyan.shade300,
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 4),
+            child: Text(
+              value,
+              textAlign: TextAlign.center,
             ),
-            itemCount: getMapList(matchData).length,
-            itemBuilder: (context, index) {
-              return getMapList(matchData)[index];
-            },
           ),
         ),
+      );
+    }
+
+    Widget styledLabels(String value) {
+      return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+        child: Container(
+          width: double.maxFinite,
+          color: Colors.cyan.shade800,
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 4),
+            child: Text(
+              value,
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
+      );
+    }
+
+    if (topBidsData.length > 0)
+      topBidsView.add(Flexible(
+        flex: 1,
+        child: Container(
+          width: double.maxFinite,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 46,
+              ),
+              styledLabels('Volume'),
+              styledLabels('Back'),
+              styledLabels('BackVol'),
+              styledLabels('Lay'),
+              styledLabels('LayVol'),
+            ],
+          ),
+        ),
+      ));
+
+    topBidsData.forEach((el) {
+      topBidsView.add(Flexible(
+        flex: 2,
+        child: Container(
+          width: double.maxFinite,
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.all(4),
+                child: Container(
+                  color: Colors.cyan.shade800,
+                  width: double.maxFinite,
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      el['MarketType'],
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ),
+              styledValues(el['Volume'].toString()),
+              styledValues(el['Back'].toString()),
+              styledValues(el['BackVol'].toString()),
+              styledValues(el['Lay'].toString()),
+              styledValues(el['LayVol'].toString()),
+            ],
+          ),
+        ),
+      ));
+    });
+
+    return Row(children: topBidsView);
+  }
+
+  Widget marketRateTab() {
+    List marketRateData = widget.matchData['marketRate'];
+    List<Widget> marketRateView = [];
+
+    marketRateData.forEach((el) {
+      List<Widget> backLays = [];
+      el['BackLays'].forEach((bl) => {
+            backLays.add(Padding(
+              padding: EdgeInsets.symmetric(horizontal: 5.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Flexible(
+                    flex: 1,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 2.0),
+                      child: Container(
+                        width: double.maxFinite,
+                        color: Colors.green.shade300,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(vertical: 2.0),
+                          child: Text(
+                            bl['Price'],
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    flex: 1,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 2.0),
+                      child: Container(
+                        width: double.maxFinite,
+                        color: Colors.green.shade600,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(vertical: 2.0),
+                          child: Text(
+                            bl['Volume'],
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ))
+          });
+
+      marketRateView.add(Flexible(
+        flex: 1,
+        child: Container(
+          width: double.maxFinite,
+          child: Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 4, vertical: 5),
+                child: Container(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 4),
+                    child: Text(
+                      el['RateType'],
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  width: double.maxFinite,
+                  color: Colors.green.shade900,
+                ),
+              ),
+              Column(children: backLays),
+            ],
+          ),
+        ),
+      ));
+    });
+
+    return Row(children: marketRateView);
+  }
+
+  Widget liveInfoTab() {
+    final basicInfo = widget.matchData['matchInfo'];
+    String commentry = basicInfo['Commentry'];
+    String last6Balls = '';
+    var i = commentry.indexOf('Last 6 balls');
+    if (i != -1) {
+      last6Balls = commentry.substring(i);
+      commentry = commentry.substring(0, i);
+    }
+
+    return Column(
+      children: [
+        SizedBox(height: 5),
+        Container(
+          width: double.maxFinite,
+          color: Colors.blueGrey.shade800,
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 6, horizontal: 2),
+            child: Text(
+              commentry,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: 4),
+        Container(
+          width: double.maxFinite,
+          color: Colors.blueGrey.shade600,
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 6, horizontal: 2),
+            child: Text(
+              last6Balls,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+              ),
+            ),
+          ),
+        ),
+        // Container(height: 200, child: Text('${widget.matchData}'))
       ],
     );
   }

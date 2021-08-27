@@ -71,7 +71,7 @@ class _BetPageState extends State<BetPage> {
               if (dataObj['responseType'] == 4) {
                 _matches.add({
                   'matchInfo': dataObj['data'],
-                  'odiScore': {},
+                  'odiScore': [],
                   'testScore': [],
                   'overRuns': {},
                   'liveCommentry': {},
@@ -86,7 +86,14 @@ class _BetPageState extends State<BetPage> {
                   break;
 
                 case 5:
-                  _matches[idx]['odiScore'] = dataObj['data'];
+                  final teamIdx = _matches[idx]['odiScore'].indexWhere(
+                    (elem) => elem['Name'] == dataObj['data']['Name'],
+                  );
+                  if (teamIdx == -1) {
+                    _matches[idx]['odiScore'].add(dataObj['data']);
+                  } else {
+                    _matches[idx]['odiScore'][teamIdx] = dataObj['data'];
+                  }
                   break;
 
                 case 6:
@@ -135,7 +142,6 @@ class _BetPageState extends State<BetPage> {
                   break;
               }
             }
-            print("${dataObj['responseType']} + '--' + ${dataObj['data']['MatchId']}");
 
             return ListView.builder(
                 itemCount: int.parse('${_matches.length}'),
