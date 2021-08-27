@@ -322,6 +322,7 @@ class _BetDetailsState extends State<BetDetails> {
           ),
         ),        // Container(height: 200, child: Text('${widget.matchData}'))
       ],
+      
     );
   }
 }
