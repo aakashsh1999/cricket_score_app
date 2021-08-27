@@ -67,7 +67,13 @@ class _BetDetailsState extends State<BetDetails> {
   Widget topBidsTab() {
     List topBidsData = widget.matchData['marketRateInfo'];
     List<Widget> topBidsView = [];
-
+    if (topBidsData == null || topBidsData.length == 0) {
+      return Center(
+          child: Text(
+        'Top Bids Not Available.',
+        style: TextStyle(fontSize: 22),
+      ));
+    }
     Widget styledValues(String value) {
       return Padding(
         padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
@@ -164,6 +170,13 @@ class _BetDetailsState extends State<BetDetails> {
 
   Widget marketRateTab() {
     List marketRateData = widget.matchData['marketRate'];
+    if (marketRateData == null || marketRateData.length == 0) {
+      return Center(
+          child: Text(
+        'Market Rate Not Available.',
+        style: TextStyle(fontSize: 22),
+      ));
+    }
     List<Widget> marketRateView = [];
 
     marketRateData.forEach((el) {
@@ -249,11 +262,19 @@ class _BetDetailsState extends State<BetDetails> {
 
   Widget liveInfoTab() {
     final basicInfo = widget.matchData['matchInfo'];
+    // print(basicInfo);
+    if (basicInfo["Commentry"] == null || basicInfo["Commentry"].length == 0) {
+      return Center(
+          child: Text(
+        'Live Info Not Available.',
+        style: TextStyle(fontSize: 22),
+      ));
+    }
     String commentry = basicInfo['Commentry'];
     String last6Balls = '';
     var i = commentry.indexOf('Last 6 balls');
     if (i != -1) {
-      last6Balls = commentry.substring(i);
+      last6Balls = commentry.substring(i+14);
       commentry = commentry.substring(0, i);
     }
 
@@ -276,37 +297,61 @@ class _BetDetailsState extends State<BetDetails> {
             ),
           ),
         ),
-        SizedBox(height: 4),
-        Container(
-          width: double.maxFinite,
-          color: Colors.blueGrey.shade600,
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 6, horizontal: 2),
-            child: Text(
-              last6Balls,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w700,
-                fontSize: 16,
+        SizedBox(height: 8),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(
+              // width: double.maxFinite,
+              color: Colors.blueGrey.shade600,
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 6, horizontal: 2),
+                child: Text(
+                  "Last 6 Balls",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  ),
+                ),
               ),
             ),
-          ),
+            for(int i=0;i<last6Balls.length;i++)
+            
+             if(last6Balls[i]!=" ")
+            Container(
+              // width: double.maxFinite,
+              color: Colors.blueGrey.shade600,
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 6, horizontal: 6),
+                child: Text(
+                  last6Balls[i],
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  ),
+                ),
+              ),
+            ),
+          ],
         ),
         // Container(height: 200, child: Text('${widget.matchData}'))
       ],
     );
   }
 
-
   Widget sessionInfoTab() {
     final basicInfo = widget.matchData['session'];
-    
-    if(basicInfo == null){
-      return Center(child: Text('Sessions Not Available.',
-      style: TextStyle(fontSize: 22),
-      )
-      );
+    // print(basicInfo);
+    if (basicInfo == null) {
+      return Center(
+          child: Text(
+        'Sessions Not Available.',
+        style: TextStyle(fontSize: 22),
+      ));
     }
     return Column(
       children: [
@@ -316,106 +361,138 @@ class _BetDetailsState extends State<BetDetails> {
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 6, horizontal: 2),
             child: Text(
-              basicInfo["Name"].toString() ?? "--",
+              basicInfo["Name"]?? "--".toString() ,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.w700,
-                fontSize:18,
+                fontSize: 18,
               ),
             ),
           ),
-        ),  
+        ),
         SizedBox(height: 5),
-         Flexible(
-                    flex: 1,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical:4, horizontal: 4),
-                          child: Container(
-                            width: double.maxFinite,
-                            height: 30,
-                            decoration: BoxDecoration(
-                              color: Colors.cyan.shade800,
-                              borderRadius: BorderRadius.circular(5.0),
-                            ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Center(
-                                    child: Text(
-                                      'Yes',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ),
-                                    Center(
-                                    child: Text(
-                                      'NO',
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    ),
-                                ],
-                              ),
-                          
-                          ),
+        Flexible(
+          flex: 1,
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+            child: Container(
+              width: double.maxFinite,
+              height: 30,
+              decoration: BoxDecoration(
+                color: Colors.cyan.shade800,
+                borderRadius: BorderRadius.circular(5.0),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Center(
+                    child: Text(
+                      'Yes',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
                       ),
-               ),
-               Row(children: [
-                SessionRate(color: Colors.cyan.shade800,rate: basicInfo['Yes'].toString() ?? "--",),
-                SessionRate(color: Colors.cyan.shade300,rate: basicInfo['No'].toString() ?? "--",),
-               ],),
-             Row(children: [
-                SessionRate(color: Colors.cyan.shade800,rate: basicInfo['YesValue'].toString() ?? "--",),
-                SessionRate(color: Colors.cyan.shade300,rate: basicInfo['NoValue'].toString() ?? "--",),
-               ],)
-           ],
+                    ),
+                  ),
+                  Center(
+                    child: Text(
+                      'NO',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Row(
+          children: [
+            SessionRate(
+              color: Colors.cyan.shade800,
+              rate: basicInfo['Yes']?? "--".toString() ,
+            ),
+            SessionRate(
+              color: Colors.cyan.shade300,
+              rate: basicInfo['No']?? "--".toString() ,
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            SessionRate(
+              color: Colors.cyan.shade800,
+              rate: basicInfo['YesValue']?? "--".toString(),
+            ),
+            SessionRate(
+              color: Colors.cyan.shade300,
+              rate: basicInfo['NoValue']?? "--".toString(),
+            ),
+          ],
+        ),
+        SizedBox(height: 5),
+
+        Container(
+          width: double.maxFinite,
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 6, horizontal: 2),
+            child: Text(
+              basicInfo["Status"]?? "--".toString() ,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w700,
+                fontSize: 18,
+              ),
+            ),
+          ),
+        ),
+
+      ],
     );
   }
 }
 
+class SessionRate extends StatelessWidget {
+  final String rate;
+  final Color color;
 
-class SessionRate extends StatelessWidget{
-final String rate;
-final Color color;
-
-SessionRate({this.color, this.rate});
- Widget build(BuildContext context){
-  return Flexible(
-                    flex: 1,
-                        child: Padding(
-                          padding: EdgeInsets.all(4),
-                          child: Container(
-                            width: double.maxFinite,
-                            height: 30,
-                            decoration: BoxDecoration(
-                              color: color,
-                              borderRadius: BorderRadius.circular(5.0),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.all(2.0),
-                              child: Center(
-                                child: Text(
-                                    rate,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-           );
-}
+  SessionRate({this.color, this.rate});
+  Widget build(BuildContext context) {
+    return Flexible(
+      flex: 1,
+      child: Padding(
+        padding: EdgeInsets.all(4),
+        child: Container(
+          width: double.maxFinite,
+          height: 30,
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(5.0),
+          ),
+          child: Padding(
+            padding: EdgeInsets.all(2.0),
+            child: Center(
+              child: Text(
+                rate,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }
