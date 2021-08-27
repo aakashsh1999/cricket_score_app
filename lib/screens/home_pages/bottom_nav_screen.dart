@@ -1,4 +1,4 @@
-import 'package:cric_dice/screens/Bets/bet_page.dart';
+import 'package:cric_dice/screens/bets/bet_page.dart';
 import 'package:cric_dice/screens/home_pages/news.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
