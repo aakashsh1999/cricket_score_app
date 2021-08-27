@@ -443,8 +443,8 @@ class _BetDetailsState extends State<BetDetails> {
           width: double.maxFinite,
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 6, horizontal: 2),
-            child: Text(
-              basicInfo["Status"]?? "--".toString() ,
+            child: Text(basicInfo["Status"]==""||basicInfo["Status"]==null?"":
+              "Status: "+(basicInfo["Status"]?? "--".toString()) ,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.black,
