@@ -66,7 +66,7 @@ class CardSelectModeApp extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            isDarkMode ? 'Dark Mode' : 'Ligh Mode',
+            isDarkMode ? 'Dark Mode' : 'Light Mode',
             style: theme.textTheme.headline4,
           ),
           Switch(
