@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BetDetails extends StatefulWidget {
@@ -75,15 +76,19 @@ class _BetDetailsState extends State<BetDetails> {
     }
     Widget styledValues(String value) {
       return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+        padding: EdgeInsets.symmetric(horizontal: 2, vertical: 2),
         child: Container(
           width: double.maxFinite,
-          color: Colors.cyan.shade300,
+          decoration: BoxDecoration(
+            color: Colors.teal.shade700,
+            borderRadius: BorderRadius.circular(5.0),
+          ),
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 4),
             child: Text(
               value,
               textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.white, fontSize: 16),
             ),
           ),
         ),
@@ -92,16 +97,22 @@ class _BetDetailsState extends State<BetDetails> {
 
     Widget styledLabels(String value) {
       return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+        padding: EdgeInsets.symmetric(horizontal: 2, vertical: 2),
         child: Container(
           width: double.maxFinite,
-          color: Colors.cyan.shade800,
+          decoration: BoxDecoration(
+            color: Colors.cyan.shade800,
+            borderRadius: BorderRadius.circular(5.0),
+          ),
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 4),
             child: Text(
               value,
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ),
@@ -138,7 +149,7 @@ class _BetDetailsState extends State<BetDetails> {
               Padding(
                 padding: EdgeInsets.all(4),
               ),
-             styledValues(el['Volume'].toString()),
+              styledValues(el['Volume'].toString()),
               styledValues(el['Back'].toString()),
               styledValues(el['BackVol'].toString()),
               styledValues(el['Lay'].toString()),
@@ -176,13 +187,23 @@ class _BetDetailsState extends State<BetDetails> {
                     child: Padding(
                       padding: EdgeInsets.symmetric(vertical: 2.0),
                       child: Container(
+                        decoration: BoxDecoration(
+                          color: Color(0xff519872),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(5),
+                            bottomLeft: Radius.circular(5),
+                          ),
+                        ),
                         width: double.maxFinite,
-                        color: Colors.green.shade300,
                         child: Padding(
                           padding: EdgeInsets.symmetric(vertical: 2.0),
                           child: Text(
                             bl['Price'],
                             textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
                       ),
@@ -194,12 +215,23 @@ class _BetDetailsState extends State<BetDetails> {
                       padding: EdgeInsets.symmetric(vertical: 2.0),
                       child: Container(
                         width: double.maxFinite,
-                        color: Colors.green.shade600,
+                        decoration: BoxDecoration(
+                        color: Color(0xff3B5249),
+
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(5),
+                            bottomRight: Radius.circular(5),
+                          ),
+                        ),
                         child: Padding(
                           padding: EdgeInsets.symmetric(vertical: 2.0),
                           child: Text(
                             bl['Volume'],
                             textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ),
                       ),
@@ -219,6 +251,10 @@ class _BetDetailsState extends State<BetDetails> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 4, vertical: 5),
                 child: Container(
+                  decoration: BoxDecoration(
+                    color: Color(0xff382933),
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 4),
                     child: Text(
@@ -231,7 +267,6 @@ class _BetDetailsState extends State<BetDetails> {
                     ),
                   ),
                   width: double.maxFinite,
-                  color: Colors.green.shade900,
                 ),
               ),
               Column(children: backLays),
@@ -259,126 +294,164 @@ class _BetDetailsState extends State<BetDetails> {
     String last6Balls = '';
     var i = commentry.indexOf('Last 6 balls');
     if (i != -1) {
-      last6Balls = commentry.substring(i+14);
+      last6Balls = commentry.substring(i + 14);
       commentry = commentry.substring(0, i);
     }
-
-    return Column(
-      children: [
-        SizedBox(height: 5),
-          Container(
-          width: double.maxFinite,
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 6, horizontal: 2),
-            child: Text(
-              commentry,
-              textAlign: TextAlign.center,
-              style: TextStyle(
+    print(widget.matchData["overRuns"]);
+    return Column(children: [
+      // SizedBox(height: 5),
+      Container(
+        color: theme.secondaryHeaderColor,
+        width: double.maxFinite,
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 6, horizontal: 2),
+          child: Text(commentry,
+              textAlign: TextAlign.center, style: theme.textTheme.headline2),
+        ),
+      ),
+      SizedBox(height: 5),
+      Container(
+        // color: theme.secondaryHeaderColor,
+        height: 40,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Flexible(
+              flex: 2,
+              child: Container(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 6, horizontal: 0),
+                  child: Text(
+                      i == -1 ? "Balls Not Available" : "Last 6 Balls :",
+                      textAlign: TextAlign.center,
+                      style: theme.textTheme.bodyText1
+                      // TextStyle(
+                      //   color: theme.primaryColor,
+                      //   fontWeight: FontWeight.w700,
+                      //   fontSize: 16,
+                      // ),
+                      ),
+                ),
+              ),
+            ),
+            for (int i = 0; i < last6Balls.length; i++)
+              if (last6Balls[i] != " ")
+                Text(
+                  last6Balls[i],
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  ),
+                ),
+          ],
+        ),
+      ),
+      SizedBox(
+        height: 5,
+      ),
+      Container(
+        child: Column(children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 2),
+            child: Container(
+              decoration: BoxDecoration(
                 color: theme.primaryColor,
-                fontWeight: FontWeight.w700,
-                fontSize: 18,
+                borderRadius: BorderRadius.circular(5.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Column(
+                  children: [
+                    if (!(widget.matchData["overRuns"]['OverNo'] == null ||
+                        widget.matchData["overRuns"]['OverNo'] == ""))
+                      Center(
+                        child: Text(
+                          widget.matchData["overRuns"]['OverNo'] == null ||
+                                  widget.matchData["overRuns"]['OverNo'] == ""
+                              ? ""
+                              : "Over: " +
+                                  widget.matchData["overRuns"]['OverNo']
+                                      .toString(),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Center(
+                          child: Text(
+                            "Teams",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Center(
+                          child: Text(
+                            'Runs',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-        SizedBox(height: 5),
-        Container(
-          color:theme.secondaryHeaderColor,
-          height: 40,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          Row(
             children: [
-              Flexible(
-                flex: 2,
-                child: Container(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 6, horizontal: 0),
-                    child: Text(
-                      i==-1 ? "Balls Not Available":"Last 6 Balls :",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: theme.primaryColor,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16,
-                      ),
-                    ),
-                  ),
-                ),
+              OverRun(
+                color: Colors.blueGrey.shade600,
+                value: widget.matchData["overRuns"]['T1'] ?? "--".toString(),
               ),
-              for(int i=0;i<last6Balls.length;i++)
-               if(last6Balls[i]!=" ")
-                  Text(
-                      last6Balls[i],
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16,
-                      ),
+              OverRun(
+                color: Colors.blueGrey.shade600,
+                value:
+                    widget.matchData["overRuns"]['T1Runs'] ?? "--".toString(),
               ),
             ],
           ),
-        ),
-        SizedBox(height: 5,),
-        Container(
-          child: Column(children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal:4.0),
-              child: Container(
-                color: Colors.green,
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Center(
-                        child: Text(
-                          'Teams',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      Center(
-                        child: Text(
-                          'Runs',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                ),
-              ),
+          Row(children: [
+            OverRun(
+              color: Colors.blueGrey.shade600,
+              value: widget.matchData["overRuns"]['T2'] ?? "--".toString(),
             ),
-            Row(children: [
-            OverRun(color:theme.cardColor, value: widget.matchData["overRuns"]['T1']?? "--".toString()) ,
-            OverRun(color:theme.cardColor, value: widget.matchData["overRuns"]['T1Runs']?? "--".toString()),
-            ],),
-            Row(children: [
-            OverRun(color:theme.cardColor, value: widget.matchData["overRuns"]['T2']?? "--".toString()),
-            OverRun(color:theme.cardColor, value: widget.matchData["overRuns"]['T2Runs'] ?? "--".toString()),
-            ]),
-          ]
-      ),
+            OverRun(
+              color: Colors.blueGrey.shade600,
+              value: widget.matchData["overRuns"]['T2Runs'] ?? "--".toString(),
+            ),
+          ]),
+        ]),
       )
-      ]);
+    ]);
   }
 
   Widget sessionInfoTab() {
-    final basicInfo = widget.matchData['session'];
+    final basicInfo = widget.matchData['session'] ?? {};
     // print(basicInfo);
-    if (basicInfo == null) {
-      return Center(
-          child: Text(
-        'Sessions Not Available.',
-        style: TextStyle(fontSize: 22),
-      ));
-    }
+    // if (basicInfo == null) {
+    //   return Center(
+    //       child: Text(
+    //     'Sessions Not Available.',
+    //     style: TextStyle(fontSize: 22),
+    //   ));
+    // }
     return Column(
       children: [
         SizedBox(height: 5),
@@ -387,13 +460,12 @@ class _BetDetailsState extends State<BetDetails> {
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 6, horizontal: 2),
             child: Text(
-              basicInfo["Name"]?? "--".toString(),
+              basicInfo["Name"] ?? "--".toString(),
               textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w700,
-                fontSize: 18,
-              ),
+              style: Theme.of(context).textTheme.headline1.copyWith(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 18,
+                  ),
             ),
           ),
         ),
@@ -401,12 +473,12 @@ class _BetDetailsState extends State<BetDetails> {
         Flexible(
           flex: 1,
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+            padding: EdgeInsets.symmetric(vertical: 2, horizontal: 2),
             child: Container(
               width: double.maxFinite,
               height: 30,
               decoration: BoxDecoration(
-                color: Colors.cyan.shade800,
+                color: Color(0xff2D132C),
                 borderRadius: BorderRadius.circular(5.0),
               ),
               child: Row(
@@ -414,11 +486,11 @@ class _BetDetailsState extends State<BetDetails> {
                 children: [
                   Center(
                     child: Text(
-                      'Yes',
+                      'YES',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 14,
+                        fontSize: 17,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -429,7 +501,7 @@ class _BetDetailsState extends State<BetDetails> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 14,
+                        fontSize: 17,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -442,45 +514,44 @@ class _BetDetailsState extends State<BetDetails> {
         Row(
           children: [
             SessionRate(
-              color: Colors.cyan.shade800,
-              rate: basicInfo['Yes']?? "--".toString() ,
+              color: Color(0xff801336),
+              rate: basicInfo['Yes'] ?? "--".toString(),
             ),
             SessionRate(
-              color: Colors.cyan.shade300,
-              rate: basicInfo['No']?? "--".toString() ,
+              color: Color(0xffC72C41),
+              rate: basicInfo['No'] ?? "--".toString(),
             ),
           ],
         ),
         Row(
           children: [
             SessionRate(
-              color: Colors.cyan.shade800,
-              rate: basicInfo['YesValue']?? "--".toString(),
+              color: Color(0xff801336),
+              rate: basicInfo['YesValue'] ?? "--".toString(),
             ),
             SessionRate(
-              color: Colors.cyan.shade300,
-              rate: basicInfo['NoValue']?? "--".toString(),
+              color: Color(0xffC72C41),
+              rate: basicInfo['NoValue'] ?? "--".toString(),
             ),
           ],
         ),
         SizedBox(height: 5),
-
         Container(
           width: double.maxFinite,
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 6, horizontal: 2),
-            child: Text(basicInfo["Status"]==""||basicInfo["Status"]==null?"":
-              "Status: "+(basicInfo["Status"]?? "--".toString()) ,
+            child: Text(
+              basicInfo["Status"] == "" || basicInfo["Status"] == null
+                  ? ""
+                  : "Status: " + (basicInfo["Status"] ?? "--".toString()),
               textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.w700,
-                fontSize: 18,
-              ),
+              style: Theme.of(context).textTheme.headline1.copyWith(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 18,
+                  ),
             ),
           ),
         ),
-
       ],
     );
   }
@@ -495,7 +566,7 @@ class SessionRate extends StatelessWidget {
     return Flexible(
       flex: 1,
       child: Padding(
-        padding: EdgeInsets.all(4),
+        padding: EdgeInsets.all(2),
         child: Container(
           width: double.maxFinite,
           height: 30,
@@ -511,7 +582,7 @@ class SessionRate extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 14,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -523,30 +594,34 @@ class SessionRate extends StatelessWidget {
   }
 }
 
-class OverRun extends StatelessWidget{
+class OverRun extends StatelessWidget {
   final String value;
   final Color color;
   OverRun({this.value, this.color});
   Widget build(BuildContext context) {
-    return Flexible(child: 
-    Column(
-      children: [ 
-      Padding(
-        padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+    return Flexible(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 2, vertical: 2),
         child: Container(
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(5.0),
+          ),
           width: double.maxFinite,
-          color: Colors.cyan.shade300,
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 4),
             child: Text(
               value,
               textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyText1.copyWith(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 15,
+                    color: Colors.white,
+                  ),
             ),
           ),
         ),
-        ),
-      ]),
+      ),
     );
   }
 }
-

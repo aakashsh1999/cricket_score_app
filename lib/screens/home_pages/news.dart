@@ -40,13 +40,13 @@ class _NewsPageState extends State<NewsPage> {
                 Icon(
                   FontAwesomeIcons.fire,
                   size: 22.0,
-                  color: theme.primaryColor,
+                  color: theme.accentColor,
                 ),
                 SizedBox(width: 5.0),
                 Text(
                   getTranslated(context, 'latest_stories'),
                   style: theme.textTheme.headline1.copyWith(
-                    color: theme.primaryColor,
+                    color: theme.accentColor,
                   ),
                 ),
               ],

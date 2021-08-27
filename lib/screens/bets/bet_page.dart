@@ -44,13 +44,13 @@ class _BetPageState extends State<BetPage> {
               Icon(
                 FontAwesomeIcons.diceThree,
                 size: 22.0,
-                color: theme.primaryColor,
+                color: theme.accentColor,
               ),
               SizedBox(width: 5.0),
               Text(
                 'Cric Dice',
                 style: theme.textTheme.headline1.copyWith(
-                  color: theme.primaryColor,
+                color: theme.accentColor,
                 ),
               ),
             ],

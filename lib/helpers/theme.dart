@@ -12,7 +12,7 @@ ThemeData themeData(BuildContext context) {
     buttonColor: kPrimaryLightColor,
     errorColor: kErrorLightColor,
     primarySwatch: Colors.green,
-    accentColor: kBackgroundDarkColor,
+    accentColor: kPrimaryLightColor,
     hintColor: kFontSecondaryLightColor,
     cardColor: kCardLightColor,
     brightness: Brightness.light,
@@ -60,7 +60,7 @@ ThemeData themeData(BuildContext context) {
         fontSize: 16.0,
       ),
       bodyText2: GoogleFonts.openSans(
-        color: kFontPrimaryLightColor,
+        color: Colors.blueGrey.shade800,
         fontSize: 14.0,
       ),
       subtitle1: GoogleFonts.openSans(
@@ -138,7 +138,7 @@ ThemeData darkThemeData(BuildContext context) {
         fontSize: 16.0,
       ),
       bodyText2: GoogleFonts.openSans(
-        color: kFontPrimaryDarkColor,
+        color: Colors.blueGrey.shade200,
         fontSize: 14.0,
       ),
       subtitle1: GoogleFonts.openSans(

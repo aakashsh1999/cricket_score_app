@@ -68,6 +68,10 @@ class BetCard extends StatelessWidget {
           ),
         ),
         ExpandablePanel(
+          theme: ExpandableThemeData(
+        iconColor: theme.primaryColor, 
+        animationDuration: const Duration(milliseconds: 500)
+    ),
           header: Padding(
             padding: EdgeInsets.only(left: 10.0),
             child: Column(
@@ -77,18 +81,19 @@ class BetCard extends StatelessWidget {
                   style: theme.textTheme.bodyText1.copyWith(
                       fontSize: 28.0,
                       fontWeight: FontWeight.bold,
-                      color: theme.primaryColor),
+                      // color: theme.primaryColor
+                      ),
                 ),
                 SizedBox(
                   height: 8.0,
                 ),
                 Text(
                   '$team',
-                  style: theme.textTheme.bodyText1.copyWith(
+                  style: theme.textTheme.bodyText2.copyWith(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     height: 1.2,
-                    color: Colors.blueGrey.shade900,
+                    // color: Colors.blueGrey.shade900,
                   ),
                   textAlign: TextAlign.center,
                 ),
