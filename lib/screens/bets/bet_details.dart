@@ -216,8 +216,7 @@ class _BetDetailsState extends State<BetDetails> {
                       child: Container(
                         width: double.maxFinite,
                         decoration: BoxDecoration(
-                        color: Color(0xff3B5249),
-
+                          color: Color(0xff3B5249),
                           borderRadius: BorderRadius.only(
                             topRight: Radius.circular(5),
                             bottomRight: Radius.circular(5),
@@ -297,7 +296,6 @@ class _BetDetailsState extends State<BetDetails> {
       last6Balls = commentry.substring(i + 14);
       commentry = commentry.substring(0, i);
     }
-    print(widget.matchData["overRuns"]);
     return Column(children: [
       // SizedBox(height: 5),
       Container(
@@ -443,15 +441,14 @@ class _BetDetailsState extends State<BetDetails> {
   }
 
   Widget sessionInfoTab() {
-    final basicInfo = widget.matchData['session'] ?? {};
-    // print(basicInfo);
-    // if (basicInfo == null) {
-    //   return Center(
-    //       child: Text(
-    //     'Sessions Not Available.',
-    //     style: TextStyle(fontSize: 22),
-    //   ));
-    // }
+    final basicInfo = widget.matchData['session'];
+    if (basicInfo == null) {
+      return Center(
+          child: Text(
+        'Sessions Not Available.',
+        style: TextStyle(fontSize: 22),
+      ));
+    }
     return Column(
       children: [
         SizedBox(height: 5),

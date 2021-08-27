@@ -64,7 +64,6 @@ class _NewsPageState extends State<NewsPage> {
             return ListView.builder(
                 itemCount: newsData.length,
                 itemBuilder: (BuildContext context, int index) {
-                  print(index);
                   return ShakeListTransition(
                     duration: Duration(milliseconds: 1800),
                     // axis: Axis.vertical,

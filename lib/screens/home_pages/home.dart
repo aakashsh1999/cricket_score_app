@@ -80,7 +80,8 @@ class _HomePageState extends State<HomePage> {
           if (snapshot.hasData) {
             final dataObj = jsonDecode(snapshot.data);
             final idx = _matches.indexWhere(
-              (elem) => elem['matchInfo']['MatchId'] == dataObj['data']['MatchId'],
+              (elem) =>
+                  elem['matchInfo']['MatchId'] == dataObj['data']['MatchId'],
             );
             if (idx == -1) {
               if (dataObj['responseType'] == 4) {
@@ -90,7 +91,6 @@ class _HomePageState extends State<HomePage> {
               switch (dataObj['responseType']) {
                 case 4:
                   _matches[idx]['matchInfo'] = dataObj['data'];
-                  print(_matches[idx]['matchInfo']);
                   break;
 
                 case 5:
@@ -131,7 +131,6 @@ class _HomePageState extends State<HomePage> {
                   break;
               }
             }
-            print(dataObj['responseType']);
 
             var _matchStr = '';
             _matches.forEach((m) => _matchStr += jsonEncode(m) + '\n\n');
