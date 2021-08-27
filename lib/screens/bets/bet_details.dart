@@ -37,13 +37,13 @@ class _BetDetailsState extends State<BetDetails> {
             ],
           ),
           SizedBox(
-            height: 400,
+            height: MediaQuery.of(context).size.height * 0.5,
             child: TabBarView(children: [
-              Text(widget.matchData['marketRateInfo'].toString()),
+              topBidsTab(),
               Text(widget.matchData['marketRate'].toString()),
             ]),
           ),
-          Text(widget.matchData.toString()),
+          // Text(widget.matchData.toString()),
         ],
       ),
       // child: Column(
@@ -61,6 +61,50 @@ class _BetDetailsState extends State<BetDetails> {
       //     ),
       //   ],
       // ),
+    );
+  }
+
+  List<Text> getMapList(Map m) {
+    List<Text> mapList = [];
+
+    //   for (var k in m.keys) {
+    //   // print("Key : $k, value : ${numMap[k]}");
+    //   mapList.add(Text(k+':'));
+    //     mapList.add(Text(m[k]));
+    // }
+    m.forEach((k, v) {
+      mapList.add(Text(k));
+      mapList.add(Text(v.toString()));
+    });
+    return mapList;
+  }
+
+  Widget topBidsTab() {
+    var matchData = widget.matchData['marketRateInfo'].length == 0 ||
+            widget.matchData['marketRateInfo'] == null
+        ? {}
+        : widget.matchData['marketRateInfo'][0];
+    return Column(
+      children: [
+        Text(widget.matchData['marketRateInfo'].toString()),
+        Container(
+          padding: const EdgeInsets.all(10.0),
+          child: GridView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 5,
+              mainAxisSpacing: 10.0,
+              crossAxisSpacing: 10.0,
+            ),
+            itemCount: getMapList(matchData).length,
+            itemBuilder: (context, index) {
+              return getMapList(matchData)[index];
+            },
+          ),
+        ),
+      ],
     );
   }
 }
