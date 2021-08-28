@@ -443,10 +443,76 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
               color: Colors.blueGrey.shade600,
               value: widget.matchData["overRuns"]['T2Runs'] ?? "--".toString(),
             ),
-          ]),
-        ]),
-      )
-    ]);
+          ]), 
+          SizedBox(height: 15,),
+         Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 2),
+            child: Container(
+              decoration: BoxDecoration(
+                color: theme.primaryColor,
+                borderRadius: BorderRadius.circular(5.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Column(
+                  children: [
+                      Center(
+                        child: Text(
+                           "Over",     
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Center(
+                          child: Text(
+                            "Teams",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Row(
+            children: [
+              OverRun(
+                color: Colors.blueGrey.shade600,
+                value: widget.matchData["overRuns"]['T1'] ?? "--".toString(),
+              ),
+              OverRun(
+                color: Colors.blueGrey.shade600,
+                value:
+                    widget.matchData["overRuns"]['T1Runs'] ?? "--".toString(),
+              ),
+            ],
+          ),
+          Row(children: [
+            OverRun(
+              color: Colors.blueGrey.shade600,
+              value: widget.matchData["overRuns"]['T2'] ?? "--".toString(),
+            ),
+            OverRun(
+              color: Colors.blueGrey.shade600,
+              value: widget.matchData["overRuns"]['T2Runs'] ?? "--".toString(),
+            ),
+          ]), 
+    ]))]
+    );
   }
 
   Widget sessionInfoTab() {
