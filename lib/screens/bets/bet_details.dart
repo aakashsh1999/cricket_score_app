@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 
 class BetDetails extends StatefulWidget {
   final matchData;
@@ -12,17 +11,16 @@ class BetDetails extends StatefulWidget {
 }
 
 class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
-  TabController tc;
+ TabController tc;
   void initState() {
-    super.initState();
-    tc = TabController(length: 4, vsync: this);
+   super.initState();
+      tc = TabController(length: 4, vsync: this);
   }
-
-  var sizeList = [0.4, 0.3, 0.3, 0.4];
-
+  var sizes =[0.6, 0.3,0.3,0.4];
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+
     return DefaultTabController(
       length: 4,
       child: Column(
@@ -56,17 +54,15 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
           ),
           SizedBox(height: 5),
           SizedBox(
-            height: 
-                 MediaQuery.of(context).size.height * sizeList[tc.index]
-                ,
-            child: TabBarView(controller: tc,
-                // physics: NeverScrollableScrollPhysics(),
-                children: [
-                  liveInfoTab(),
-                  topBidsTab(),
-                  marketRateTab(),
-                  sessionInfoTab(),
-                ]),
+            height: MediaQuery.of(context).size.height * sizes[tc.index],
+            child: TabBarView(
+              controller: tc,
+              children: [
+              liveInfoTab(),
+              topBidsTab(),
+              marketRateTab(),
+              sessionInfoTab()
+            ]),
           ),
         ],
       ),
@@ -305,6 +301,8 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
       last6Balls = commentry.substring(i + 14);
       commentry = commentry.substring(0, i);
     }
+    var odiData =widget.matchData["odiScore"].length==-1? "" : widget.matchData["odiScore"][0];
+    print(odiData);
     return Column(children: [
       // SizedBox(height: 5),
       Container(
@@ -312,7 +310,8 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
         width: double.maxFinite,
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 6, horizontal: 2),
-          child: Text(commentry,
+          child: Text(commentry, 
+          
               textAlign: TextAlign.center, style: theme.textTheme.headline2),
         ),
       ),
@@ -371,24 +370,6 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Column(
                   children: [
-                    if (!(widget.matchData["overRuns"]['OverNo'] == null ||
-                        widget.matchData["overRuns"]['OverNo'] == ""))
-                      Center(
-                        child: Text(
-                          widget.matchData["overRuns"]['OverNo'] == null ||
-                                  widget.matchData["overRuns"]['OverNo'] == ""
-                              ? ""
-                              : "Over: " +
-                                  widget.matchData["overRuns"]['OverNo']
-                                      .toString(),
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -443,76 +424,89 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
               color: Colors.blueGrey.shade600,
               value: widget.matchData["overRuns"]['T2Runs'] ?? "--".toString(),
             ),
-          ]), 
-          SizedBox(height: 15,),
-         Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 2),
-            child: Container(
-              decoration: BoxDecoration(
-                color: theme.primaryColor,
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Column(
-                  children: [
+          ]),
+          SizedBox(
+            height: 2,
+          ),
+     Container(
+            decoration: BoxDecoration(
+              color: theme.primaryColor,
+              borderRadius: BorderRadius.circular(5.0),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Column(
+                children: [
+                  Row(
+                     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
                       Center(
-                        child: Text(
-                           "Over",     
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Center(
-                          child: Text(
-                            "Teams",
+                        child: Text("Score: "+ odiData['Score']??'--'.toString(),
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                            )),
+                      ),
+                      Center(
+                        child: Text("Over: "+ odiData['Over']??'--'.toString(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
-          ),
+          ) ,
           Row(
-            children: [
-              OverRun(
-                color: Colors.blueGrey.shade600,
-                value: widget.matchData["overRuns"]['T1'] ?? "--".toString(),
-              ),
-              OverRun(
-                color: Colors.blueGrey.shade600,
-                value:
-                    widget.matchData["overRuns"]['T1Runs'] ?? "--".toString(),
-              ),
-            ],
-          ),
-          Row(children: [
+              children: [
+                  OverRun(
+                        color: Colors.blueGrey.shade600,
+                        value:odiData['BatOrBall'] +':  '+ widget.matchData["odiScore"][0]['Name'] ??
+                            "--".toString(),
+                      ),]),
+       Row(children: [
             OverRun(
               color: Colors.blueGrey.shade600,
-              value: widget.matchData["overRuns"]['T2'] ?? "--".toString(),
+              value:'Players Detail:  '+ odiData['OnFiledDetail'] ??
+                            "--".toString(),
+            ),
+          ]),
+        Row(children: [
+           OverRun(
+              color: Colors.blueGrey.shade600,
+              value:'Run Rate:  '+ odiData['RunRate'] ??
+                            "--".toString()
             ),
             OverRun(
               color: Colors.blueGrey.shade600,
-              value: widget.matchData["overRuns"]['T2Runs'] ?? "--".toString(),
+              value:'Fours:  '+ odiData[0]['Fours'] ??
+                            "--".toString()
             ),
-          ]), 
-    ]))]
-    );
+             OverRun(
+              color: Colors.blueGrey.shade600,
+              value:'Sixs: '+ odiData['Sixs'] ??
+                            "--".toString(),
+                      
+            ),
+               OverRun(
+              color: Colors.blueGrey.shade600,
+              value:'Wides '+ odiData['Wides'] ??
+                            "--".toString(),
+                      
+            ),
+            
+          ]),
+        ])
+    ,
+      )
+    ]);
   }
 
   Widget sessionInfoTab() {
@@ -697,42 +691,3 @@ class OverRun extends StatelessWidget {
     );
   }
 }
-
-// class WidgetSize extends StatefulWidget {
-//   final Widget child;
-//   final Function onChange;
-
-//   const WidgetSize({
-//     Key key,
-//     @required this.onChange,
-//     @required this.child,
-//   }) : super(key: key);
-
-//   @override
-//   _WidgetSizeState createState() => _WidgetSizeState();
-// }
-
-// class _WidgetSizeState extends State<WidgetSize> {
-//   @override
-//   Widget build(BuildContext context) {
-//     SchedulerBinding.instance.addPostFrameCallback(postFrameCallback);
-//     return Container(
-//       key: widgetKey,
-//       child: widget.child,
-//     );
-//   }
-
-//   var widgetKey = GlobalKey();
-//   var oldSize;
-
-//   void postFrameCallback(_) {
-//     var context = widgetKey.currentContext;
-//     if (context == null) return;
-
-//     var newSize = context.size;
-//     if (oldSize == newSize) return;
-
-//     oldSize = newSize;
-//     widget.onChange(newSize);
-//   }
-// }
