@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 class BetDetails extends StatefulWidget {
   final matchData;
@@ -10,15 +11,18 @@ class BetDetails extends StatefulWidget {
   _BetDetailsState createState() => _BetDetailsState();
 }
 
-class _BetDetailsState extends State<BetDetails> {
+class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
+  TabController tc;
   void initState() {
     super.initState();
+    tc = TabController(length: 4, vsync: this);
   }
+
+  var sizeList = [0.4, 0.3, 0.3, 0.4];
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
     return DefaultTabController(
       length: 4,
       child: Column(
@@ -27,6 +31,7 @@ class _BetDetailsState extends State<BetDetails> {
           Container(
             color: Colors.blueGrey.shade100,
             child: TabBar(
+              controller: tc,
               isScrollable: true,
               indicatorColor: theme.primaryColor,
               indicatorWeight: 2.5,
@@ -51,13 +56,17 @@ class _BetDetailsState extends State<BetDetails> {
           ),
           SizedBox(height: 5),
           SizedBox(
-            height: MediaQuery.of(context).size.height * 0.3,
-            child: TabBarView(children: [
-              liveInfoTab(),
-              topBidsTab(),
-              marketRateTab(),
-              sessionInfoTab()
-            ]),
+            height: 
+                 MediaQuery.of(context).size.height * sizeList[tc.index]
+                ,
+            child: TabBarView(controller: tc,
+                // physics: NeverScrollableScrollPhysics(),
+                children: [
+                  liveInfoTab(),
+                  topBidsTab(),
+                  marketRateTab(),
+                  sessionInfoTab(),
+                ]),
           ),
         ],
       ),
@@ -622,3 +631,42 @@ class OverRun extends StatelessWidget {
     );
   }
 }
+
+// class WidgetSize extends StatefulWidget {
+//   final Widget child;
+//   final Function onChange;
+
+//   const WidgetSize({
+//     Key key,
+//     @required this.onChange,
+//     @required this.child,
+//   }) : super(key: key);
+
+//   @override
+//   _WidgetSizeState createState() => _WidgetSizeState();
+// }
+
+// class _WidgetSizeState extends State<WidgetSize> {
+//   @override
+//   Widget build(BuildContext context) {
+//     SchedulerBinding.instance.addPostFrameCallback(postFrameCallback);
+//     return Container(
+//       key: widgetKey,
+//       child: widget.child,
+//     );
+//   }
+
+//   var widgetKey = GlobalKey();
+//   var oldSize;
+
+//   void postFrameCallback(_) {
+//     var context = widgetKey.currentContext;
+//     if (context == null) return;
+
+//     var newSize = context.size;
+//     if (oldSize == newSize) return;
+
+//     oldSize = newSize;
+//     widget.onChange(newSize);
+//   }
+// }
