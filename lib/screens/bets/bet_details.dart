@@ -499,7 +499,7 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
                     value: 'Fours\n' + (odiData['Fours'] ?? "--").toString()),
                 OverRun(
                   color: Colors.blueGrey.shade600,
-                  value: 'Sixs\n' + (odiData['Sixs'] ?? "--").toString(),
+                  value: 'Sixes\n' + (odiData['Sixs'] ?? "--").toString(),
                 ),
                 OverRun(
                   color: Colors.blueGrey.shade600,
