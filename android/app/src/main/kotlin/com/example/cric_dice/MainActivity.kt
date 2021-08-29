@@ -1,4 +1,4 @@
-package com.example.cric_dice
+package com.skeltoz.cric_dice
 
 import io.flutter.embedding.android.FlutterActivity
 

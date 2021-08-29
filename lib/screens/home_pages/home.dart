@@ -1,27 +1,8 @@
-import 'dart:io';
 import 'dart:convert';
-import 'package:cric_dice/api/bets_api.dart';
-import 'package:cric_dice/api/clubs_api.dart';
-import 'package:cric_dice/api/events_api.dart';
-import 'package:cric_dice/api/leagues_api.dart';
-import 'package:cric_dice/localizations/localization_constants.dart';
-import 'package:cric_dice/models/events.dart';
-import 'package:cric_dice/models/teams.dart';
-import 'package:cric_dice/screens/details/events_details.dart';
-import 'package:cric_dice/api/hometab_api.dart';
-import 'package:cric_dice/screens/favorites/favorites_clubs.dart';
 import 'package:cric_dice/widgets/trensations_widgets.dart';
-import 'package:cric_dice/widgets/widgets_home.dart';
-import 'package:cric_dice/widgets/widgets_news.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
-import 'package:cric_dice/api/leagues_api.dart';
-import 'package:cric_dice/widgets/widgets_news.dart';
-import 'package:cric_dice/screens/details/events_details.dart';
-import 'package:cric_dice/api/events_api.dart';
-import 'package:http/http.dart' as http;
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 // some code

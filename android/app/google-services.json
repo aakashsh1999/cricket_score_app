@@ -7,20 +7,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:331215136685:android:b738a64c4f3aad1060a324",
+        "mobilesdk_app_id": "1:331215136685:android:37b7600015e9b04960a324",
         "android_client_info": {
-          "package_name": "com.example.cric_dice"
+          "package_name": "com.skeltoz.cric_dice"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "331215136685-k453ijjcg63hei23brrhja43729k4e5a.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.cric_dice",
-            "certificate_hash": "e404598adbc2b075a17d0c29a4d464847591cb77"
-          }
-        },
         {
           "client_id": "331215136685-crdr0a2c5dh1d67pp6bhpc9jdjtcglt6.apps.googleusercontent.com",
           "client_type": 3
