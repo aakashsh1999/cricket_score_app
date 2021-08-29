@@ -55,7 +55,7 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
           ),
           SizedBox(height: 5),
           SizedBox(
-            height: 350,
+            height: 400,
             child: TabBarView(controller: tc, children: [
               Center(child: liveInfoTab()),
               Center(child: topBidsTab()),
@@ -129,8 +129,7 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
         child: Container(
           width: double.maxFinite,
           child: Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SizedBox(
                 height: 8,
@@ -151,8 +150,7 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
         child: Container(
           width: double.maxFinite,
           child: Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Padding(
                 padding: EdgeInsets.all(4),
@@ -173,8 +171,8 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Row(
-          // crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: topBidsView),
+            // crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: topBidsView),
       ],
     );
   }
@@ -292,8 +290,7 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
     });
 
     return Column(
-      mainAxisSize:MainAxisSize.min,
-      
+      mainAxisSize: MainAxisSize.min,
       children: [
         Row(children: marketRateView),
       ],
@@ -304,13 +301,13 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
     final theme = Theme.of(context);
     final basicInfo = widget.matchData['matchInfo'];
     // print(basicInfo);
-    if (basicInfo["Commentry"] == null || basicInfo["Commentry"].length == 0) {
-      return Center(
-          child: Text(
-        'Live Info Not Available.',
-        style: TextStyle(fontSize: 22),
-      ));
-    }
+    // if (basicInfo["Commentry"] == null || basicInfo["Commentry"].length == 0) {
+    //   return Center(
+    //       child: Text(
+    //     'Live Info Not Available.',
+    //     style: TextStyle(fontSize: 22),
+    //   ));
+    // }
     String commentry = basicInfo['Commentry'];
     String last6Balls = '';
     var i = commentry.indexOf('Last 6 balls');
@@ -318,17 +315,15 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
       last6Balls = commentry.substring(i + 14);
       commentry = commentry.substring(0, i);
     }
-    // print(widget.matchData["odiScore"]);
-    var odiData = widget.matchData["odiScore"].length == 0 ||
-            widget.matchData["odiScore"] == null
-        ? []
-
-        : widget.matchData["odiScore"];
-    // print(odiData);
-    return Column(
-      mainAxisSize:MainAxisSize.min,
-      children: [
-      // SizedBox(height: 5),
+    var odiData = widget.matchData["odiScore"];
+    //  odiData = {
+    //   "Name": 'Aakash',
+    //   "RunRate": '20',
+    //   "Fours": '4',
+    //   "Sixs": '6',
+    //   "Wides": "20"
+    // };
+    return Column(mainAxisSize: MainAxisSize.min, children: [
       Container(
         color: theme.secondaryHeaderColor,
         width: double.maxFinite,
@@ -340,7 +335,6 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
       ),
       SizedBox(height: 5),
       Container(
-        // color: theme.secondaryHeaderColor,
         height: 40,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -351,15 +345,10 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
                 child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 6, horizontal: 0),
                   child: Text(
-                      i == -1 ? "Balls Not Available" : "Last 6 Balls :",
-                      textAlign: TextAlign.center,
-                      style: theme.textTheme.bodyText1
-                      // TextStyle(
-                      //   color: theme.primaryColor,
-                      //   fontWeight: FontWeight.w700,
-                      //   fontSize: 16,
-                      // ),
-                      ),
+                    i == -1 ? "Balls Not Available" : "Last 6 Balls :",
+                    textAlign: TextAlign.center,
+                    style: theme.textTheme.bodyText1,
+                  ),
                 ),
               ),
             ),
@@ -448,83 +437,77 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
               value: widget.matchData["overRuns"]['T2Runs'] ?? "--".toString(),
             ),
           ]),
-          SizedBox(
-            height: 2,
-          ),
-          if (odiData.length!=0 )
-            Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: theme.primaryColor,
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Center(
-                          child: Text(
-                              "Score: " + (odiData[0]['Score'] ??
-                                  '--').toString(),
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              )),
-                        ),
-                        Center(
-                          child: Text(
-                              "Over: " + (odiData[0]['Over'] ?? '--').toString(),
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              )),
-                        ),
-                      ],
-                    ),
+          Column(
+            children: [
+              SizedBox(height: 16),
+              Container(
+                decoration: BoxDecoration(
+                  color: theme.primaryColor,
+                  borderRadius: BorderRadius.circular(5.0),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Center(
+                        child: Text(
+                            "Score: " + (odiData['Score'] ?? '--').toString(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ),
+                      Center(
+                        child: Text(
+                            "Over: " + (odiData['Over'] ?? '--').toString(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            )),
+                      ),
+                    ],
                   ),
                 ),
-                Row(children: [
-                  OverRun(
+              ),
+              Row(children: [
+                OverRun(
+                  color: Colors.blueGrey.shade600,
+                  value: (odiData['BatOrBall'] ?? "--") +
+                      '  :  ' +
+                      (odiData['Name'] ?? "--").toString(),
+                ),
+              ]),
+              Row(children: [
+                OverRun(
+                  color: Colors.blueGrey.shade600,
+                  value: 'Players Detail:  ' +
+                      (odiData['OnFiledDetail'] ?? "--").toString(),
+                ),
+              ]),
+              Row(children: [
+                OverRun(
                     color: Colors.blueGrey.shade600,
-                    value: (odiData[0]['BatOrBall']??"--") +
-                            ':  ' +
-                            (odiData[0]['Name'] ??
-                        "--").toString(),
-                  ),
-                ]),
-                Row(children: [
-                  OverRun(
+                    value:
+                        'Run Rate\n' + (odiData['RunRate'] ?? "--").toString()),
+                OverRun(
                     color: Colors.blueGrey.shade600,
-                    value: 'Players Detail:  ' + (odiData[0]['OnFiledDetail'] ??
-                        "--").toString(),
-                  ),
-                ]),
-                Row(children: [
-                  OverRun(
-                      color: Colors.blueGrey.shade600,
-                      value: 'Run Rate:  ' + (odiData[0]['RunRate'] ??
-                          "--").toString()),
-                  OverRun(
-                      color: Colors.blueGrey.shade600,
-                      value:
-                          'Fours:  ' + (odiData[0]['Fours'] ?? "--").toString()),
-                  OverRun(
-                    color: Colors.blueGrey.shade600,
-                    value: 'Sixs: ' + (odiData[0]['Sixs'] ?? "--").toString(),
-                  ),
-                  OverRun(
-                    color: Colors.blueGrey.shade600,
-                    value: 'Wides ' + (odiData[0]['Wides'] ?? "--").toString(),
-                  ),
-                ]),
-              ],
-            ),
+                    value: 'Fours\n' + (odiData['Fours'] ?? "--").toString()),
+                OverRun(
+                  color: Colors.blueGrey.shade600,
+                  value: 'Sixs\n' + (odiData['Sixs'] ?? "--").toString(),
+                ),
+                OverRun(
+                  color: Colors.blueGrey.shade600,
+                  value: 'Wides\n' + (odiData['Wides'] ?? "--").toString(),
+                ),
+              ]),
+            ],
+          ),
         ]),
       )
     ]);
@@ -540,8 +523,7 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
       ));
     }
     return Column(
-      mainAxisSize:MainAxisSize.min,
-
+      mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(height: 5),
         Container(
