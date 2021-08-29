@@ -301,13 +301,13 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
     final theme = Theme.of(context);
     final basicInfo = widget.matchData['matchInfo'];
     // print(basicInfo);
-    // if (basicInfo["Commentry"] == null || basicInfo["Commentry"].length == 0) {
-    //   return Center(
-    //       child: Text(
-    //     'Live Info Not Available.',
-    //     style: TextStyle(fontSize: 22),
-    //   ));
-    // }
+    if (basicInfo["Commentry"] == null || basicInfo["Commentry"].length == 0) {
+      return Center(
+          child: Text(
+        'Live Info Not Available.',
+        style: TextStyle(fontSize: 22),
+      ));
+    }
     String commentry = basicInfo['Commentry'];
     String last6Balls = '';
     var i = commentry.indexOf('Last 6 balls');
