@@ -50,7 +50,7 @@ class _BetPageState extends State<BetPage> {
               Text(
                 'Cric Dice',
                 style: theme.textTheme.headline1.copyWith(
-                color: theme.accentColor,
+                  color: theme.accentColor,
                 ),
               ),
             ],
@@ -71,7 +71,7 @@ class _BetPageState extends State<BetPage> {
               if (dataObj['responseType'] == 4) {
                 _matches.add({
                   'matchInfo': dataObj['data'],
-                  'odiScore': [],
+                  'odiScore': {},
                   'testScore': [],
                   'overRuns': {},
                   'liveCommentry': {},
@@ -86,14 +86,7 @@ class _BetPageState extends State<BetPage> {
                   break;
 
                 case 5:
-                  final teamIdx = _matches[idx]['odiScore'].indexWhere(
-                    (elem) => elem['Name'] == dataObj['data']['Name'],
-                  );
-                  if (teamIdx == -1) {
-                    _matches[idx]['odiScore'].add(dataObj['data']);
-                  } else {
-                    _matches[idx]['odiScore'][teamIdx] = dataObj['data'];
-                  }
+                  _matches[idx]['odiScore'] = dataObj['data'];
                   break;
 
                 case 6:
