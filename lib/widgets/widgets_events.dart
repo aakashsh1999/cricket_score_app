@@ -1,11 +1,8 @@
-import 'package:cric_dice/api/events_api.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 class CardEventItem extends StatelessWidget {
   final Function onTap;

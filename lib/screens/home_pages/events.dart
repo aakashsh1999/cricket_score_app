@@ -1,13 +1,9 @@
-import 'package:cric_dice/api/events_api.dart';
-import 'package:cric_dice/api/leagues_api.dart';
 import 'package:cric_dice/helpers/constants.dart';
-import 'package:cric_dice/screens/details/events_details.dart';
 import 'package:cric_dice/widgets/trensations_widgets.dart';
 import 'package:cric_dice/widgets/widget_calendar.dart';
 import 'package:cric_dice/widgets/widgets_events.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class EventsPage extends StatefulWidget {
   @override
@@ -17,9 +13,7 @@ class EventsPage extends StatefulWidget {
 class _EventsPageState extends State<EventsPage> {
   bool _barDrop = true;
   var _selectedDate = DateTime.now();
-  int _selectedPost = 1;
 
-  int _selectedLeague = 0;
 
   @override
   Widget build(BuildContext context) {

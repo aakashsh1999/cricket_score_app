@@ -1,8 +1,5 @@
-import 'package:cric_dice/api/news_api.dart';
-import 'package:cric_dice/localizations/localization_constants.dart';
 import 'package:cric_dice/screens/webview.dart';
 import 'package:cric_dice/widgets/trensations_widgets.dart';
-import 'package:cric_dice/widgets/widgets_news.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';

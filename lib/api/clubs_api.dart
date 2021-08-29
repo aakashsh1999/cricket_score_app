@@ -1,7 +1,6 @@
 import 'package:cric_dice/constants.dart';
 import 'package:cric_dice/models/teams.dart';
 import 'package:http/http.dart' as http;
-import 'dart:io';
 import 'dart:convert' as convert;
 
 class TeamsApi {
