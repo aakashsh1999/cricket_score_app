@@ -318,6 +318,7 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
     var odiData = widget.matchData["odiScore"];
 
     print(widget.matchData["overRuns"]);
+    var perOver = widget.matchData['overRuns']['OverNo'].toString();
     //  odiData = {
     //   "Name": 'Aakash',
     //   "RunRate": '20',
@@ -493,7 +494,7 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
                         ),
                         Center(
                           child: Text(
-                           widget.matchData["overRuns"]['OverNo'] == "" || widget.matchData["overRuns"]['OverNO'] == null ? "Overs : --" : "Overs : " + (widget.matchData["overRuns"]['OverNo'] ?? "--".toString()),
+                          perOver == "" || perOver == null ? "Overs : --" : "Overs : " + perOver ?? "--",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Colors.white,
