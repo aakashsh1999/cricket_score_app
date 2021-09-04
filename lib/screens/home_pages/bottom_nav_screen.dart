@@ -1,9 +1,11 @@
 import 'package:cric_dice/screens/bets/bet_page.dart';
 import 'package:cric_dice/screens/home_pages/news.dart';
+import 'package:cric_dice/widgets/dice_ad.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:jumping_bottom_nav_bar/jumping_bottom_nav_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'account.dart';
 
@@ -24,7 +26,7 @@ class _BottomNavScreenState extends State<BottomNavScreen>
   List<Widget> _listPages = [
     BetPage(),
     // EventsPage(),
-    NewsPage(),    
+    NewsPage(),
     AccountPage(),
   ];
 
@@ -58,6 +60,7 @@ class _BottomNavScreenState extends State<BottomNavScreen>
 
     return Scaffold(
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
             child: _getPageInstant(),
@@ -112,31 +115,28 @@ class _BottomNavScreenState extends State<BottomNavScreen>
                   // ),
                   TabItemIcon(
                     buildWidget: (_, color) => TabBottomMain(
-                      isSelected: _indexPage == 1,
-                      icon: FontAwesomeIcons.diceThree,
-                      // icon:ImageIcon(AssetImage(''),),
-                      label:'Odds'
-                    ),
+                        isSelected: _indexPage == 1,
+                        icon: FontAwesomeIcons.diceThree,
+                        // icon:ImageIcon(AssetImage(''),),
+                        label: 'Odds'),
                     startColor: theme.backgroundColor,
                     endColor: theme.backgroundColor,
                     curveColor: theme.backgroundColor,
                   ),
                   TabItemIcon(
                     buildWidget: (_, color) => TabBottomMain(
-                      isSelected: _indexPage == 2,
-                      icon: FontAwesomeIcons.newspaper,
-                      label:'News'
-                    ),
+                        isSelected: _indexPage == 2,
+                        icon: FontAwesomeIcons.newspaper,
+                        label: 'News'),
                     startColor: theme.backgroundColor,
                     endColor: theme.backgroundColor,
                     curveColor: theme.backgroundColor,
                   ),
                   TabItemIcon(
                     buildWidget: (_, color) => TabBottomMain(
-                      isSelected: _indexPage == 3,
-                      icon: Icons.menu_open,
-                      label:'More'
-                    ),
+                        isSelected: _indexPage == 3,
+                        icon: Icons.menu_open,
+                        label: 'More'),
                     startColor: theme.backgroundColor,
                     endColor: theme.backgroundColor,
                     curveColor: theme.backgroundColor,
@@ -145,11 +145,14 @@ class _BottomNavScreenState extends State<BottomNavScreen>
               ),
             ),
           ),
+          DiceAd()
         ],
       ),
     );
   }
 }
+
+
 
 class TabBottomMain extends StatelessWidget {
   final bool isSelected;
@@ -162,8 +165,7 @@ class TabBottomMain extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(top: isSelected ? 15.0 : 5.0),
-      child:
-       Column(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -172,12 +174,17 @@ class TabBottomMain extends StatelessWidget {
             size: 20.0,
             color: Colors.white,
           ),
-          if(!isSelected)
-           Padding(
-            padding: const EdgeInsets.only(top: 5.0),
-            child: Text(label, style: TextStyle(color: Colors.white,), textAlign: TextAlign.center,),
-          )
-          ,
+          if (!isSelected)
+            Padding(
+              padding: const EdgeInsets.only(top: 5.0),
+              child: Text(
+                label,
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
         ],
       ),
     );
