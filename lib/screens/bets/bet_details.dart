@@ -317,7 +317,7 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
     }
     var odiData = widget.matchData["odiScore"];
 
-    print(widget.matchData["overRuns"]);
+    // print(widget.matchData["overRuns"]);
     var perOver = widget.matchData['overRuns']['OverNo'].toString();
     //  odiData = {
     //   "Name": 'Aakash',

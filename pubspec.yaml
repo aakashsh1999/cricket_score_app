@@ -37,6 +37,7 @@ dependencies:
   url_launcher: ^6.0.3
   web_socket_channel: ^2.1.0
   webview_flutter: ^2.0.12
+  # whatsapp_unilink: ^2.0.0
 
 dev_dependencies:
   flutter_test:
