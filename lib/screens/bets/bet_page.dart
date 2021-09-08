@@ -59,7 +59,7 @@ class _BetPageState extends State<BetPage> {
         stream: _channel.stream,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            print(snapshot.data[0]);
+            print(snapshot.data);
             final _matches = jsonDecode(snapshot.data);
             return ListView.builder(
                 itemCount: int.parse('${_matches.length}'),
