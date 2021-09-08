@@ -357,8 +357,8 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
                 Text(
                   last6Balls[i],
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black,
+                  style: theme.textTheme.bodyText1.copyWith(
+                    // color: Colors.black,
                     fontWeight: FontWeight.w700,
                     fontSize: 16,
                   ),
