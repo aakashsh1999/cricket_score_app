@@ -17,7 +17,7 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
     tc = TabController(length: 4, vsync: this);
   }
 
-  var sizes = [350.0, 300.0, 300.0, 300.0];
+  var sizes = [600.0, 300.0, 300.0, 300.0];
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -55,7 +55,7 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
           ),
           SizedBox(height: 5),
           SizedBox(
-            height: 400,
+            height: 420,
             child: TabBarView(controller: tc, children: [
               Center(child: liveInfoTab()),
               Center(child: topBidsTab()),
@@ -315,17 +315,14 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
       last6Balls = commentry.substring(i + 14);
       commentry = commentry.substring(0, i);
     }
-    var odiData = widget.matchData["odiScore"];
-
-    // print(widget.matchData["overRuns"]);
+    var odiData = widget.matchData["liveScore"];
     var perOver = widget.matchData['overRuns']['OverNo'].toString();
-    //  odiData = {
-    //   "Name": 'Aakash',
-    //   "RunRate": '20',
-    //   "Fours": '4',
-    //   "Sixs": '6',
-    //   "Wides": "20"
-    // };
+
+    dynamic batBallInfo(data) {
+      if (data == {} || data == null) return {'Team': '-', 'OnField': '-'};
+      return data;
+    }
+
     return Column(mainAxisSize: MainAxisSize.min, children: [
       Container(
         color: theme.secondaryHeaderColor,
@@ -373,83 +370,9 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
         height: 5,
       ),
       Container(
-        child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: theme.primaryColor,
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Center(
-                          child: Text(
-                              "Score: " + (odiData['Score'] ?? '--').toString(),
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              )),
-                        ),
-                        Center(
-                          child: Text(
-                              "Over: " + (odiData['Over'] ?? '--').toString(),
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
-                              )),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Row(children: [
-                OverRun(
-                  color: Colors.blueGrey.shade600,
-                  value: (odiData['BatOrBall'] ?? "--") +
-                      '  :  ' +
-                      (odiData['Name'] ?? "--").toString(),
-                ),
-              ]),
-              Row(children: [
-                OverRun(
-                  color: Colors.blueGrey.shade600,
-                  value: 'Players Detail:  ' +
-                      (odiData['OnFiledDetail'] ?? "--").toString(),
-                ),
-              ]),
-              Row(children: [
-                OverRun(
-                    color: Colors.blueGrey.shade600,
-                    value:
-                        'Run Rate\n' + (odiData['RunRate'] ?? "--").toString()),
-                OverRun(
-                    color: Colors.blueGrey.shade600,
-                    value: 'Fours\n' + (odiData['Fours'] ?? "--").toString()),
-                OverRun(
-                  color: Colors.blueGrey.shade600,
-                  value: 'Sixes\n' + (odiData['Sixs'] ?? "--").toString(),
-                ),
-                OverRun(
-                  color: Colors.blueGrey.shade600,
-                  value: 'Wides\n' + (odiData['Wides'] ?? "--").toString(),
-                ),
-              ]),
-            ]),
-      ),
-      SizedBox(height: 16,),
-     Column(children: [
+        child: Column(children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 2),
+            padding: const EdgeInsets.symmetric(horizontal: 2.0),
             child: Container(
               decoration: BoxDecoration(
                 color: theme.primaryColor,
@@ -457,83 +380,178 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Column(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                      Padding(
-                        padding: EdgeInsets.only(bottom: 5),
-                        child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Center(
-                            child: Text(
-                              "Over By Over Runs",
+                    Center(
+                      child: Text(
+                          "Score: " + (odiData['Score'] ?? '--').toString(),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          )),
+                    ),
+                    Center(
+                      child:
+                          Text("Over: " + (odiData['Over'] ?? '--').toString(),
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ]),
-                      ),
-                    SizedBox(height: 5,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Center(
-                          child: Text(
-                            "Teams",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Center(
-                          child: Text(
-                          perOver == "" || perOver == null ? "Overs : --" : "Overs : " + perOver ?? "--",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ],
+                              )),
                     ),
                   ],
                 ),
               ),
             ),
           ),
-          Row(
-            children: [
-              OverRun(
+          Row(children: [
+            OverRun(
                 color: Colors.blueGrey.shade600,
-                value: widget.matchData["overRuns"]['T1'] ?? "--".toString(),
-              ),
-              OverRun(
+                value: 'Run Rate\n' + (odiData['RunRate'] ?? "--").toString()),
+            OverRun(
                 color: Colors.blueGrey.shade600,
-                value:
-                    widget.matchData["overRuns"]['T1Runs'] ?? "--".toString(),
+                value: 'Fours\n' + (odiData['Fours'] ?? "--").toString()),
+            OverRun(
+              color: Colors.blueGrey.shade600,
+              value: 'Sixes\n' + (odiData['Sixs'] ?? "--").toString(),
+            ),
+            OverRun(
+              color: Colors.blueGrey.shade600,
+              value: 'Wides\n' + (odiData['Wides'] ?? "--").toString(),
+            ),
+          ]),
+          SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 2.0),
+            child: Container(
+              decoration: BoxDecoration(
+                color: theme.primaryColor,
+                borderRadius: BorderRadius.circular(5.0),
               ),
-            ],
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
+                child: Center(
+                  child: Text(
+                      'On Batting : ' +
+                          (batBallInfo(odiData['Bat']))['Team'].toString(),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      )),
+                ),
+              ),
+            ),
           ),
           Row(children: [
             OverRun(
               color: Colors.blueGrey.shade600,
-              value: widget.matchData["overRuns"]['T2'] ?? "--".toString(),
+              value: (batBallInfo(odiData['Bat']))['OnField'].toString(),
+            ),
+          ]),
+          SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 2.0),
+            child: Container(
+              decoration: BoxDecoration(
+                color: theme.primaryColor,
+                borderRadius: BorderRadius.circular(5.0),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
+                child: Center(
+                  child: Text(
+                      'On Balling : ' +
+                          (batBallInfo(odiData['Ball']))['Team'].toString(),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      )),
+                ),
+              ),
+            ),
+          ),
+          Row(children: [
+            OverRun(
+              color: Colors.blueGrey.shade600,
+              value: (batBallInfo(odiData['Ball']))['OnField'].toString(),
+            ),
+          ]),
+        ]),
+      ),
+      SizedBox(
+        height: 10,
+      ),
+      Column(children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 2.0, vertical: 2),
+          child: Container(
+            decoration: BoxDecoration(
+              color: theme.primaryColor,
+              borderRadius: BorderRadius.circular(5.0),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 4.0),
+              child: Column(
+                children: [
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Center(
+                          child: Text(
+                            "Over By Over Runs  (Current Over: " + perOver+")"??
+                                "--",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ]),
+                  SizedBox(
+                    height: 5,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Row(
+          children: [
+            OverRun(
+              color: Colors.blueGrey.shade600,
+              value: widget.matchData["overRuns"]['T1'] ?? "--".toString(),
             ),
             OverRun(
               color: Colors.blueGrey.shade600,
-              value: widget.matchData["overRuns"]['T2Runs'] ?? "--".toString(),
+              value: widget.matchData["overRuns"]['T1Runs'] ?? "--".toString(),
             ),
-          ])
-     ])
+          ],
+        ),
+        Row(children: [
+          OverRun(
+            color: Colors.blueGrey.shade600,
+            value: widget.matchData["overRuns"]['T2'] ?? "--".toString(),
+          ),
+          OverRun(
+            color: Colors.blueGrey.shade600,
+            value: widget.matchData["overRuns"]['T2Runs'] ?? "--".toString(),
+          ),
+        ])
+      ])
     ]);
   }
 
