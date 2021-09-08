@@ -1,0 +1,80 @@
+[
+    {
+        "matchInfo": {
+            "MatchId": "p11019",
+            "MatchType": "T20",
+            "Teams": "Bangladesh Vs New Zealand",
+            "StartTime": "2021-09-08T15:30:05",
+            "Status": "In-Play",
+            "Volume": 269966661,
+            "Commentry": "Ban need 11 from 12 balls. RRR:5.5 Last 6 balls: 1 1w 1 1 2 1"
+        },
+        "liveScore": {
+            "MatchId": "p11019",
+            "Score": "83/4",
+            "Over": "18/20",
+            "RunRate": "4.6",
+            "Fours": "3",
+            "Sixs": "2",
+            "Wides": "2",
+            "Bat": {
+                "Team": "Bangladesh",
+                "OnField": "A.Hossain 5, Mahmudullah 31*"
+            }
+        },
+        "liveCommentry": {},
+        "overRuns": {
+            "MatchId": "p11019",
+            "OverNo": 18,
+            "T1": "Bangladesh",
+            "T2": "New Zealand",
+            "T1Runs": "8",
+            "T2Runs": "7"
+        },
+        "marketRateInfo": [
+            {
+                "MatchId": "p11019",
+                "MarketType": "Market Rate",
+                "Volume": 269966661,
+                "PlayStatus": "In-Play",
+                "Back": 1.07,
+                "Lay": 1.08,
+                "BackVol": 14,
+                "LayVol": 15
+            }
+        ],
+        "marketRate": [
+            {
+                "MatchId": "p11019",
+                "MarketType": "Market Rate",
+                "RateType": "Bangladesh",
+                "BackLays": [
+                    {
+                        "Price": "0",
+                        "Volume": "0"
+                    },
+                    {
+                        "Price": "0",
+                        "Volume": "0"
+                    },
+                    {
+                        "Price": "1.07",
+                        "Volume": "1269613"
+                    },
+                    {
+                        "Price": "1.08",
+                        "Volume": "676116"
+                    },
+                    {
+                        "Price": "0",
+                        "Volume": "0"
+                    },
+                    {
+                        "Price": "0",
+                        "Volume": "0"
+                    }
+                ]
+            },
+            {
+                "MatchId": "p11019",
+                "MarketType":"Market R
