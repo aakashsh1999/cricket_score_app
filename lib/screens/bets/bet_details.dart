@@ -55,7 +55,7 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
           ),
           SizedBox(height: 5),
           SizedBox(
-            height: 420,
+            height: 450,
             child: TabBarView(controller: tc, children: [
               Center(child: liveInfoTab()),
               Center(child: topBidsTab()),

@@ -59,94 +59,96 @@ class _BottomNavScreenState extends State<BottomNavScreen>
     final theme = Theme.of(context);
 
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            child: _getPageInstant(),
-          ),
-          Container(
-            width: double.infinity,
-            height: 55.0,
-            decoration: BoxDecoration(
-                // color: theme.primaryColorDark,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(5.0),
-                  topRight: Radius.circular(5.0),
-                ),
-                gradient: LinearGradient(
-                  end: Alignment.bottomCenter,
-                  begin: Alignment.topCenter,
-                  colors: [
-                    theme.primaryColor,
-                    theme.primaryColorDark,
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              child: _getPageInstant(),
+            ),
+            Container(
+              width: double.infinity,
+              height: 55.0,
+              decoration: BoxDecoration(
+                  // color: theme.primaryColorDark,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(5.0),
+                    topRight: Radius.circular(5.0),
+                  ),
+                  gradient: LinearGradient(
+                    end: Alignment.bottomCenter,
+                    begin: Alignment.topCenter,
+                    colors: [
+                      theme.primaryColor,
+                      theme.primaryColorDark,
+                    ],
+                  )),
+              child: Directionality(
+                textDirection: TextDirection.ltr,
+                child: JumpingTabBar(
+                  controller: _tabController,
+                  onChangeTab: (int index) {
+                    //  print(index);
+                    setState(() {
+                      _indexPage = index;
+                    });
+                  },
+                  duration: Duration(milliseconds: 1500),
+                  circleGradient: LinearGradient(
+                    colors: [
+                      theme.primaryColorDark,
+                      theme.primaryColor,
+                    ],
+                    begin: Alignment.bottomLeft,
+                    end: Alignment.topRight,
+                  ),
+                  selectedIndex: _indexPage,
+                  items: [
+                    // TabItemIcon(
+                    //   buildWidget: (_, color) => TabBottomMain(
+                    //     isSelected: _indexPage == 1,
+                    //     icon: FontAwesomeIcons.home,
+                    //     label:'Home'
+                    //   ),
+                    //   startColor: theme.backgroundColor,
+                    //   endColor: theme.backgroundColor,
+                    //   curveColor: theme.backgroundColor,
+                    // ),
+                    TabItemIcon(
+                      buildWidget: (_, color) => TabBottomMain(
+                          isSelected: _indexPage == 1,
+                          icon: FontAwesomeIcons.diceThree,
+                          // icon:ImageIcon(AssetImage(''),),
+                          label: 'Odds'),
+                      startColor: theme.backgroundColor,
+                      endColor: theme.backgroundColor,
+                      curveColor: theme.backgroundColor,
+                    ),
+                    TabItemIcon(
+                      buildWidget: (_, color) => TabBottomMain(
+                          isSelected: _indexPage == 2,
+                          icon: FontAwesomeIcons.newspaper,
+                          label: 'News'),
+                      startColor: theme.backgroundColor,
+                      endColor: theme.backgroundColor,
+                      curveColor: theme.backgroundColor,
+                    ),
+                    TabItemIcon(
+                      buildWidget: (_, color) => TabBottomMain(
+                          isSelected: _indexPage == 3,
+                          icon: Icons.menu_open,
+                          label: 'More'),
+                      startColor: theme.backgroundColor,
+                      endColor: theme.backgroundColor,
+                      curveColor: theme.backgroundColor,
+                    ),
                   ],
-                )),
-            child: Directionality(
-              textDirection: TextDirection.ltr,
-              child: JumpingTabBar(
-                controller: _tabController,
-                onChangeTab: (int index) {
-                  //  print(index);
-                  setState(() {
-                    _indexPage = index;
-                  });
-                },
-                duration: Duration(milliseconds: 1500),
-                circleGradient: LinearGradient(
-                  colors: [
-                    theme.primaryColorDark,
-                    theme.primaryColor,
-                  ],
-                  begin: Alignment.bottomLeft,
-                  end: Alignment.topRight,
                 ),
-                selectedIndex: _indexPage,
-                items: [
-                  // TabItemIcon(
-                  //   buildWidget: (_, color) => TabBottomMain(
-                  //     isSelected: _indexPage == 1,
-                  //     icon: FontAwesomeIcons.home,
-                  //     label:'Home'
-                  //   ),
-                  //   startColor: theme.backgroundColor,
-                  //   endColor: theme.backgroundColor,
-                  //   curveColor: theme.backgroundColor,
-                  // ),
-                  TabItemIcon(
-                    buildWidget: (_, color) => TabBottomMain(
-                        isSelected: _indexPage == 1,
-                        icon: FontAwesomeIcons.diceThree,
-                        // icon:ImageIcon(AssetImage(''),),
-                        label: 'Odds'),
-                    startColor: theme.backgroundColor,
-                    endColor: theme.backgroundColor,
-                    curveColor: theme.backgroundColor,
-                  ),
-                  TabItemIcon(
-                    buildWidget: (_, color) => TabBottomMain(
-                        isSelected: _indexPage == 2,
-                        icon: FontAwesomeIcons.newspaper,
-                        label: 'News'),
-                    startColor: theme.backgroundColor,
-                    endColor: theme.backgroundColor,
-                    curveColor: theme.backgroundColor,
-                  ),
-                  TabItemIcon(
-                    buildWidget: (_, color) => TabBottomMain(
-                        isSelected: _indexPage == 3,
-                        icon: Icons.menu_open,
-                        label: 'More'),
-                    startColor: theme.backgroundColor,
-                    endColor: theme.backgroundColor,
-                    curveColor: theme.backgroundColor,
-                  ),
-                ],
               ),
             ),
-          ),
-          DiceAd()
-        ],
+            DiceAd()
+          ],
+        ),
       ),
     );
   }

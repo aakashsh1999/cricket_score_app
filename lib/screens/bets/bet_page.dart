@@ -14,7 +14,9 @@ class BetPage extends StatefulWidget {
 class _BetPageState extends State<BetPage> {
   final List _matches = [];
   final _channel = WebSocketChannel.connect(
-    Uri.parse('wss://cric-dice-api-dev.herokuapp.com'),
+    // Uri.parse('wss://cric-dice-api-dev.herokuapp.com'),
+    Uri.parse('wss://cric-dice-api.herokuapp.com'),
+
   );
 
   @override
