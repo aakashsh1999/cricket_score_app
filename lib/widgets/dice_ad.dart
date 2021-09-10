@@ -9,22 +9,49 @@ class DiceAd extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async => await launch("https://wa.me/+918285631499?text=Hello"),
+      onTap: () async => await launch(
+          "https://wa.me/+919643358211?text=Hello, I want to register in dice1x.com"),
       // https://sitethemedata.com/sitethemes/dice1x.com/front/logo.png'
       child: Container(
         child: Padding(
-          padding: const EdgeInsets.all(4.0),
+          padding: const EdgeInsets.all(8.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Image.network(
-                  'https://sitethemedata.com/sitethemes/dice1x.com/front/logo.png'),
-              Text('Try Now',
-                  style: TextStyle(
-                    color: Color(0xffCDB46A),
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                  ))
+              Expanded(
+                child: Image.network(
+                    'https://sitethemedata.com/sitethemes/dice1x.com/front/logo.png'),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                child:
+                    Text('India\'s No1 betting id \n24/7 withdrawal & deposit',
+                        style: TextStyle(
+                          color: Color(0xffCDB46A),
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        )),
+              ),
+              // Spacer(),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                child: Text('|',
+                    style: TextStyle(
+                      color: Color(0xffCDB46A),
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    )),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                child: Text('Try Now',
+                    style: TextStyle(
+                      color: Color(0xffCDB46A),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    )),
+              ),
             ],
           ),
         ),
