@@ -133,52 +133,52 @@ class _AccountPageState extends State<AccountPage> {
                   },
                 ),
               ),
-              Divider(),
-              ShakeTransition(
-                duration: Duration(milliseconds: 2000),
-                child: Text(
-                  'Visit',
-                  style: TextStyle(
-                    decoration: TextDecoration.underline,
-                    fontSize: 22.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              ShakeTransition(
-                duration: Duration(milliseconds: 2600),
-                child: CardTileSettings(
-                  label: getTranslated(context, 'twitter'),
-                  icon: FontAwesomeIcons.twitter,
-                  onTap: () async {
-                    const bool isProduction = bool.fromEnvironment('dart.vm.development');
-                    print(isProduction);
+              // Divider(),
+              // ShakeTransition(
+              //   duration: Duration(milliseconds: 2000),
+              //   child: Text(
+              //     'Visit',
+              //     style: TextStyle(
+              //       decoration: TextDecoration.underline,
+              //       fontSize: 22.0,
+              //       fontWeight: FontWeight.bold,
+              //     ),
+              //   ),
+              // ),
+              // ShakeTransition(
+              //   duration: Duration(milliseconds: 2600),
+              //   child: CardTileSettings(
+              //     label: getTranslated(context, 'twitter'),
+              //     icon: FontAwesomeIcons.twitter,
+              //     onTap: () async {
+              //       const bool isProduction = bool.fromEnvironment('dart.vm.development');
+              //       print(isProduction);
                     
-                    // await launch(
-                    //     'https://www.linkedin.com/in/mouad-azul-8061a7176/?originalSubdomain=ma');
-                  },
-                ),
-              ),
-              ShakeTransition(
-                duration: Duration(milliseconds: 2800),
-                child: CardTileSettings(
-                  label: getTranslated(context, 'facebook'),
-                  icon: FontAwesomeIcons.facebookF,
-                  onTap: () async {
-                    // await launch('https://www.facebook.com/mouad.azul');
-                  },
-                ),
-              ),
-              ShakeTransition(
-                duration: Duration(milliseconds: 3000),
-                child: CardTileSettings(
-                  label: getTranslated(context, 'instagram'),
-                  icon: FontAwesomeIcons.instagram,
-                  onTap: () async {
-                    // await launch('https://www.instagram.com/azul_mouad/');
-                  },
-                ),
-              ),
+              //       // await launch(
+              //       //     'https://www.linkedin.com/in/mouad-azul-8061a7176/?originalSubdomain=ma');
+              //     },
+              //   ),
+              // ),
+              // ShakeTransition(
+              //   duration: Duration(milliseconds: 2800),
+              //   child: CardTileSettings(
+              //     label: getTranslated(context, 'facebook'),
+              //     icon: FontAwesomeIcons.facebookF,
+              //     onTap: () async {
+              //       // await launch('https://www.facebook.com/mouad.azul');
+              //     },
+              //   ),
+              // ),
+              // ShakeTransition(
+              //   duration: Duration(milliseconds: 3000),
+              //   child: CardTileSettings(
+              //     label: getTranslated(context, 'instagram'),
+              //     icon: FontAwesomeIcons.instagram,
+              //     onTap: () async {
+              //       // await launch('https://www.instagram.com/azul_mouad/');
+              //     },
+              //   ),
+              // ),
 
               Divider(),
               ShakeTransition(
