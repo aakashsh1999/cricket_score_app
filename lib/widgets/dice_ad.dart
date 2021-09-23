@@ -10,7 +10,7 @@ class DiceAd extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async => await launch(
-          "https://wa.me/+919643358211?text=Hello, I want to register in dice1x.com"),
+          "https://wa.me/+917704887412?text=Hello, I want to register in dice1x.com"),
       // https://sitethemedata.com/sitethemes/dice1x.com/front/logo.png'
       child: Container(
         child: Padding(
