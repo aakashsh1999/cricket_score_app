@@ -322,6 +322,9 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
       if (data == {} || data == null) return {'Team': '-', 'OnField': '-'};
       return data;
     }
+    String truncateString(String data, int length){
+        return (data.length >= length) ? '${data.substring(0, length)}...' : data;
+      }
 
     return Column(mainAxisSize: MainAxisSize.min, children: [
       Container(
@@ -533,7 +536,7 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
           children: [
             OverRun(
               color: Colors.blueGrey.shade600,
-              value: widget.matchData["overRuns"]['T1'] ?? "--".toString(),
+              value: truncateString(widget.matchData["overRuns"]['T1'], 20) ?? "--".toString(),
             ),
             OverRun(
               color: Colors.blueGrey.shade600,
@@ -544,7 +547,7 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
         Row(children: [
           OverRun(
             color: Colors.blueGrey.shade600,
-            value: widget.matchData["overRuns"]['T2'] ?? "--".toString(),
+            value: truncateString(widget.matchData["overRuns"]['T2'], 20) ?? "--".toString(),
           ),
           OverRun(
             color: Colors.blueGrey.shade600,
