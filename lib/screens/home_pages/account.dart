@@ -184,7 +184,7 @@ class _AccountPageState extends State<AccountPage> {
               ShakeTransition(
                 duration: Duration(milliseconds: 2000),
                 child: Text(
-                  'Contact Us',
+                  'Contact',
                   style: TextStyle(
                     decoration: TextDecoration.underline,
                     fontSize: 22.0,

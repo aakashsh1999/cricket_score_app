@@ -1,11 +1,10 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CardLatestNews extends StatelessWidget {
   final image;
   final String title;
-  final String category;
+  final String author;
   final Function onTap;
   final id;
 
@@ -13,7 +12,7 @@ class CardLatestNews extends StatelessWidget {
     @required this.id,
     @required this.image,
     @required this.title,
-    @required this.category,
+    @required this.author,
     @required this.onTap,
   });
 
@@ -59,7 +58,7 @@ class CardLatestNews extends StatelessWidget {
                     padding:
                         EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
                     child: Text(
-                      category,
+                      'Publisher: ' + author,
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 10.0,
@@ -172,4 +171,3 @@ class CardRecentNews extends StatelessWidget {
     );
   }
 }
-

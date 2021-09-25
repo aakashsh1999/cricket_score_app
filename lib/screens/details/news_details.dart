@@ -55,7 +55,7 @@ class NewsDetails extends StatelessWidget {
                 ShakeTransition(
                   duration: Duration(milliseconds: 900),
                   child: Text(
-                    data.category,
+                    data.author != null ? data.author : 'newsapi.org',
                     style: theme.textTheme.headline4.copyWith(
                       color: theme.primaryColor,
                     ),
