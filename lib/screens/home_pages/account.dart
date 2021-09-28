@@ -211,6 +211,37 @@ class _AccountPageState extends State<AccountPage> {
                   },
                 ),
               ),
+               Divider(),
+              ShakeTransition(
+                duration: Duration(milliseconds: 2000),
+                child: Text(
+                  'Sources',
+                  style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    fontSize: 22.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+
+              ShakeTransition(
+                duration: Duration(milliseconds: 2000),
+                child: CardTileSettings(
+                  label: 'Live Data Source',
+                  onTap: () async {
+                    await launch("mailto:cricdiceofficial@gmail.com");
+                  },
+                ),
+              ),
+              ShakeTransition(
+                duration: Duration(milliseconds: 2000),
+                child: CardTileSettings(
+                  label: 'News Source',
+                  onTap: () async {
+                    await launch("mailto:skeltoz.official@gmail.com");
+                  },
+                ),
+              ),
               // Divider(),
               // ShakeTransition(
               //   duration: Duration(milliseconds: 3200),
