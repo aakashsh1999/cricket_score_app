@@ -69,7 +69,9 @@ class _NewsPageState extends State<NewsPage> {
                     // axis: Axis.vertical,
                     child: CardLatestNews(
                       id: index,
-                      author: newsData[index].author != null ? newsData[index].author : 'newsapi.org',
+                      author: newsData[index].author != null
+                          ? newsData[index].author
+                          : 'Cric Dice',
                       image: newsData[index].image,
                       title: newsData[index].title,
                       onTap: () {

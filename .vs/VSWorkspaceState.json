@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\lib",
+    "\\lib\\helpers",
+    "\\lib\\models",
+    "\\lib\\network",
+    "\\lib\\providers",
+    "\\lib\\respository",
+    "\\lib\\screens"
+  ],
+  "SelectedNode": "\\lib\\respository",
+  "PreviewInSolutionExplorer": false
+}

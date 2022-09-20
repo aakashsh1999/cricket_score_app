@@ -25,6 +25,11 @@ const kUser01 =
 const kBody01 =
     "Lautaro Martinez: Man City eye Inter Milan striker as Sergio Aguero\'s potential successor";
 
+//Authorization Token
+const token = "Bearer qeu0dq2d2q1ihfgx";
+
+//HtML string
+
 ///change theme
 /*
 

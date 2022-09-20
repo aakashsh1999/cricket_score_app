@@ -16,7 +16,6 @@ class _BetPageState extends State<BetPage> {
   final _channel = WebSocketChannel.connect(
     // Uri.parse('wss://cric-dice-api-dev.herokuapp.com'),
     Uri.parse('wss://cric-dice-api.herokuapp.com'),
-
   );
 
   @override
@@ -60,40 +59,44 @@ class _BetPageState extends State<BetPage> {
           child: StreamBuilder(
         stream: _channel.stream,
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
+          if (snapshot != null) {
             final _matches = jsonDecode(snapshot.data);
-            return ListView.builder(
-                itemCount: int.parse('${_matches.length}'),
-                itemBuilder: (BuildContext context, int index) {
-                  if (_matches[index]["matchInfo"]["Status"] == "") {
-                    final st = DateTime.parse(
-                        _matches[index]["matchInfo"]["StartTime"]);
-                    _matches[index]["matchInfo"]["Status"] =
-                        DateFormat('EEE d MMM, hh:mm').format(st);
-                  }
-                  return Column(
-                    children: [
-                      ShakeListTransition(
-                        duration: Duration(milliseconds: 1600),
-                        child: BetCard(
-                          matchType: _matches[index]["matchInfo"]["MatchType"]
-                              .toString(),
-                          team:
-                              _matches[index]["matchInfo"]["Teams"].toString(),
-                          price: '20',
-                          volume:
-                              _matches[index]["matchInfo"]["Volume"].toString(),
-                          status:
-                              _matches[index]["matchInfo"]["Status"].toString(),
-                          fullData: _matches[index],
+            if (_matches != null) {
+              return ListView.builder(
+                  itemCount: int.parse('${_matches.length}'),
+                  itemBuilder: (BuildContext context, int index) {
+                    if (_matches[index]["matchInfo"]["Status"] == "") {
+                      final st = DateTime.parse(
+                          _matches[index]["matchInfo"]["StartTime"]);
+                      _matches[index]["matchInfo"]["Status"] =
+                          DateFormat('EEE d MMM, hh:mm').format(st);
+                    }
+                    return Column(
+                      children: [
+                        ShakeListTransition(
+                          duration: Duration(milliseconds: 1600),
+                          child: BetCard(
+                            matchType: _matches[index]["matchInfo"]["MatchType"]
+                                .toString(),
+                            team: _matches[index]["matchInfo"]["Teams"]
+                                .toString(),
+                            price: '20',
+                            volume: _matches[index]["matchInfo"]["Volume"]
+                                .toString(),
+                            status: _matches[index]["matchInfo"]["Status"]
+                                .toString(),
+                            fullData: _matches[index],
+                          ),
                         ),
-                      ),
-                      SizedBox(
-                        height: 20.0,
-                      )
-                    ],
-                  );
-                });
+                        SizedBox(
+                          height: 20.0,
+                        )
+                      ],
+                    );
+                  });
+            } else {
+              return Center(child: Text('No Data found'));
+            }
           } else {
             return Center(child: CircularProgressIndicator());
           }

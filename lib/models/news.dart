@@ -5,7 +5,7 @@ class NewsModel {
   final id;
   final date;
   final body;
-  final url;
+  final content;
 
   NewsModel({
     this.title,
@@ -14,19 +14,18 @@ class NewsModel {
     this.author,
     this.date,
     this.body,
-    this.url,
+    this.content,
   });
 
   factory NewsModel.fromJson(Map<String, dynamic> json) {
     print(json);
     return NewsModel(
       title: json['title'],
-      image: json['urlToImage'],
-      author: json['author'],
-      id: json['source']['id'],
-      date: json['publishedAt'],
+      image: json['image'],
+      id: json['news_id'],
+      date: json['pub_date'],
       body: json['description'],
-      url: json['url'],
+      content: json['content'],
     );
   }
 }

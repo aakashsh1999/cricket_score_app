@@ -55,7 +55,7 @@ class NewsDetails extends StatelessWidget {
                 ShakeTransition(
                   duration: Duration(milliseconds: 900),
                   child: Text(
-                    data.author != null ? data.author : 'newsapi.org',
+                    data.author != null ? data.author : 'Cric Dice',
                     style: theme.textTheme.headline4.copyWith(
                       color: theme.primaryColor,
                     ),
@@ -74,30 +74,34 @@ class NewsDetails extends StatelessWidget {
                 ShakeTransition(
                   duration: Duration(milliseconds: 1600),
                   axis: Axis.vertical,
-                  child: Html(
-                    data: data.body,
-                    defaultTextStyle:
-                        theme.textTheme.bodyText1.copyWith(fontSize: 20),
+                  child: Text(
+                    data.body,
+                    style: theme.textTheme.bodyText1.copyWith(fontSize: 20),
                   ),
                 ),
                 SizedBox(height: 10.0),
                 Center(
-                  child: TextButton(
-                    onPressed: () {
-                      Get.to(() => WebViewExample(url: data.url));
-                    },
-                    child: Text(
-                      'Read Full Story',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
-                    ),
-                    style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all<Color>(theme.primaryColor),
-                    ),
-                  ),
+                    child: Html(
+                  data: data.content.toString(),
+                  tagsList: [],
                 )
+                    // child: TextButton(
+                    //   onPressed: () {
+                    //     Get.to(() => WebViewExample(url: data.url));
+                    //   },r
+                    //   child: Text(
+                    //     'Read Full Story',
+                    //     style: TextStyle(
+                    //       fontSize: 16,
+                    //       color: Colors.white,
+                    //     ),
+                    //   ),
+                    //   style: ButtonStyle(
+                    //     backgroundColor:
+                    //         MaterialStateProperty.all<Color>(theme.primaryColor),
+                    //   ),
+                    // ),
+                    )
                 // ShakeTransition(
                 //   duration: Duration(milliseconds: 1800),
                 //   axis: Axis.vertical,
