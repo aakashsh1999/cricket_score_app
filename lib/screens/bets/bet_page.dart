@@ -1,3 +1,8 @@
+import 'package:cric_dice/network/httpClient.dart';
+import 'package:cric_dice/screens/home_pages/home.dart';
+import 'package:cric_dice/screens/home_pages/live.dart';
+import 'package:cric_dice/screens/home_pages/recent.dart';
+import 'package:cric_dice/screens/home_pages/upcoming.dart';
 import 'package:cric_dice/widgets/trensations_widgets.dart';
 import 'package:cric_dice/widgets/widgets_bets.dart';
 import 'package:flutter/material.dart';
@@ -12,96 +17,83 @@ class BetPage extends StatefulWidget {
 }
 
 class _BetPageState extends State<BetPage> {
-  final List _matches = [];
-  final _channel = WebSocketChannel.connect(
-    // Uri.parse('wss://cric-dice-api-dev.herokuapp.com'),
-    Uri.parse('wss://cric-dice-api.herokuapp.com'),
-  );
+  final networkHandler = new NetworkHandler();
+  var response;
+
+  void getData() async {
+    response = await networkHandler.get('/get_liveMatchList');
+    response = response['data'];
+
+    setState(() {});
+  }
 
   @override
   void initState() {
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _channel.sink.close();
+    getData();
   }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: ShakeTransition(
-          duration: Duration(milliseconds: 1600),
-          child: Row(
-            children: [
-              Icon(
-                FontAwesomeIcons.diceThree,
-                size: 22.0,
-                color: theme.accentColor,
-              ),
-              SizedBox(width: 5.0),
-              Text(
-                'Cric Dice',
-                style: theme.textTheme.headline1.copyWith(
+    return DefaultTabController(
+      length: 4,
+      child: Scaffold(
+        appBar: AppBar(
+          title: ShakeTransition(
+            duration: Duration(milliseconds: 1600),
+            child: Row(
+              children: [
+                Icon(
+                  FontAwesomeIcons.diceThree,
+                  size: 22.0,
                   color: theme.accentColor,
                 ),
-              ),
+                SizedBox(width: 5.0),
+                Text(
+                  'Cric Dice',
+                  style: theme.textTheme.headline1.copyWith(
+                    color: theme.accentColor,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          bottom: TabBar(
+            tabs: [
+              Tab(
+                  child: Text(
+                "Live",
+                style: TextStyle(color: Colors.black),
+              )),
+              Tab(
+                  child: Text(
+                'Home',
+                style: TextStyle(color: Colors.black),
+              )),
+              Tab(
+                  child: Text(
+                'Upcoming',
+                style: TextStyle(color: Colors.black),
+              )),
+              Tab(
+                  child: Text(
+                'Recent',
+                style: TextStyle(color: Colors.black),
+              )),
             ],
           ),
         ),
+        body: TabBarView(
+          children: [
+            LiveMatches(),
+            HomePage(),
+            UpcomingMatches(),
+            RecentMatches(),
+          ],
+        ),
       ),
-      body: Container(
-          child: StreamBuilder(
-        stream: _channel.stream,
-        builder: (context, snapshot) {
-          if (snapshot != null) {
-            final _matches = jsonDecode(snapshot.data);
-            if (_matches != null) {
-              return ListView.builder(
-                  itemCount: int.parse('${_matches.length}'),
-                  itemBuilder: (BuildContext context, int index) {
-                    if (_matches[index]["matchInfo"]["Status"] == "") {
-                      final st = DateTime.parse(
-                          _matches[index]["matchInfo"]["StartTime"]);
-                      _matches[index]["matchInfo"]["Status"] =
-                          DateFormat('EEE d MMM, hh:mm').format(st);
-                    }
-                    return Column(
-                      children: [
-                        ShakeListTransition(
-                          duration: Duration(milliseconds: 1600),
-                          child: BetCard(
-                            matchType: _matches[index]["matchInfo"]["MatchType"]
-                                .toString(),
-                            team: _matches[index]["matchInfo"]["Teams"]
-                                .toString(),
-                            price: '20',
-                            volume: _matches[index]["matchInfo"]["Volume"]
-                                .toString(),
-                            status: _matches[index]["matchInfo"]["Status"]
-                                .toString(),
-                            fullData: _matches[index],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 20.0,
-                        )
-                      ],
-                    );
-                  });
-            } else {
-              return Center(child: Text('No Data found'));
-            }
-          } else {
-            return Center(child: CircularProgressIndicator());
-          }
-        },
-      )),
     );
   }
 }

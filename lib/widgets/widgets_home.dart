@@ -19,7 +19,7 @@ class CardFavoritTeam extends StatelessWidget {
   final String startAt;
 
   CardFavoritTeam({
-    @required this.onTap,
+    this.onTap,
     @required this.teamOneLogo,
     @required this.teamTwoLogo,
     @required this.teamOne,
@@ -28,10 +28,8 @@ class CardFavoritTeam extends StatelessWidget {
     @required this.teamTwoScore,
     @required this.leagueName,
     @required this.status,
-    // @required this.teamOneOvers,
-    // @required this.teamTwoOvers,
     @required this.subtitle,
-    @required this.homeTab,
+    this.homeTab,
     @required this.teamOneBatting,
     @required this.teamOneWicketsDown,
     @required this.teamTwoWicketsDown,

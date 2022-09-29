@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cric_dice/screens/bets/bet_details.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +11,7 @@ class BetCard extends StatelessWidget {
   final String price;
   final String status;
   final String volume;
+  final Function onTap;
   final fullData;
 
   BetCard(
@@ -17,98 +20,1017 @@ class BetCard extends StatelessWidget {
       this.price,
       this.volume,
       this.status,
+      this.onTap,
       this.fullData});
 
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10.0),
-      padding: EdgeInsets.all(5.0),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        // color: theme.focusColor,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: theme.primaryColor),
-      ),
-      child: Column(children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Chip(
-                backgroundColor: theme.focusColor,
-                avatar: Container(
-                  child: Icon(
-                    FontAwesomeIcons.solidCircle,
-                    color: status == 'In-Play' ? Colors.green : Colors.blueGrey,
-                    size: 15,
-                  ),
-                ),
-                label: Text('$status'),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                height: 30,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(4.0),
-                  color: theme.primaryColor,
-                ),
-                child: Center(
-                  child: Text(
-                    'Vol: $volume',
-                    style: theme.textTheme.bodyText2
-                        .copyWith(fontSize: 16.0, color: Colors.white),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              )
-            ],
-          ),
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 10.0),
+        padding: EdgeInsets.all(5.0),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: theme.primaryColor),
         ),
-        ExpandablePanel(
-          theme: ExpandableThemeData(
-        iconColor: theme.primaryColor, 
-        animationDuration: const Duration(milliseconds: 500)
-    ),
-          header: Padding(
-            padding: EdgeInsets.only(left: 10.0),
+        child: Column(children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
             child: Column(
               children: [
-                Text(
-                  '$matchType',
-                  style: theme.textTheme.bodyText1.copyWith(
-                      fontSize: 28.0,
-                      fontWeight: FontWeight.bold,
-                      // color: theme.primaryColor
-                      ),
-                ),
-                SizedBox(
-                  height: 8.0,
-                ),
-                Text(
-                  '$team',
-                  style: theme.textTheme.bodyText2.copyWith(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    height: 1.2,
-                    // color: Colors.blueGrey.shade900,
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Text(fullData['matchs'] + " " + fullData['venue'],
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.blueGrey)),
                   ),
-                  textAlign: TextAlign.center,
                 ),
-                SizedBox(
-                  height: 10.0,
+                Padding(
+                  padding: const EdgeInsets.only(left: 8, right: 8, top: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(children: [
+                            Container(
+                              width: 25,
+                              height: 25,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(12.5),
+                                child: Image.network(
+                                    fullData['team_a_img'].toString(),
+                                    width: 25,
+                                    height: 25),
+                              ),
+                            ),
+                            Container(
+                              width: 180,
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 10.0),
+                                child: Text(
+                                  fullData['team_a'],
+                                  style: theme.textTheme.bodyText2.copyWith(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.bold,
+                                    height: 1.2,
+                                    // color: Colors.blueGrey.shade900,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ]),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: Row(children: [
+                              Container(
+                                width: 25,
+                                height: 25,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(12.5),
+                                  child: Image.network(
+                                      fullData['team_b_img'].toString(),
+                                      width: 25,
+                                      height: 25),
+                                ),
+                              ),
+                              Container(
+                                width: 180,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Text(
+                                    fullData['team_b'],
+                                    style: theme.textTheme.bodyText2.copyWith(
+                                      fontSize: 19,
+                                      fontWeight: FontWeight.bold,
+                                      height: 1.2,
+                                      // color: Colors.blueGrey.shade900,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              // if (status.toLowerCase() == 'finished')
+                              //   Padding(
+                              //     padding:
+                              //         const EdgeInsets.symmetric(horizontal: 5.0),
+                              //     child: Text(
+                              //       "test",
+                              //       style: theme.textTheme.bodyText2.copyWith(
+                              //         fontSize: 16,
+                              //         fontWeight: FontWeight.bold,
+                              //         height: 1.2,
+                              //         // color: Colors.blueGrey.shade900,
+                              //       ),
+                              //     ),
+                              //   ),
+                              // if (status.toLowerCase() == 'finished')
+                              //   Text(
+                              //     fullData['team_b_short'],
+                              //     style: theme.textTheme.bodyText2.copyWith(
+                              //       fontSize: 18,
+                              //       // color: Colors.blueGrey.shade900,
+                              //     ),
+                              //   ),
+                            ]),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Chip(
+                                backgroundColor: theme.focusColor,
+                                avatar: Container(
+                                  child: Icon(
+                                    FontAwesomeIcons.solidCircle,
+                                    color: status == 'In-Play'
+                                        ? Colors.green
+                                        : Color(0xFFfb6404),
+                                    size: 14,
+                                  ),
+                                ),
+                                label: Text('$status',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12)),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                if (fullData['result'] != "")
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(right: 8, left: 8, bottom: 8),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: Text(fullData['result'].toString() ?? "",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w900,
+                              color: Colors.blueGrey)),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        ]),
+      ),
+    );
+  }
+}
+
+class SeriesName extends StatelessWidget {
+  final String seriesName;
+  SeriesName({this.seriesName});
+
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        child: Text('$seriesName',
+            textAlign: TextAlign.left,
+            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w900)),
+      ),
+    );
+  }
+}
+
+// Upcoming matches
+
+class UpcomingMatchesCard extends StatelessWidget {
+  final String matchType;
+  final String team;
+  final String price;
+  final String status;
+  final fullData;
+  final Function onTap;
+
+  UpcomingMatchesCard(
+      {this.matchType,
+      this.team,
+      this.price,
+      this.status,
+      this.fullData,
+      this.onTap});
+
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    String handleDate(date) {
+      var currDate = DateTime.now();
+      var finalDate = "";
+      date = date.split("-");
+      if (int.parse(date[0]) == currDate.day) {
+        finalDate = "Today";
+      } else if (int.parse(date[0]) == currDate.day + 1) {
+        finalDate = "Tomorrow";
+      } else {
+        finalDate = date.join(" ");
+      }
+      return finalDate;
+    }
+
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 10.0),
+        padding: EdgeInsets.all(5.0),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: theme.primaryColor),
+        ),
+        child: Column(children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            child: Column(
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Text(fullData['matchs'] + " " + fullData['series'],
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.blueGrey)),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8, right: 8, top: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(children: [
+                            Container(
+                              width: 25,
+                              height: 25,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(12.5),
+                                child: Image.network(
+                                    fullData['team_a_img'].toString(),
+                                    width: 25,
+                                    height: 25),
+                              ),
+                            ),
+                            Container(
+                              width: 180,
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 10.0),
+                                child: Text(
+                                  fullData['team_a'],
+                                  style: theme.textTheme.bodyText2.copyWith(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    height: 1.2,
+                                    // color: Colors.blueGrey.shade900,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ]),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: Row(children: [
+                              Container(
+                                width: 25,
+                                height: 25,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(12.5),
+                                  child: Image.network(
+                                      fullData['team_b_img'].toString(),
+                                      width: 25,
+                                      height: 25),
+                                ),
+                              ),
+                              Container(
+                                width: 180,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: Text(
+                                    fullData['team_b'],
+                                    style: theme.textTheme.bodyText2.copyWith(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      height: 1.2,
+                                      // color: Colors.blueGrey.shade900,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ]),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            handleDate(fullData['match_date']) ?? '',
+                            style: theme.textTheme.bodyText2.copyWith(
+                              fontSize: 24,
+                              fontWeight: FontWeight
+                                  .bold, // color: Colors.blueGrey.shade900,
+                            ),
+                          ),
+                          Text(
+                            fullData['match_time'],
+                            style: theme.textTheme.bodyText2.copyWith(
+                              fontSize: 18,
+                              color: Colors.blueGrey.shade900,
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
-          collapsed: null,
-          expanded: BetDetails(
-            matchData: fullData,
+        ]),
+      ),
+    );
+  }
+}
+
+class RecentMatchesCard extends StatelessWidget {
+  final String matchType;
+  final String team;
+  final String price;
+  final String status;
+  final fullData;
+  final Function onTap;
+
+  RecentMatchesCard(
+      {this.matchType,
+      this.onTap,
+      this.team,
+      this.price,
+      this.status,
+      this.fullData});
+
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    String handleDate(date) {
+      var currDate = DateTime.now();
+      var finalDate = "";
+      date = date.split("-");
+      if (int.parse(date[0]) == currDate.day) {
+        finalDate = "Today";
+      } else if (int.parse(date[0]) == currDate.day - 1) {
+        finalDate = "Yesterday";
+      } else {
+        finalDate = date.join(" ");
+      }
+      return finalDate;
+    }
+
+    String handleResult(result) {
+      var finalResult = "";
+      if (result.toLowerCase().contains('abandoned')) {
+        finalResult = "Match Abandoned";
+      } else {
+        finalResult = result;
+      }
+      return finalResult;
+    }
+
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 10.0),
+        padding: EdgeInsets.all(5.0),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: theme.primaryColor),
+        ),
+        child: Column(children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            child: Column(
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Text(fullData['matchs'] + " " + fullData['series'],
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.blueGrey)),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8, right: 8, top: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(children: [
+                            Container(
+                              width: 25,
+                              height: 25,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(12.5),
+                                child: Image.network(
+                                    fullData['team_a_img'].toString(),
+                                    width: 25,
+                                    height: 25),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10.0),
+                              child: Text(
+                                fullData['team_a_short'],
+                                style: theme.textTheme.bodyText2.copyWith(
+                                  fontSize: 19,
+                                  fontWeight: FontWeight.bold,
+                                  height: 1.2,
+                                  // color: Colors.blueGrey.shade900,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 5.0),
+                              child: Text(
+                                fullData['team_a_scores'].toString() ?? "",
+                                style: theme.textTheme.bodyText2.copyWith(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  height: 1.2,
+                                  // color: Colors.blueGrey.shade900,
+                                ),
+                              ),
+                            ),
+                            // const EdgeInsets.symmetric(horizontal: 0),
+                            Text(
+                              fullData['team_a_over'].toString() ?? "",
+                              style: theme.textTheme.bodyText2.copyWith(
+                                fontSize: 15,
+                                // color: Colors.blueGrey.shade900,
+                              ),
+                            ),
+                          ]),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: Row(children: [
+                              Container(
+                                width: 25,
+                                height: 25,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(12.5),
+                                  child: Image.network(
+                                      fullData['team_b_img'].toString(),
+                                      width: 25,
+                                      height: 25),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Text(
+                                  fullData['team_b_short'],
+                                  style: theme.textTheme.bodyText2.copyWith(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.bold,
+                                    height: 1.2,
+                                    // color: Colors.blueGrey.shade900,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 5.0),
+                                child: Text(
+                                  fullData['team_b_scores'].toString() ?? "",
+                                  style: theme.textTheme.bodyText2.copyWith(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    height: 1.2,
+                                    // color: Colors.blueGrey.shade900,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                fullData['team_b_over'].toString() ?? "",
+                                style: theme.textTheme.bodyText2.copyWith(
+                                  fontSize: 18,
+                                  // color: Colors.blueGrey.shade900,
+                                ),
+                              ),
+                              Text(
+                                fullData['team_b_over'].toString() ?? "",
+                                style: theme.textTheme.bodyText2.copyWith(
+                                  fontSize: 18,
+                                  // color: Colors.blueGrey.shade900,
+                                ),
+                              ),
+                            ]),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            handleDate(fullData['match_date']) ?? '',
+                            style: theme.textTheme.bodyText2.copyWith(
+                              fontSize: 24,
+                              fontWeight: FontWeight
+                                  .bold, // color: Colors.blueGrey.shade900,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                if (fullData['result'] != "")
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(right: 8, left: 8, bottom: 8),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: Text(
+                          handleResult(fullData['result']).toString() ?? null,
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w900,
+                              color: Colors.blueGrey)),
+                    ),
+                  ),
+              ],
+            ),
           ),
-        )
-      ]),
+        ]),
+      ),
+    );
+  }
+}
+
+class MatchFancyCard extends StatelessWidget {
+  final data;
+
+  MatchFancyCard({this.data});
+
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: theme.primaryColor),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          child: Column(
+            children: [
+              Container(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 4),
+                        child: Text(
+                          'Fancy :',
+                          style: theme.textTheme.bodyText2.copyWith(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            height: 1.2,
+                          ),
+                        )),
+                    Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 4),
+                        child: Container(
+                          width: 260,
+                          child: Text(
+                            data['fancy'] ?? "N.A.",
+                            style: theme.textTheme.bodyText2.copyWith(
+                              fontSize: 18,
+                              height: 1.2,
+                            ),
+                          ),
+                        ))
+                  ],
+                ),
+              ),
+              Divider(height: 8, color: Colors.black),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: Text(
+                          'Back Size',
+                          style: theme.textTheme.bodyText2.copyWith(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            height: 1.2,
+                          ),
+                        )),
+                    Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: Text(
+                          'Back Price',
+                          style: theme.textTheme.bodyText2.copyWith(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            height: 1.2,
+                          ),
+                        )),
+                    Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: Text(
+                          'Lay Price',
+                          style: theme.textTheme.bodyText2.copyWith(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            height: 1.2,
+                          ),
+                        )),
+                    Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: Text(
+                          'Lay Size',
+                          style: theme.textTheme.bodyText2.copyWith(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            height: 1.2,
+                          ),
+                        )),
+                  ],
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                          color: theme.primaryColor,
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Align(
+                          alignment: Alignment
+                              .center, // Align however you like (i.e .centerRight, centerLeft)
+                          child: Text(data['back_size'] ?? "N.A.",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 18))),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                          color: theme.primaryColor,
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Align(
+                          alignment: Alignment
+                              .center, // Align however you like (i.e .centerRight, centerLeft)
+                          child: Text(data['back_price'] ?? "N.A.",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 18))),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                          color: theme.primaryColor,
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Align(
+                          alignment: Alignment
+                              .center, // Align however you like (i.e .centerRight, centerLeft)
+                          child: Text(data['lay_size'] ?? "N.A.",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 18))),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                          color: theme.primaryColor,
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Align(
+                          alignment: Alignment
+                              .center, // Align however you like (i.e .centerRight, centerLeft)
+                          child: Text(data['lay_price'] ?? "N.A.",
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 18))),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 12,
+              ),
+              Divider(height: 8, color: Colors.black),
+              Container(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 4),
+                        child: Text(
+                          'Created At :',
+                          style: theme.textTheme.bodyText2.copyWith(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            height: 1.2,
+                          ),
+                        )),
+                    Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 8, horizontal: 4),
+                        child: Container(
+                          width: 200,
+                          child: Text(
+                            data['created'] ?? "N.A.",
+                            style: theme.textTheme.bodyText2.copyWith(
+                              fontSize: 18,
+                              height: 1.2,
+                            ),
+                          ),
+                        ))
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class LiveMatchesCard extends StatelessWidget {
+  final String matchType;
+  final String team;
+  final String price;
+  final String status;
+  final fullData;
+  final Function onTap;
+
+  LiveMatchesCard(
+      {this.matchType,
+      this.onTap,
+      this.team,
+      this.price,
+      this.status,
+      this.fullData});
+
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    var matchBScore = fullData['team_b_score']['1']['score'];
+    print(matchBScore);
+
+    String handleDate(date) {
+      var currDate = DateTime.now();
+      var finalDate = "";
+      date = date.split("-");
+      if (int.parse(date[0]) == currDate.day) {
+        finalDate = "Today";
+      } else if (int.parse(date[0]) == currDate.day - 1) {
+        finalDate = "Yesterday";
+      } else {
+        finalDate = date.join(" ");
+      }
+      return finalDate;
+    }
+
+    String handleResult(result) {
+      var finalResult = "";
+      // if (result.toLowerCase().contains('abandoned')) {
+      //   finalResult = "Match Abandoned";
+      // } else {
+
+      // var data = json.decode(fullData['team_b_score']);
+      // print('$data');
+      //   finalResult = result;
+      // }
+      return finalResult;
+    }
+
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 10.0),
+        padding: EdgeInsets.all(5.0),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: theme.primaryColor),
+        ),
+        child: Column(children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            child: Column(
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Text(fullData['matchs'] + " " + fullData['series'],
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.blueGrey)),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8, right: 8, top: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(children: [
+                            Container(
+                              width: 25,
+                              height: 25,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(12.5),
+                                child: Image.network(
+                                    fullData['team_a_img'].toString(),
+                                    width: 25,
+                                    height: 25),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10.0),
+                              child: Text(
+                                fullData['team_a_short'],
+                                style: theme.textTheme.bodyText2.copyWith(
+                                  fontSize: 19,
+                                  fontWeight: FontWeight.bold,
+                                  height: 1.2,
+                                  // color: Colors.blueGrey.shade900,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 5.0),
+                              child: Text(
+                                fullData['team_a_scores'].toString() ?? "",
+                                style: theme.textTheme.bodyText2.copyWith(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                  height: 1.2,
+                                  // color: Colors.blueGrey.shade900,
+                                ),
+                              ),
+                            ),
+                            // const EdgeInsets.symmetric(horizontal: 0),
+                            Text(
+                              fullData['team_a_over'].toString() ?? "",
+                              style: theme.textTheme.bodyText2.copyWith(
+                                fontSize: 15,
+                                // color: Colors.blueGrey.shade900,
+                              ),
+                            ),
+                          ]),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: Row(children: [
+                              Container(
+                                width: 25,
+                                height: 25,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(12.5),
+                                  child: Image.network(
+                                      fullData['team_b_img'].toString(),
+                                      width: 25,
+                                      height: 25),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 10),
+                                child: Text(
+                                  fullData['team_b_short'],
+                                  style: theme.textTheme.bodyText2.copyWith(
+                                    fontSize: 19,
+                                    fontWeight: FontWeight.bold,
+                                    height: 1.2,
+                                    // color: Colors.blueGrey.shade900,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 5.0),
+                                child: Text(
+                                  matchBScore.toString() ?? "",
+                                  style: theme.textTheme.bodyText2.copyWith(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    height: 1.2,
+                                    // color: Colors.blueGrey.shade900,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                fullData['team_b_over'].toString() ?? "",
+                                style: theme.textTheme.bodyText2.copyWith(
+                                  fontSize: 18,
+                                  // color: Colors.blueGrey.shade900,
+                                ),
+                              ),
+                            ]),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            handleDate(fullData['match_date']) ?? '',
+                            style: theme.textTheme.bodyText2.copyWith(
+                              fontSize: 24,
+                              fontWeight: FontWeight
+                                  .bold, // color: Colors.blueGrey.shade900,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                if (fullData['result'] != "")
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(right: 8, left: 8, bottom: 8),
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: Text(
+                          handleResult(fullData['result']).toString() ?? null,
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w900,
+                              color: Colors.blueGrey)),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        ]),
+      ),
     );
   }
 }

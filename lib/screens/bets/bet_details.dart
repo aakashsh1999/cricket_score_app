@@ -23,7 +23,7 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
     final theme = Theme.of(context);
 
     return DefaultTabController(
-      length: 4,
+      length: 1,
       child: Column(
         children: [
           SizedBox(height: 10),
@@ -58,9 +58,9 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
             height: 450,
             child: TabBarView(controller: tc, children: [
               Center(child: liveInfoTab()),
-              Center(child: topBidsTab()),
-              Center(child: marketRateTab()),
-              Center(child: sessionInfoTab())
+              Center(child: Text('Top bids')),
+              Center(child: Text('Market rate')),
+              Center(child: Text('Session Rate'))
             ]),
           ),
         ],
@@ -68,234 +68,234 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
     );
   }
 
-  Widget topBidsTab() {
-    List topBidsData = widget.matchData['marketRateInfo'];
-    List<Widget> topBidsView = [];
-    if (topBidsData == null || topBidsData.length == 0) {
-      return Center(
-          child: Text(
-        'Top Bids Not Available.',
-        style: TextStyle(fontSize: 22),
-      ));
-    }
-    Widget styledValues(String value) {
-      return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-        child: Container(
-          width: double.maxFinite,
-          decoration: BoxDecoration(
-            color: Colors.teal.shade700,
-            borderRadius: BorderRadius.circular(5.0),
-          ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 4),
-            child: Text(
-              value,
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white, fontSize: 16),
-            ),
-          ),
-        ),
-      );
-    }
+  // Widget topBidsTab() {
+  //   List topBidsData = widget.matchData['marketRateInfo'];
+  //   List<Widget> topBidsView = [];
+  //   if (topBidsData == null || topBidsData.length == 0) {
+  //     return Center(
+  //         child: Text(
+  //       'Top Bids Not Available.',
+  //       style: TextStyle(fontSize: 22),
+  //     ));
+  //   }
+  //   Widget styledValues(String value) {
+  //     return Padding(
+  //       padding: EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+  //       child: Container(
+  //         width: double.maxFinite,
+  //         decoration: BoxDecoration(
+  //           color: Colors.teal.shade700,
+  //           borderRadius: BorderRadius.circular(5.0),
+  //         ),
+  //         child: Padding(
+  //           padding: EdgeInsets.symmetric(vertical: 4),
+  //           child: Text(
+  //             value,
+  //             textAlign: TextAlign.center,
+  //             style: TextStyle(color: Colors.white, fontSize: 16),
+  //           ),
+  //         ),
+  //       ),
+  //     );
+  //   }
 
-    Widget styledLabels(String value) {
-      return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-        child: Container(
-          width: double.maxFinite,
-          decoration: BoxDecoration(
-            color: Colors.cyan.shade800,
-            borderRadius: BorderRadius.circular(5.0),
-          ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 4),
-            child: Text(
-              value,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
-        ),
-      );
-    }
+  //   Widget styledLabels(String value) {
+  //     return Padding(
+  //       padding: EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+  //       child: Container(
+  //         width: double.maxFinite,
+  //         decoration: BoxDecoration(
+  //           color: Colors.cyan.shade800,
+  //           borderRadius: BorderRadius.circular(5.0),
+  //         ),
+  //         child: Padding(
+  //           padding: EdgeInsets.symmetric(vertical: 4),
+  //           child: Text(
+  //             value,
+  //             textAlign: TextAlign.center,
+  //             style: TextStyle(
+  //                 color: Colors.white,
+  //                 fontSize: 16,
+  //                 fontWeight: FontWeight.bold),
+  //           ),
+  //         ),
+  //       ),
+  //     );
+  //   }
 
-    if (topBidsData.length > 0)
-      topBidsView.add(Flexible(
-        flex: 1,
-        child: Container(
-          width: double.maxFinite,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              SizedBox(
-                height: 8,
-              ),
-              styledLabels('Volume'),
-              styledLabels('Back'),
-              styledLabels('BackVol'),
-              styledLabels('Lay'),
-              styledLabels('LayVol'),
-            ],
-          ),
-        ),
-      ));
+  //   if (topBidsData.length > 0)
+  //     topBidsView.add(Flexible(
+  //       flex: 1,
+  //       child: Container(
+  //         width: double.maxFinite,
+  //         child: Column(
+  //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //           children: [
+  //             SizedBox(
+  //               height: 8,
+  //             ),
+  //             styledLabels('Volume'),
+  //             styledLabels('Back'),
+  //             styledLabels('BackVol'),
+  //             styledLabels('Lay'),
+  //             styledLabels('LayVol'),
+  //           ],
+  //         ),
+  //       ),
+  //     ));
 
-    topBidsData.forEach((el) {
-      topBidsView.add(Flexible(
-        flex: 2,
-        child: Container(
-          width: double.maxFinite,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Padding(
-                padding: EdgeInsets.all(4),
-              ),
-              styledValues(el['Volume'].toString()),
-              styledValues(el['Back'].toString()),
-              styledValues(el['BackVol'].toString()),
-              styledValues(el['Lay'].toString()),
-              styledValues(el['LayVol'].toString()),
-            ],
-          ),
-        ),
-      ));
-    });
+  //   topBidsData.forEach((el) {
+  //     topBidsView.add(Flexible(
+  //       flex: 2,
+  //       child: Container(
+  //         width: double.maxFinite,
+  //         child: Column(
+  //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //           children: [
+  //             Padding(
+  //               padding: EdgeInsets.all(4),
+  //             ),
+  //             styledValues(el['Volume'].toString()),
+  //             styledValues(el['Back'].toString()),
+  //             styledValues(el['BackVol'].toString()),
+  //             styledValues(el['Lay'].toString()),
+  //             styledValues(el['LayVol'].toString()),
+  //           ],
+  //         ),
+  //       ),
+  //     ));
+  //   });
 
-    return Column(
-      // mainAxisSize:MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Row(
-            // crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: topBidsView),
-      ],
-    );
-  }
+  //   return Column(
+  //     // mainAxisSize:MainAxisSize.min,
+  //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //     children: [
+  //       Row(
+  //           // crossAxisAlignment: CrossAxisAlignment.stretch,
+  //           children: topBidsView),
+  //     ],
+  //   );
+  // }
 
-  Widget marketRateTab() {
-    List marketRateData = widget.matchData['marketRate'];
-    if (marketRateData == null || marketRateData.length == 0) {
-      return Center(
-          child: Text(
-        'Market Rate Not Available.',
-        style: TextStyle(fontSize: 22),
-      ));
-    }
-    List<Widget> marketRateView = [];
+  // Widget marketRateTab() {
+  //   List marketRateData = widget.matchData['marketRate'];
+  //   if (marketRateData == null || marketRateData.length == 0) {
+  //     return Center(
+  //         child: Text(
+  //       'Market Rate Not Available.',
+  //       style: TextStyle(fontSize: 22),
+  //     ));
+  //   }
+  //   List<Widget> marketRateView = [];
 
-    marketRateData.forEach((el) {
-      List<Widget> backLays = [];
-      el['BackLays'].forEach((bl) => {
-            backLays.add(Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Flexible(
-                    flex: 1,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: 2.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Color(0xff519872),
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(5),
-                            bottomLeft: Radius.circular(5),
-                          ),
-                        ),
-                        width: double.maxFinite,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 2.0),
-                          child: Text(
-                            bl['Price'],
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Flexible(
-                    flex: 1,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: 2.0),
-                      child: Container(
-                        width: double.maxFinite,
-                        decoration: BoxDecoration(
-                          color: Color(0xff3B5249),
-                          borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(5),
-                            bottomRight: Radius.circular(5),
-                          ),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 2.0),
-                          child: Text(
-                            bl['Volume'],
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ))
-          });
+  //   marketRateData.forEach((el) {
+  //     List<Widget> backLays = [];
+  //     el['BackLays'].forEach((bl) => {
+  //           backLays.add(Padding(
+  //             padding: EdgeInsets.symmetric(horizontal: 5.0),
+  //             child: Row(
+  //               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //               children: [
+  //                 Flexible(
+  //                   flex: 1,
+  //                   child: Padding(
+  //                     padding: EdgeInsets.symmetric(vertical: 2.0),
+  //                     child: Container(
+  //                       decoration: BoxDecoration(
+  //                         color: Color(0xff519872),
+  //                         borderRadius: BorderRadius.only(
+  //                           topLeft: Radius.circular(5),
+  //                           bottomLeft: Radius.circular(5),
+  //                         ),
+  //                       ),
+  //                       width: double.maxFinite,
+  //                       child: Padding(
+  //                         padding: EdgeInsets.symmetric(vertical: 2.0),
+  //                         child: Text(
+  //                           bl['Price'],
+  //                           textAlign: TextAlign.center,
+  //                           style: TextStyle(
+  //                             color: Colors.white,
+  //                             fontWeight: FontWeight.w600,
+  //                           ),
+  //                         ),
+  //                       ),
+  //                     ),
+  //                   ),
+  //                 ),
+  //                 Flexible(
+  //                   flex: 1,
+  //                   child: Padding(
+  //                     padding: EdgeInsets.symmetric(vertical: 2.0),
+  //                     child: Container(
+  //                       width: double.maxFinite,
+  //                       decoration: BoxDecoration(
+  //                         color: Color(0xff3B5249),
+  //                         borderRadius: BorderRadius.only(
+  //                           topRight: Radius.circular(5),
+  //                           bottomRight: Radius.circular(5),
+  //                         ),
+  //                       ),
+  //                       child: Padding(
+  //                         padding: EdgeInsets.symmetric(vertical: 2.0),
+  //                         child: Text(
+  //                           bl['Volume'],
+  //                           textAlign: TextAlign.center,
+  //                           style: TextStyle(
+  //                             color: Colors.white,
+  //                             fontWeight: FontWeight.w600,
+  //                           ),
+  //                         ),
+  //                       ),
+  //                     ),
+  //                   ),
+  //                 ),
+  //               ],
+  //             ),
+  //           ))
+  //         });
 
-      marketRateView.add(Flexible(
-        flex: 1,
-        child: Container(
-          width: double.maxFinite,
-          child: Column(
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 4, vertical: 5),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Color(0xff382933),
-                    borderRadius: BorderRadius.circular(5.0),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 4),
-                    child: Text(
-                      el['RateType'],
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                  width: double.maxFinite,
-                ),
-              ),
-              Column(children: backLays),
-            ],
-          ),
-        ),
-      ));
-    });
+  //     marketRateView.add(Flexible(
+  //       flex: 1,
+  //       child: Container(
+  //         width: double.maxFinite,
+  //         child: Column(
+  //           children: [
+  //             Padding(
+  //               padding: EdgeInsets.symmetric(horizontal: 4, vertical: 5),
+  //               child: Container(
+  //                 decoration: BoxDecoration(
+  //                   color: Color(0xff382933),
+  //                   borderRadius: BorderRadius.circular(5.0),
+  //                 ),
+  //                 child: Padding(
+  //                   padding: EdgeInsets.symmetric(vertical: 4),
+  //                   child: Text(
+  //                     el['RateType'],
+  //                     textAlign: TextAlign.center,
+  //                     style: TextStyle(
+  //                         color: Colors.white,
+  //                         fontSize: 16,
+  //                         fontWeight: FontWeight.bold),
+  //                   ),
+  //                 ),
+  //                 width: double.maxFinite,
+  //               ),
+  //             ),
+  //             Column(children: backLays),
+  //           ],
+  //         ),
+  //       ),
+  //     ));
+  //   });
 
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Row(children: marketRateView),
-      ],
-    );
-  }
+  //   return Column(
+  //     mainAxisSize: MainAxisSize.min,
+  //     children: [
+  //       Row(children: marketRateView),
+  //     ],
+  //   );
+  // }
 
   Widget liveInfoTab() {
     final theme = Theme.of(context);
@@ -322,9 +322,10 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
       if (data == {} || data == null) return {'Team': '-', 'OnField': '-'};
       return data;
     }
-    String truncateString(String data, int length){
-        return (data.length >= length) ? '${data.substring(0, length)}...' : data;
-      }
+
+    String truncateString(String data, int length) {
+      return (data.length >= length) ? '${data.substring(0, length)}...' : data;
+    }
 
     return Column(mainAxisSize: MainAxisSize.min, children: [
       Container(
@@ -513,7 +514,9 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
                       children: [
                         Center(
                           child: Text(
-                            "Over By Over Runs  (Current Over: " + perOver+")"??
+                            "Over By Over Runs  (Current Over: " +
+                                    perOver +
+                                    ")" ??
                                 "--",
                             textAlign: TextAlign.center,
                             style: TextStyle(
@@ -536,7 +539,8 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
           children: [
             OverRun(
               color: Colors.blueGrey.shade600,
-              value: truncateString(widget.matchData["overRuns"]['T1'], 20) ?? "--".toString(),
+              value: truncateString(widget.matchData["overRuns"]['T1'], 20) ??
+                  "--".toString(),
             ),
             OverRun(
               color: Colors.blueGrey.shade600,
@@ -547,7 +551,8 @@ class _BetDetailsState extends State<BetDetails> with TickerProviderStateMixin {
         Row(children: [
           OverRun(
             color: Colors.blueGrey.shade600,
-            value: truncateString(widget.matchData["overRuns"]['T2'], 20) ?? "--".toString(),
+            value: truncateString(widget.matchData["overRuns"]['T2'], 20) ??
+                "--".toString(),
           ),
           OverRun(
             color: Colors.blueGrey.shade600,
