@@ -52,15 +52,15 @@ class NewsDetails extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
             sliver: SliverList(
               delegate: SliverChildListDelegate([
-                ShakeTransition(
-                  duration: Duration(milliseconds: 900),
-                  child: Text(
-                    data.author != null ? data.author : 'Cric Dice',
-                    style: theme.textTheme.headline4.copyWith(
-                      color: theme.primaryColor,
-                    ),
-                  ),
-                ),
+                // ShakeTransition(
+                //   duration: Duration(milliseconds: 900),
+                //   child: Text(
+                //     data.author != null ? data.author : 'Cric Dice',
+                //     style: theme.textTheme.headline4.copyWith(
+                //       color: theme.primaryColor,
+                //     ),
+                //   ),
+                // ),
                 SizedBox(height: 10.0),
                 ShakeTransition(
                   duration: Duration(milliseconds: 1200),

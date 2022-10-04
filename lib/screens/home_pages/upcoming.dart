@@ -14,10 +14,12 @@ class UpcomingMatches extends StatefulWidget {
 class _UpcomingMatchesState extends State<UpcomingMatches> {
   final networkHandler = new NetworkHandler();
   var response;
+  var isLoading = false;
   void getData() async {
+    isLoading = true;
     response = await networkHandler.get('/get_upcomingMatches');
+    isLoading = false;
     response = await response['data'];
-    print(response);
     setState(() {});
   }
 
@@ -28,7 +30,10 @@ class _UpcomingMatchesState extends State<UpcomingMatches> {
   }
 
   Widget build(BuildContext context) {
-    return response != null
+    if (isLoading) {
+      return Center(child: CircularProgressIndicator());
+    }
+    return !response.isEmpty
         ? Padding(
             padding: const EdgeInsets.only(top: 5),
             child: Container(
@@ -59,6 +64,6 @@ class _UpcomingMatchesState extends State<UpcomingMatches> {
                       ]);
                     })),
           )
-        : Center(child: CircularProgressIndicator());
+        : Center(child: Text('No data found'));
   }
 }

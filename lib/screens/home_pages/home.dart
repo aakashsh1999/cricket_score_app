@@ -22,11 +22,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final networkHandler = new NetworkHandler();
+  var isLoading = false;
+
   var response;
   void getData() async {
+    isLoading = true;
     response = await networkHandler.get('/get_homelist');
+    isLoading = false;
     response = await response['data'];
-    print(response);
     setState(() {});
   }
 
@@ -45,7 +48,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return response != null
+    if (isLoading) {
+      return Center(child: CircularProgressIndicator());
+    }
+    return !response.isEmpty
         ? Padding(
             padding: const EdgeInsets.only(top: 5),
             child: Container(
@@ -83,6 +89,6 @@ class _HomePageState extends State<HomePage> {
                       ]);
                     })),
           )
-        : Center(child: CircularProgressIndicator());
+        : Center(child: Text('No Data Found'));
   }
 }

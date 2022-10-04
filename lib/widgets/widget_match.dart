@@ -27,9 +27,9 @@ class MatchOddHistoryCard extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             vertical: 8, horizontal: 2),
                         child: Text(
-                          'Match Oddd ID :',
+                          'Match Odd ID :',
                           style: theme.textTheme.bodyText2.copyWith(
-                            fontSize: 18,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                             height: 1.2,
                           ),
@@ -41,7 +41,7 @@ class MatchOddHistoryCard extends StatelessWidget {
                           child: Text(
                             data['match_odd_id'].toString() ?? "N.A.",
                             style: theme.textTheme.bodyText2.copyWith(
-                              fontSize: 18,
+                              fontSize: 16,
                               height: 1.2,
                             ),
                           ),
@@ -59,7 +59,7 @@ class MatchOddHistoryCard extends StatelessWidget {
                         child: Text(
                           'Team :',
                           style: theme.textTheme.bodyText2.copyWith(
-                            fontSize: 18,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                             height: 1.2,
                           ),
@@ -70,9 +70,9 @@ class MatchOddHistoryCard extends StatelessWidget {
                         child: Container(
                           width: 260,
                           child: Text(
-                            data['team'] ?? "N.A.",
+                            data['team'].toString() ?? "N.A.",
                             style: theme.textTheme.bodyText2.copyWith(
-                              fontSize: 18,
+                              fontSize: 14,
                               height: 1.2,
                             ),
                           ),
@@ -80,7 +80,7 @@ class MatchOddHistoryCard extends StatelessWidget {
                   ],
                 ),
               ),
-              Divider(height: 8, color: Colors.black),
+              Divider(height: 8, color: theme.accentColor),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Row(
@@ -89,7 +89,7 @@ class MatchOddHistoryCard extends StatelessWidget {
                     Text(
                       'Innings',
                       style: theme.textTheme.bodyText2.copyWith(
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
                         height: 1.2,
                       ),
@@ -97,7 +97,7 @@ class MatchOddHistoryCard extends StatelessWidget {
                     Text(
                       'Score',
                       style: theme.textTheme.bodyText2.copyWith(
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
                         height: 1.2,
                       ),
@@ -105,7 +105,7 @@ class MatchOddHistoryCard extends StatelessWidget {
                     Text(
                       'Overs',
                       style: theme.textTheme.bodyText2.copyWith(
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
                         height: 1.2,
                       ),
@@ -113,7 +113,7 @@ class MatchOddHistoryCard extends StatelessWidget {
                     Text(
                       'Runs',
                       style: theme.textTheme.bodyText2.copyWith(
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
                         height: 1.2,
                       ),
@@ -193,7 +193,7 @@ class MatchOddHistoryCard extends StatelessWidget {
               SizedBox(
                 height: 6,
               ),
-              Divider(height: 8, color: Colors.black),
+              Divider(height: 8, color: theme.accentColor),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Row(
@@ -202,7 +202,7 @@ class MatchOddHistoryCard extends StatelessWidget {
                     Text(
                       'Min Rate',
                       style: theme.textTheme.bodyText2.copyWith(
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
                         height: 1.2,
                       ),
@@ -210,7 +210,7 @@ class MatchOddHistoryCard extends StatelessWidget {
                     Text(
                       'Max Rate',
                       style: theme.textTheme.bodyText2.copyWith(
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
                         height: 1.2,
                       ),
@@ -218,7 +218,7 @@ class MatchOddHistoryCard extends StatelessWidget {
                     Text(
                       'S. Min',
                       style: theme.textTheme.bodyText2.copyWith(
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
                         height: 1.2,
                       ),
@@ -226,7 +226,7 @@ class MatchOddHistoryCard extends StatelessWidget {
                     Text(
                       'S. Max',
                       style: theme.textTheme.bodyText2.copyWith(
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
                         height: 1.2,
                       ),
@@ -306,7 +306,7 @@ class MatchOddHistoryCard extends StatelessWidget {
               SizedBox(
                 height: 12,
               ),
-              Divider(height: 8, color: Colors.black),
+              Divider(height: 8, color: theme.accentColor),
               Container(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -317,7 +317,7 @@ class MatchOddHistoryCard extends StatelessWidget {
                         child: Text(
                           'Created At :',
                           style: theme.textTheme.bodyText2.copyWith(
-                            fontSize: 18,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold,
                             height: 1.2,
                           ),
@@ -333,7 +333,7 @@ class MatchOddHistoryCard extends StatelessWidget {
                                 data['date_time'].toString().split(' ')[0] ??
                                     "N.A.",
                                 style: theme.textTheme.bodyText2.copyWith(
-                                  fontSize: 18,
+                                  fontSize: 14,
                                   height: 1.2,
                                 ),
                               ),
@@ -341,15 +341,159 @@ class MatchOddHistoryCard extends StatelessWidget {
                                 width: 10,
                               ),
                               Text(
-                                data['time'] ?? "N.A.",
+                                data['time'].toString() ?? "N.A.",
                                 style: theme.textTheme.bodyText2.copyWith(
-                                  fontSize: 18,
+                                  fontSize: 14,
                                   height: 1.2,
                                 ),
                               ),
                             ],
                           ),
                         ))
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class PointsTableCard extends StatelessWidget {
+  final data;
+
+  PointsTableCard({this.data});
+
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: theme.primaryColor),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          width: 40,
+                          height: 40,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: Image.network(data['flag'].toString(),
+                                width: 30, height: 30),
+                          ),
+                        ),
+                        Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              data['teams'].toString() ?? "N.A.",
+                              style: theme.textTheme.bodyText2.copyWith(
+                                fontSize: 18,
+                                height: 1.2,
+                              ),
+                            )),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 6,
+              ),
+              Divider(height: 8, color: theme.accentColor),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      'P',
+                      style: theme.textTheme.bodyText2.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        height: 1.2,
+                      ),
+                    ),
+                    Text(
+                      'W',
+                      style: theme.textTheme.bodyText2.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        height: 1.2,
+                      ),
+                    ),
+                    Text(
+                      'L',
+                      style: theme.textTheme.bodyText2.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        height: 1.2,
+                      ),
+                    ),
+                    Text(
+                      'NR',
+                      style: theme.textTheme.bodyText2.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        height: 1.2,
+                      ),
+                    ),
+                    Text(
+                      'PTS',
+                      style: theme.textTheme.bodyText2.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        height: 1.2,
+                      ),
+                    ),
+                    Text(
+                      'NRR',
+                      style: theme.textTheme.bodyText2.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        height: 1.2,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 11),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(data['P'].toString() ?? "N.A.",
+                        style:
+                            TextStyle(color: theme.accentColor, fontSize: 18)),
+                    Text(data['W'].toString() ?? "N.A.",
+                        style:
+                            TextStyle(color: theme.accentColor, fontSize: 18)),
+                    Text(data['L'].toString() ?? "N.A.",
+                        style:
+                            TextStyle(color: theme.accentColor, fontSize: 18)),
+                    Text(data['NR'].toString() ?? "N.A.",
+                        style:
+                            TextStyle(color: theme.accentColor, fontSize: 18)),
+                    Text(data['Pts'].toString() ?? "N.A.",
+                        style:
+                            TextStyle(color: theme.accentColor, fontSize: 18)),
+                    Text(data['NRR'].toString() ?? "N.A.",
+                        style:
+                            TextStyle(color: theme.accentColor, fontSize: 18)),
                   ],
                 ),
               ),

@@ -14,14 +14,13 @@ class MatchDetails extends StatelessWidget {
   MatchDetails({this.data});
 
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final ThemeData theme = Theme.of(context);
 
     return DefaultTabController(
         length: 4,
         child: Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            backgroundColor: Colors.white,
             elevation: 3,
             title: ShakeTransition(
               duration: Duration(milliseconds: 1600),
@@ -30,34 +29,30 @@ class MatchDetails extends StatelessWidget {
                   Text(
                     data['team_a_short'] + ' Vs ' + data['team_b_short'],
                     style: theme.textTheme.headline1
-                        .copyWith(color: theme.primaryColor),
+                        .copyWith(color: theme.accentColor),
                   ),
                 ],
               ),
             ),
-            bottom: const TabBar(
+            bottom: TabBar(
               isScrollable: true,
               tabs: [
                 Tab(
-                    child: Text(
-                  'Info',
-                  style: TextStyle(color: Colors.black),
-                )),
+                  child:
+                      Text('Info', style: TextStyle(color: theme.accentColor)),
+                ),
+                Tab(
+                    child: Text('Match Fancy',
+                        style: TextStyle(color: theme.accentColor))),
                 Tab(
                     child: Text(
-                  'Match Fancy',
-                  style: TextStyle(color: Colors.black),
+                  'Match Odd',
+                  style: TextStyle(color: theme.accentColor),
                 )),
                 Tab(
-                    child: Text(
-                  'Match Odd History',
-                  style: TextStyle(color: Colors.black),
-                )),
-                Tab(
-                    child: Text(
-                  'Scorecard',
-                  style: TextStyle(color: Colors.black),
-                )),
+                  child: Text('Scorecard',
+                      style: TextStyle(color: theme.accentColor)),
+                )
               ],
             ),
           ),

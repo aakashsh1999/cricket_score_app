@@ -14,10 +14,12 @@ class RecentMatches extends StatefulWidget {
 class _RecentMatchesState extends State<RecentMatches> {
   final networkHandler = new NetworkHandler();
   var response;
+  var isLoading = false;
   void getData() async {
+    isLoading = true;
     response = await networkHandler.get('/get_recentMatches');
+    isLoading = false;
     response = await response['data'];
-    print(response);
     setState(() {});
   }
 
@@ -28,7 +30,10 @@ class _RecentMatchesState extends State<RecentMatches> {
   }
 
   Widget build(BuildContext context) {
-    return response != null
+    if (isLoading) {
+      return Center(child: CircularProgressIndicator());
+    }
+    return !response.isEmpty
         ? Padding(
             padding: const EdgeInsets.only(top: 5),
             child: Container(
@@ -59,6 +64,6 @@ class _RecentMatchesState extends State<RecentMatches> {
                       ]);
                     })),
           )
-        : Center(child: CircularProgressIndicator());
+        : Center(child: Text('No data found'));
   }
 }

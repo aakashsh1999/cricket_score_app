@@ -1,5 +1,6 @@
 import 'package:cric_dice/network/httpClient.dart';
 import 'package:cric_dice/widgets/trensations_widgets.dart';
+import 'package:cric_dice/widgets/widget_score_card.dart';
 import 'package:cric_dice/widgets/widgets_bets.dart';
 import 'package:cric_dice/widgets/widgets_home.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,12 +19,17 @@ class _ScorecardState extends State<Scorecard> {
   final networkHandler = new NetworkHandler();
   var response;
   var result;
+  var teamA;
+  var teamB;
+  var isLoading = false;
   void getData() async {
+    isLoading = true;
     response = await networkHandler.getById('/get_scorecard', widget.id);
+    isLoading = false;
     response = await response['data'];
-    result = await response['data'];
-    print(response);
+    result = await response['result'];
     setState(() {});
+    print(result.length);
   }
 
   void initState() {
@@ -34,20 +40,16 @@ class _ScorecardState extends State<Scorecard> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    String handleResult(result) {
-      var finalResult = "";
-
-      finalResult = result;
-      return finalResult;
+    if (isLoading) {
+      return Center(child: CircularProgressIndicator());
     }
 
-    return response != null
-        ? Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 10.0),
+    return response != null && !isLoading
+        ? SingleChildScrollView(
+            child: Column(children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(12, 16, 12, 12),
+                child: Container(
                   padding: EdgeInsets.all(5.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
@@ -58,21 +60,18 @@ class _ScorecardState extends State<Scorecard> {
                       padding: EdgeInsets.symmetric(horizontal: 8.0),
                       child: Column(
                         children: [
-                          if (response['result'] != "")
+                          if (result[0] != "")
                             Padding(
                               padding: const EdgeInsets.only(
                                   right: 8, left: 8, top: 8),
                               child: Container(
                                 width: MediaQuery.of(context).size.width,
-                                child: Text(
-                                    handleResult(response['result'][0])
-                                            .toString() ??
-                                        null,
+                                child: Text(result[0].toString(),
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
-                                        fontSize: 18,
+                                        fontSize: 14,
                                         fontWeight: FontWeight.w900,
-                                        color: Colors.blueGrey)),
+                                        color: theme.accentColor)),
                               ),
                             ),
                           Padding(
@@ -109,7 +108,7 @@ class _ScorecardState extends State<Scorecard> {
                                               "",
                                           style: theme.textTheme.bodyText2
                                               .copyWith(
-                                            fontSize: 19,
+                                            fontSize: 16,
                                             fontWeight: FontWeight.bold,
                                             height: 1.2,
                                             // color: Colors.blueGrey.shade900,
@@ -129,7 +128,7 @@ class _ScorecardState extends State<Scorecard> {
                                               "",
                                           style: theme.textTheme.bodyText2
                                               .copyWith(
-                                            fontSize: 16,
+                                            fontSize: 14,
                                             fontWeight: FontWeight.bold,
                                             height: 1.2,
                                             // color: Colors.blueGrey.shade900,
@@ -143,7 +142,8 @@ class _ScorecardState extends State<Scorecard> {
                                             "",
                                         style:
                                             theme.textTheme.bodyText2.copyWith(
-                                          fontSize: 15,
+                                          fontSize: 12,
+                                          height: 1.2,
                                           // color: Colors.blueGrey.shade900,
                                         ),
                                       ),
@@ -159,9 +159,13 @@ class _ScorecardState extends State<Scorecard> {
                                             borderRadius:
                                                 BorderRadius.circular(12.5),
                                             child: Image.network(
-                                                response['team'][1]['team']
-                                                        ['flag']
-                                                    .toString(),
+                                                response['team']
+                                                        .asMap()
+                                                        .containsKey(1)
+                                                    ? response['team'][1]
+                                                            ['team']['flag']
+                                                        .toString()
+                                                    : "",
                                                 width: 25,
                                                 height: 25),
                                           ),
@@ -170,12 +174,16 @@ class _ScorecardState extends State<Scorecard> {
                                           padding:
                                               const EdgeInsets.only(left: 10.0),
                                           child: Text(
-                                            response['team'][1]['team']['name']
-                                                    .toString() ??
-                                                "",
+                                            response['team']
+                                                    .asMap()
+                                                    .containsKey(1)
+                                                ? response['team'][1]['team']
+                                                        ['name']
+                                                    .toString()
+                                                : "N.A.",
                                             style: theme.textTheme.bodyText2
                                                 .copyWith(
-                                              fontSize: 19,
+                                              fontSize: 16,
                                               fontWeight: FontWeight.bold,
                                               height: 1.2,
                                               // color: Colors.blueGrey.shade900,
@@ -186,16 +194,20 @@ class _ScorecardState extends State<Scorecard> {
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 5.0),
                                           child: Text(
-                                            response['team'][1]['team']['score']
+                                            response['team']
+                                                    .asMap()
+                                                    .containsKey(1)
+                                                ? response['team'][1]['team']
+                                                            ['score']
                                                         .toString() +
                                                     "-" +
-                                                    response['team'][0]['team']
+                                                    response['team'][1]['team']
                                                             ['wicket']
-                                                        .toString() ??
-                                                "",
+                                                        .toString()
+                                                : "",
                                             style: theme.textTheme.bodyText2
                                                 .copyWith(
-                                              fontSize: 16,
+                                              fontSize: 14,
                                               fontWeight: FontWeight.bold,
                                               height: 1.2,
                                               // color: Colors.blueGrey.shade900,
@@ -204,12 +216,17 @@ class _ScorecardState extends State<Scorecard> {
                                         ),
                                         // const EdgeInsets.symmetric(horizontal: 0),
                                         Text(
-                                          response['team'][1]['team']['over']
-                                                  .toString() ??
-                                              "",
+                                          response['team']
+                                                  .asMap()
+                                                  .containsKey(1)
+                                              ? response['team'][1]['team']
+                                                      ['over']
+                                                  .toString()
+                                              : "",
                                           style: theme.textTheme.bodyText2
                                               .copyWith(
-                                            fontSize: 15,
+                                            fontSize: 12,
+                                            height: 1.2,
                                             // color: Colors.blueGrey.shade900,
                                           ),
                                         ),
@@ -225,9 +242,233 @@ class _ScorecardState extends State<Scorecard> {
                     ),
                   ]),
                 ),
-              ],
-            ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 16, left: 12, right: 12, bottom: 16),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: Text(
+                      response['team'][0]['team']['name'].toString() +
+                              ' Batsman' ??
+                          "N.A.",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          color: theme.accentColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold)),
+                ),
+              ),
+              if (response['team'].asMap().containsKey(0) &&
+                  response['team'][0].containsKey('batsman') &&
+                  response['team'][0]['batsman'].length > 0)
+                SizedBox(
+                    height:
+                        response['team'][0]['batsman'].length > 2 ? 500 : 200,
+                    child: ListView.builder(
+                        itemCount: response['team'][0]['batsman'].length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Column(children: [
+                            ShakeListTransition(
+                                duration: Duration(milliseconds: 1000),
+                                child: BatsmanCard(
+                                  data: response['team'][0]['batsman'][index],
+                                )),
+                            SizedBox(
+                              height: 20.0,
+                            )
+                          ]);
+                        })),
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 16, left: 12, right: 12, bottom: 16),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: Text(
+                      response['team'][0]['team']['name'].toString() +
+                              ' Bowler' ??
+                          "N.A.",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          color: theme.accentColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold)),
+                ),
+              ),
+              if (response['team'].asMap().containsKey(0) &&
+                  response['team'][0].containsKey('bolwer') &&
+                  response['team'][0]['bolwer'].length > 0)
+                SizedBox(
+                    height:
+                        response['team'][0]['bolwer'].length > 2 ? 500 : 200,
+                    child: ListView.builder(
+                        itemCount: response['team'][0]['bolwer'].length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Column(children: [
+                            ShakeListTransition(
+                                duration: Duration(milliseconds: 1000),
+                                child: BowlerCard(
+                                  data: response['team'][0]['bolwer'][index],
+                                )),
+                            SizedBox(
+                              height: 20.0,
+                            )
+                          ]);
+                        })),
+              Padding(
+                padding: const EdgeInsets.only(
+                    top: 16, left: 12, right: 12, bottom: 16),
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: Text(
+                      response['team'][0]['team']['name'].toString() +
+                              ' Fall Wickets' ??
+                          "N.A.",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          color: theme.accentColor,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold)),
+                ),
+              ),
+              if (response['team'].asMap().containsKey(0) &&
+                  response['team'][0].containsKey('fallwicket') &&
+                  response['team'][0]['fallwicket'].length > 0)
+                SizedBox(
+                    height: response['team'][0]['fallwicket'].length > 2
+                        ? 500
+                        : 200,
+                    child: ListView.builder(
+                        itemCount: response['team'][0]['fallwicket'].length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Column(children: [
+                            ShakeListTransition(
+                                duration: Duration(milliseconds: 1000),
+                                child: FallWicketCard(
+                                  data: response['team'][0]['fallwicket']
+                                      [index],
+                                )),
+                            SizedBox(
+                              height: 20.0,
+                            )
+                          ]);
+                        })),
+              if (response['team'].asMap().containsKey(1))
+                Padding(
+                  padding: const EdgeInsets.only(
+                      top: 16, left: 12, right: 12, bottom: 16),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Text(
+                        response['team'][1]['team']['name'].toString() +
+                                ' Batsman' ??
+                            "N.A.",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                            color: theme.accentColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold)),
+                  ),
+                ),
+              if (response['team'].asMap().containsKey(1) &&
+                  response['team'][1].containsKey('batsman') &&
+                  response['team'][1]['batsman'].length > 0)
+                SizedBox(
+                    height:
+                        response['team'][1]['batsman'].length > 2 ? 500 : 200,
+                    child: ListView.builder(
+                        itemCount: response['team'][1]['batsman'].length ?? 0,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Column(children: [
+                            ShakeListTransition(
+                                duration: Duration(milliseconds: 1000),
+                                child: BatsmanCard(
+                                  data: response['team'][1]['batsman'][index],
+                                )),
+                            SizedBox(
+                              height: 20.0,
+                            )
+                          ]);
+                        })),
+              if (response['team'].asMap().containsKey(1))
+                Padding(
+                  padding: const EdgeInsets.only(
+                      top: 16, left: 12, right: 12, bottom: 16),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Text(
+                        response['team'][1]['team']['name'].toString() +
+                                ' Bowler' ??
+                            "N.A.",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                            color: theme.accentColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold)),
+                  ),
+                ),
+              if (response['team'].asMap().containsKey(1) &&
+                  response['team'][1].containsKey('bolwer') &&
+                  response['team'][1]['bolwer'].length > 0)
+                SizedBox(
+                    height:
+                        response['team'][1]['bolwer'].length > 2 ? 500 : 200,
+                    child: ListView.builder(
+                        itemCount: response['team'][1]['bolwer'].length ?? 0,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Column(children: [
+                            ShakeListTransition(
+                                duration: Duration(milliseconds: 1000),
+                                child: BowlerCard(
+                                  data: response['team'][1]['bolwer'][index],
+                                )),
+                            SizedBox(
+                              height: 20.0,
+                            )
+                          ]);
+                        })),
+              if (response['team'].asMap().containsKey(1))
+                Padding(
+                  padding: const EdgeInsets.only(
+                      top: 16, left: 12, right: 12, bottom: 16),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    child: Text(
+                        response['team'][1]['team']['name'].toString() +
+                                ' Fall Wickets' ??
+                            "N.A.",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                            color: theme.accentColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold)),
+                  ),
+                ),
+              if (response['team'].asMap().containsKey(1) &&
+                  response['team'][1].containsKey('fallwicket') &&
+                  response['team'][1]['fallwicket'].length > 0)
+                SizedBox(
+                    height: response['team'][1]['fallwicket'].length > 2
+                        ? 500
+                        : 200,
+                    child: ListView.builder(
+                        itemCount:
+                            response['team'][1]['fallwicket'].length ?? 0,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Column(children: [
+                            ShakeListTransition(
+                                duration: Duration(milliseconds: 1000),
+                                child: FallWicketCard(
+                                  data: response['team'][1]['fallwicket']
+                                      [index],
+                                )),
+                            SizedBox(
+                              height: 20.0,
+                            )
+                          ]);
+                        })),
+            ]),
           )
-        : Center(child: CircularProgressIndicator());
+        : Center(child: Text('No data found.'));
   }
 }

@@ -18,10 +18,12 @@ class MatchOddHistory extends StatefulWidget {
 class _MatchOddHistoryState extends State<MatchOddHistory> {
   final networkHandler = new NetworkHandler();
   var response;
+  var isLoading = false;
   void getData() async {
+    isLoading = true;
     response = await networkHandler.getById('/get_matchoddHistory', widget.id);
+    isLoading = false;
     response = await response['data'];
-    print(response);
     setState(() {});
   }
 
@@ -32,7 +34,10 @@ class _MatchOddHistoryState extends State<MatchOddHistory> {
 
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return response != null
+    if (isLoading) {
+      return Center(child: CircularProgressIndicator());
+    }
+    return !response.isEmpty
         ? Container(
             child: Padding(
               padding: const EdgeInsets.only(top: 20),
@@ -53,6 +58,6 @@ class _MatchOddHistoryState extends State<MatchOddHistory> {
                       })),
             ),
           )
-        : Center(child: CircularProgressIndicator());
+        : Center(child: Text('No data found.'));
   }
 }

@@ -50,21 +50,21 @@ class CardLatestNews extends StatelessWidget {
                     style: theme.textTheme.headline4,
                   ),
                   SizedBox(height: 5.0),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: theme.primaryColorDark,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
-                    child: Text(
-                      'Publisher: ' + author,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 10.0,
-                      ),
-                    ),
-                  ),
+                  // Container(
+                  //   decoration: BoxDecoration(
+                  //     color: theme.primaryColorDark,
+                  //     borderRadius: BorderRadius.circular(10.0),
+                  //   ),
+                  //   padding:
+                  //       EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0),
+                  //   child: Text(
+                  //     'Publisher: ' + author,
+                  //     style: TextStyle(
+                  //       color: Colors.white,
+                  //       fontSize: 10.0,
+                  //     ),
+                  //   ),
+                  // ),
                 ],
               ),
             ),

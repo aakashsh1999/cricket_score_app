@@ -18,20 +18,6 @@ class BetPage extends StatefulWidget {
 
 class _BetPageState extends State<BetPage> {
   final networkHandler = new NetworkHandler();
-  var response;
-
-  void getData() async {
-    response = await networkHandler.get('/get_liveMatchList');
-    response = response['data'];
-
-    setState(() {});
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getData();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,26 +47,28 @@ class _BetPageState extends State<BetPage> {
             ),
           ),
           bottom: TabBar(
+            indicatorColor: Colors.blueGrey,
+            indicatorSize: TabBarIndicatorSize.label,
             tabs: [
               Tab(
                   child: Text(
                 "Live",
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: theme.accentColor, fontSize: 13),
               )),
               Tab(
                   child: Text(
                 'Home',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: theme.accentColor, fontSize: 13),
               )),
               Tab(
                   child: Text(
                 'Upcoming',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: theme.accentColor, fontSize: 13),
               )),
               Tab(
                   child: Text(
                 'Recent',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: theme.accentColor, fontSize: 13),
               )),
             ],
           ),

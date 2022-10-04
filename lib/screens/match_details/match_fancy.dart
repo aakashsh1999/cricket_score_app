@@ -17,10 +17,12 @@ class Fantasy extends StatefulWidget {
 class _FantasyState extends State<Fantasy> {
   final networkHandler = new NetworkHandler();
   var response;
+  var isLoading = false;
   void getData() async {
+    isLoading = true;
     response = await networkHandler.getById('/get_matchFancy', widget.id);
+    isLoading = false;
     response = await response['data'];
-    print(response);
     setState(() {});
   }
 
@@ -31,7 +33,11 @@ class _FantasyState extends State<Fantasy> {
 
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return response != null
+
+    if (isLoading) {
+      return Center(child: CircularProgressIndicator());
+    }
+    return !response.isEmpty
         ? Container(
             child: Padding(
               padding: const EdgeInsets.only(top: 20),
@@ -52,6 +58,6 @@ class _FantasyState extends State<Fantasy> {
                       })),
             ),
           )
-        : Center(child: CircularProgressIndicator());
+        : Center(child: Text('No data found.'));
   }
 }

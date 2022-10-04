@@ -1,9 +1,12 @@
 import 'package:cric_dice/network/httpClient.dart';
+import 'package:cric_dice/screens/match_details/squad_info.dart';
 import 'package:cric_dice/widgets/trensations_widgets.dart';
 import 'package:cric_dice/widgets/widgets_home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'squad_info.dart';
 
 class MatchInfo extends StatefulWidget {
   final int id;
@@ -17,11 +20,13 @@ class MatchInfo extends StatefulWidget {
 class _MatchInfoState extends State<MatchInfo> {
   final networkHandler = new NetworkHandler();
   var response;
+  var isLoading = false;
   void getData() async {
+    isLoading = true;
     response = await networkHandler.getById('/get_matchInfo', widget.id);
+    isLoading = false;
     response = await response['data'];
     setState(() {});
-    print(response);
   }
 
   void initState() {
@@ -31,7 +36,10 @@ class _MatchInfoState extends State<MatchInfo> {
 
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return response != null
+    if (isLoading) {
+      return Center(child: CircularProgressIndicator());
+    }
+    return !response.isEmpty
         ? ListView(
             children: [
               Container(
@@ -42,6 +50,7 @@ class _MatchInfoState extends State<MatchInfo> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 18,
+                          color: theme.accentColor,
                         )),
                   )),
 
@@ -50,6 +59,7 @@ class _MatchInfoState extends State<MatchInfo> {
                 child: Container(
                     decoration: BoxDecoration(
                         color: Colors.black12,
+                        border: Border.all(color: theme.primaryColor),
                         borderRadius: BorderRadius.circular(8)),
                     width: MediaQuery.of(context).size.width,
                     child: Padding(
@@ -66,9 +76,10 @@ class _MatchInfoState extends State<MatchInfo> {
                                     child: Text(
                                       'Match Type:',
                                       style: theme.textTheme.bodyText2.copyWith(
-                                        fontSize: 18,
+                                        fontSize: 14,
                                         fontWeight: FontWeight.bold,
                                         height: 1.2,
+                                        color: theme.accentColor,
                                       ),
                                     )),
                                 Padding(
@@ -77,8 +88,9 @@ class _MatchInfoState extends State<MatchInfo> {
                                     child: Text(
                                       response['match_type'],
                                       style: theme.textTheme.bodyText2.copyWith(
-                                        fontSize: 18,
+                                        fontSize: 14,
                                         height: 1.2,
+                                        color: theme.accentColor,
                                       ),
                                     ))
                               ],
@@ -86,7 +98,7 @@ class _MatchInfoState extends State<MatchInfo> {
                           ),
                           Divider(
                             height: 8,
-                            color: Colors.black,
+                            color: theme.accentColor,
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 4.0),
@@ -98,9 +110,10 @@ class _MatchInfoState extends State<MatchInfo> {
                                     child: Text(
                                       'Status :',
                                       style: theme.textTheme.bodyText2.copyWith(
-                                        fontSize: 18,
+                                        fontSize: 14,
                                         fontWeight: FontWeight.bold,
                                         height: 1.2,
+                                        color: theme.accentColor,
                                       ),
                                     )),
                                 Padding(
@@ -109,10 +122,13 @@ class _MatchInfoState extends State<MatchInfo> {
                                     child: Container(
                                       width: 250,
                                       child: Text(
-                                        response['toss'],
+                                        response['toss'].toString().isEmpty
+                                            ? "N.A."
+                                            : response['toss'].toString(),
                                         style:
                                             theme.textTheme.bodyText2.copyWith(
-                                          fontSize: 18,
+                                          fontSize: 14,
+                                          color: theme.accentColor,
                                           height: 1.2,
                                         ),
                                       ),
@@ -135,8 +151,8 @@ class _MatchInfoState extends State<MatchInfo> {
                   child: Text('Venue',
                       textAlign: TextAlign.left,
                       style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 22,
+                          color: theme.accentColor,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold)),
                 ),
               ),
@@ -146,6 +162,7 @@ class _MatchInfoState extends State<MatchInfo> {
                 child: Container(
                     decoration: BoxDecoration(
                         color: Colors.black12,
+                        border: Border.all(color: theme.primaryColor),
                         borderRadius: BorderRadius.circular(8)),
                     width: MediaQuery.of(context).size.width,
                     child: Padding(
@@ -169,7 +186,8 @@ class _MatchInfoState extends State<MatchInfo> {
                                           " " +
                                           response['match_time'],
                                       style: theme.textTheme.bodyText2.copyWith(
-                                        fontSize: 16,
+                                        fontSize: 14,
+                                        color: theme.accentColor,
                                         fontWeight: FontWeight.bold,
                                         height: 1.2,
                                       ),
@@ -179,7 +197,7 @@ class _MatchInfoState extends State<MatchInfo> {
                           ),
                           Divider(
                             height: 8,
-                            color: Colors.black,
+                            color: theme.accentColor,
                           ),
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -198,9 +216,9 @@ class _MatchInfoState extends State<MatchInfo> {
                                       child: Text(response['venue'],
                                           style: theme.textTheme.bodyText2
                                               .copyWith(
-                                            fontSize: 16,
+                                            fontSize: 14,
                                             height: 1.2,
-                                            color: Colors.black,
+                                            color: theme.accentColor,
                                           ))),
                                 )
                               ],
@@ -220,113 +238,124 @@ class _MatchInfoState extends State<MatchInfo> {
                       child: Text('Teams',
                           textAlign: TextAlign.left,
                           style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 22,
+                              color: theme.accentColor,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold)),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 12, right: 12),
-                    child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.black12,
-                            borderRadius: BorderRadius.circular(8)),
-                        width: MediaQuery.of(context).size.width,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 8.0),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Container(
-                                          width: 30,
-                                          height: 30,
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            child: Image.network(
-                                                response['team_a_img']
-                                                    .toString(),
-                                                width: 30,
-                                                height: 30),
+                  InkWell(
+                    onTap: () {
+                      Get.to(() => SquadInfo(id: widget.id));
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 12, right: 12),
+                      child: Container(
+                          decoration: BoxDecoration(
+                              color: Colors.black12,
+                              border: Border.all(color: theme.primaryColor),
+                              borderRadius: BorderRadius.circular(8)),
+                          width: MediaQuery.of(context).size.width,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 8.0),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Container(
+                                            width: 30,
+                                            height: 30,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              child: Image.network(
+                                                  response['team_a_img']
+                                                      .toString(),
+                                                  width: 30,
+                                                  height: 30),
+                                            ),
                                           ),
-                                        ),
-                                        Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text(
-                                              response['team_a'],
-                                              style: theme.textTheme.bodyText2
-                                                  .copyWith(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold,
-                                                height: 1.2,
-                                              ),
-                                            )),
-                                      ],
-                                    ),
-                                    Icon(
-                                      Icons.chevron_right,
-                                      size: 30,
-                                    )
-                                  ],
-                                ),
-                              ),
-                              Divider(
-                                height: 8,
-                                color: Colors.black,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 8.0),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Container(
-                                          width: 30,
-                                          height: 30,
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(15),
-                                            child: Image.network(
-                                                response['team_b_img']
-                                                    .toString(),
-                                                width: 30,
-                                                height: 30),
-                                          ),
-                                        ),
-                                        Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text(response['team_b'],
+                                          Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Text(
+                                                response['team_a'],
                                                 style: theme.textTheme.bodyText2
                                                     .copyWith(
-                                                  fontSize: 16,
+                                                  fontSize: 14,
                                                   height: 1.2,
-                                                  color: Colors.black,
-                                                ))),
-                                      ],
-                                    ),
-                                    Icon(
-                                      Icons.chevron_right,
-                                      size: 30,
-                                    )
-                                  ],
+                                                  color: theme.accentColor,
+                                                ),
+                                              )),
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.chevron_right,
+                                        size: 30,
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              )
-                            ],
-                          ),
-                        )),
+                                Divider(
+                                  height: 8,
+                                  color: theme.accentColor,
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 8.0),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Container(
+                                            width: 30,
+                                            height: 30,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                              child: Image.network(
+                                                  response['team_b_img']
+                                                      .toString(),
+                                                  width: 30,
+                                                  height: 30),
+                                            ),
+                                          ),
+                                          Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Text(response['team_b'],
+                                                  style: theme
+                                                      .textTheme.bodyText2
+                                                      .copyWith(
+                                                    fontSize: 14,
+                                                    height: 1.2,
+                                                    color: theme.accentColor,
+                                                  ))),
+                                        ],
+                                      ),
+                                      Icon(
+                                        Icons.chevron_right,
+                                        size: 30,
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          )),
+                    ),
                   ),
                   Padding(
                     padding:
@@ -336,8 +365,8 @@ class _MatchInfoState extends State<MatchInfo> {
                       child: Text('Referees & Umpires',
                           textAlign: TextAlign.left,
                           style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 22,
+                              color: theme.accentColor,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold)),
                     ),
                   ),
@@ -347,6 +376,7 @@ class _MatchInfoState extends State<MatchInfo> {
                     child: Container(
                         decoration: BoxDecoration(
                             color: Colors.black12,
+                            border: Border.all(color: theme.primaryColor),
                             borderRadius: BorderRadius.circular(8)),
                         width: MediaQuery.of(context).size.width,
                         child: Padding(
@@ -366,19 +396,22 @@ class _MatchInfoState extends State<MatchInfo> {
                                           'Referee :',
                                           style: theme.textTheme.bodyText2
                                               .copyWith(
-                                            fontSize: 16,
+                                            fontSize: 14,
                                             fontWeight: FontWeight.bold,
                                             height: 1.2,
+                                            color: theme.accentColor,
                                           ),
                                         )),
                                     Padding(
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 8, horizontal: 4),
                                         child: Text(
-                                          response['referee'],
+                                          response['referee'].toString().isEmpty
+                                              ? "N.A"
+                                              : response['referee'].toString(),
                                           style: theme.textTheme.bodyText2
                                               .copyWith(
-                                            fontSize: 16,
+                                            fontSize: 14,
                                             height: 1.2,
                                           ),
                                         ))
@@ -387,7 +420,7 @@ class _MatchInfoState extends State<MatchInfo> {
                               ),
                               Divider(
                                 height: 8,
-                                color: Colors.black,
+                                color: theme.accentColor,
                               ),
                               Padding(
                                 padding:
@@ -402,19 +435,22 @@ class _MatchInfoState extends State<MatchInfo> {
                                           'Umpire :',
                                           style: theme.textTheme.bodyText2
                                               .copyWith(
-                                            fontSize: 16,
+                                            fontSize: 14,
                                             fontWeight: FontWeight.bold,
                                             height: 1.2,
+                                            color: theme.accentColor,
                                           ),
                                         )),
                                     Padding(
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 8, horizontal: 4),
                                         child: Text(
-                                          response['umpire'],
+                                          response['umpire'].toString().isEmpty
+                                              ? "N.A."
+                                              : response['umpire'].toString(),
                                           style: theme.textTheme.bodyText2
                                               .copyWith(
-                                            fontSize: 16,
+                                            fontSize: 14,
                                             height: 1.2,
                                           ),
                                         ))
@@ -423,7 +459,7 @@ class _MatchInfoState extends State<MatchInfo> {
                               ),
                               Divider(
                                 height: 8,
-                                color: Colors.black,
+                                color: theme.accentColor,
                               ),
                               Padding(
                                 padding:
@@ -438,19 +474,25 @@ class _MatchInfoState extends State<MatchInfo> {
                                           'Third Umpire:',
                                           style: theme.textTheme.bodyText2
                                               .copyWith(
-                                            fontSize: 16,
+                                            fontSize: 14,
                                             fontWeight: FontWeight.bold,
                                             height: 1.2,
+                                            color: theme.accentColor,
                                           ),
                                         )),
                                     Padding(
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 8, horizontal: 4),
                                         child: Text(
-                                          response['third_umpire'],
+                                          response['third_umpire']
+                                                  .toString()
+                                                  .isEmpty
+                                              ? "N.A."
+                                              : response['third_umpire']
+                                                  .toString(),
                                           style: theme.textTheme.bodyText2
                                               .copyWith(
-                                            fontSize: 16,
+                                            fontSize: 14,
                                             height: 1.2,
                                           ),
                                         ))
@@ -465,9 +507,11 @@ class _MatchInfoState extends State<MatchInfo> {
               )
             ],
           )
-        : Center(child: CircularProgressIndicator());
+        : Center(child: Text('No data found.'));
   }
 }
+
+
 
 
               //   height: 100,

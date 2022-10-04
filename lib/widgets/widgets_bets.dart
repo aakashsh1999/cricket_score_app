@@ -49,9 +49,9 @@ class BetCard extends StatelessWidget {
                     child: Text(fullData['matchs'] + " " + fullData['venue'],
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 14,
                             fontWeight: FontWeight.w500,
-                            color: Colors.blueGrey)),
+                            color: theme.accentColor)),
                   ),
                 ),
                 Padding(
@@ -82,7 +82,7 @@ class BetCard extends StatelessWidget {
                                 child: Text(
                                   fullData['team_a'],
                                   style: theme.textTheme.bodyText2.copyWith(
-                                    fontSize: 19,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     height: 1.2,
                                     // color: Colors.blueGrey.shade900,
@@ -112,7 +112,7 @@ class BetCard extends StatelessWidget {
                                   child: Text(
                                     fullData['team_b'],
                                     style: theme.textTheme.bodyText2.copyWith(
-                                      fontSize: 19,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                       height: 1.2,
                                       // color: Colors.blueGrey.shade900,
@@ -120,28 +120,6 @@ class BetCard extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              // if (status.toLowerCase() == 'finished')
-                              //   Padding(
-                              //     padding:
-                              //         const EdgeInsets.symmetric(horizontal: 5.0),
-                              //     child: Text(
-                              //       "test",
-                              //       style: theme.textTheme.bodyText2.copyWith(
-                              //         fontSize: 16,
-                              //         fontWeight: FontWeight.bold,
-                              //         height: 1.2,
-                              //         // color: Colors.blueGrey.shade900,
-                              //       ),
-                              //     ),
-                              //   ),
-                              // if (status.toLowerCase() == 'finished')
-                              //   Text(
-                              //     fullData['team_b_short'],
-                              //     style: theme.textTheme.bodyText2.copyWith(
-                              //       fontSize: 18,
-                              //       // color: Colors.blueGrey.shade900,
-                              //     ),
-                              //   ),
                             ]),
                           ),
                         ],
@@ -183,9 +161,9 @@ class BetCard extends StatelessWidget {
                       child: Text(fullData['result'].toString() ?? "",
                           textAlign: TextAlign.left,
                           style: TextStyle(
-                              fontSize: 16,
+                              fontSize: 14,
                               fontWeight: FontWeight.w900,
-                              color: Colors.blueGrey)),
+                              color: theme.accentColor)),
                     ),
                   ),
               ],
@@ -209,7 +187,10 @@ class SeriesName extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         child: Text('$seriesName',
             textAlign: TextAlign.left,
-            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w900)),
+            style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w900,
+                color: theme.accentColor)),
       ),
     );
   }
@@ -273,9 +254,9 @@ class UpcomingMatchesCard extends StatelessWidget {
                     child: Text(fullData['matchs'] + " " + fullData['series'],
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 14,
                             fontWeight: FontWeight.w500,
-                            color: Colors.blueGrey)),
+                            color: theme.accentColor)),
                   ),
                 ),
                 Padding(
@@ -305,7 +286,7 @@ class UpcomingMatchesCard extends StatelessWidget {
                                 child: Text(
                                   fullData['team_a'],
                                   style: theme.textTheme.bodyText2.copyWith(
-                                    fontSize: 18,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     height: 1.2,
                                     // color: Colors.blueGrey.shade900,
@@ -335,7 +316,7 @@ class UpcomingMatchesCard extends StatelessWidget {
                                   child: Text(
                                     fullData['team_b'],
                                     style: theme.textTheme.bodyText2.copyWith(
-                                      fontSize: 18,
+                                      fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                       height: 1.2,
                                       // color: Colors.blueGrey.shade900,
@@ -353,7 +334,7 @@ class UpcomingMatchesCard extends StatelessWidget {
                           Text(
                             handleDate(fullData['match_date']) ?? '',
                             style: theme.textTheme.bodyText2.copyWith(
-                              fontSize: 24,
+                              fontSize: 20,
                               fontWeight: FontWeight
                                   .bold, // color: Colors.blueGrey.shade900,
                             ),
@@ -361,8 +342,8 @@ class UpcomingMatchesCard extends StatelessWidget {
                           Text(
                             fullData['match_time'],
                             style: theme.textTheme.bodyText2.copyWith(
-                              fontSize: 18,
-                              color: Colors.blueGrey.shade900,
+                              fontSize: 14,
+                              color: theme.accentColor,
                             ),
                           )
                         ],
@@ -445,9 +426,9 @@ class RecentMatchesCard extends StatelessWidget {
                     child: Text(fullData['matchs'] + " " + fullData['series'],
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 14,
                             fontWeight: FontWeight.w500,
-                            color: Colors.blueGrey)),
+                            color: theme.accentColor)),
                   ),
                 ),
                 Padding(
@@ -476,7 +457,7 @@ class RecentMatchesCard extends StatelessWidget {
                               child: Text(
                                 fullData['team_a_short'],
                                 style: theme.textTheme.bodyText2.copyWith(
-                                  fontSize: 19,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   height: 1.2,
                                   // color: Colors.blueGrey.shade900,
@@ -489,7 +470,7 @@ class RecentMatchesCard extends StatelessWidget {
                               child: Text(
                                 fullData['team_a_scores'].toString() ?? "",
                                 style: theme.textTheme.bodyText2.copyWith(
-                                  fontSize: 16,
+                                  fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                   height: 1.2,
                                   // color: Colors.blueGrey.shade900,
@@ -524,7 +505,7 @@ class RecentMatchesCard extends StatelessWidget {
                                 child: Text(
                                   fullData['team_b_short'],
                                   style: theme.textTheme.bodyText2.copyWith(
-                                    fontSize: 19,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     height: 1.2,
                                     // color: Colors.blueGrey.shade900,
@@ -547,14 +528,7 @@ class RecentMatchesCard extends StatelessWidget {
                               Text(
                                 fullData['team_b_over'].toString() ?? "",
                                 style: theme.textTheme.bodyText2.copyWith(
-                                  fontSize: 18,
-                                  // color: Colors.blueGrey.shade900,
-                                ),
-                              ),
-                              Text(
-                                fullData['team_b_over'].toString() ?? "",
-                                style: theme.textTheme.bodyText2.copyWith(
-                                  fontSize: 18,
+                                  fontSize: 15,
                                   // color: Colors.blueGrey.shade900,
                                 ),
                               ),
@@ -568,7 +542,7 @@ class RecentMatchesCard extends StatelessWidget {
                           Text(
                             handleDate(fullData['match_date']) ?? '',
                             style: theme.textTheme.bodyText2.copyWith(
-                              fontSize: 24,
+                              fontSize: 18,
                               fontWeight: FontWeight
                                   .bold, // color: Colors.blueGrey.shade900,
                             ),
@@ -583,15 +557,15 @@ class RecentMatchesCard extends StatelessWidget {
                     padding:
                         const EdgeInsets.only(right: 8, left: 8, bottom: 8),
                     child: Container(
-                      width: MediaQuery.of(context).size.width,
-                      child: Text(
-                          handleResult(fullData['result']).toString() ?? null,
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              fontSize: 18,
+                        width: MediaQuery.of(context).size.width,
+                        child: Text(
+                            handleResult(fullData['result']).toString() ?? null,
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontSize: 14,
                               fontWeight: FontWeight.w900,
-                              color: Colors.blueGrey)),
-                    ),
+                              color: theme.accentColor,
+                            ))),
                   ),
               ],
             ),
@@ -631,28 +605,29 @@ class MatchFancyCard extends StatelessWidget {
                         child: Text(
                           'Fancy :',
                           style: theme.textTheme.bodyText2.copyWith(
-                            fontSize: 18,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                             height: 1.2,
                           ),
                         )),
-                    Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 8, horizontal: 4),
-                        child: Container(
-                          width: 260,
-                          child: Text(
-                            data['fancy'] ?? "N.A.",
-                            style: theme.textTheme.bodyText2.copyWith(
-                              fontSize: 18,
-                              height: 1.2,
+                    Expanded(
+                      child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 8, horizontal: 4),
+                          child: Container(
+                            child: Text(
+                              data['fancy'] ?? "N.A.",
+                              style: theme.textTheme.bodyText2.copyWith(
+                                fontSize: 16,
+                                height: 1.2,
+                              ),
                             ),
-                          ),
-                        ))
+                          )),
+                    )
                   ],
                 ),
               ),
-              Divider(height: 8, color: Colors.black),
+              Divider(height: 8, color: theme.accentColor),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Row(
@@ -663,7 +638,7 @@ class MatchFancyCard extends StatelessWidget {
                         child: Text(
                           'Back Size',
                           style: theme.textTheme.bodyText2.copyWith(
-                            fontSize: 16,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold,
                             height: 1.2,
                           ),
@@ -673,7 +648,7 @@ class MatchFancyCard extends StatelessWidget {
                         child: Text(
                           'Back Price',
                           style: theme.textTheme.bodyText2.copyWith(
-                            fontSize: 16,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold,
                             height: 1.2,
                           ),
@@ -683,7 +658,7 @@ class MatchFancyCard extends StatelessWidget {
                         child: Text(
                           'Lay Price',
                           style: theme.textTheme.bodyText2.copyWith(
-                            fontSize: 16,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold,
                             height: 1.2,
                           ),
@@ -693,7 +668,7 @@ class MatchFancyCard extends StatelessWidget {
                         child: Text(
                           'Lay Size',
                           style: theme.textTheme.bodyText2.copyWith(
-                            fontSize: 16,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold,
                             height: 1.2,
                           ),
@@ -717,7 +692,7 @@ class MatchFancyCard extends StatelessWidget {
                               .center, // Align however you like (i.e .centerRight, centerLeft)
                           child: Text(data['back_size'] ?? "N.A.",
                               style: TextStyle(
-                                  color: Colors.white, fontSize: 18))),
+                                  color: Colors.white, fontSize: 14))),
                     ),
                   ),
                   Padding(
@@ -733,7 +708,7 @@ class MatchFancyCard extends StatelessWidget {
                               .center, // Align however you like (i.e .centerRight, centerLeft)
                           child: Text(data['back_price'] ?? "N.A.",
                               style: TextStyle(
-                                  color: Colors.white, fontSize: 18))),
+                                  color: Colors.white, fontSize: 14))),
                     ),
                   ),
                   Padding(
@@ -749,7 +724,7 @@ class MatchFancyCard extends StatelessWidget {
                               .center, // Align however you like (i.e .centerRight, centerLeft)
                           child: Text(data['lay_size'] ?? "N.A.",
                               style: TextStyle(
-                                  color: Colors.white, fontSize: 18))),
+                                  color: Colors.white, fontSize: 14))),
                     ),
                   ),
                   Padding(
@@ -765,7 +740,7 @@ class MatchFancyCard extends StatelessWidget {
                               .center, // Align however you like (i.e .centerRight, centerLeft)
                           child: Text(data['lay_price'] ?? "N.A.",
                               style: TextStyle(
-                                  color: Colors.white, fontSize: 18))),
+                                  color: Colors.white, fontSize: 14))),
                     ),
                   ),
                 ],
@@ -773,7 +748,7 @@ class MatchFancyCard extends StatelessWidget {
               SizedBox(
                 height: 12,
               ),
-              Divider(height: 8, color: Colors.black),
+              Divider(height: 8, color: theme.accentColor),
               Container(
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -784,7 +759,7 @@ class MatchFancyCard extends StatelessWidget {
                         child: Text(
                           'Created At :',
                           style: theme.textTheme.bodyText2.copyWith(
-                            fontSize: 18,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold,
                             height: 1.2,
                           ),
@@ -797,7 +772,7 @@ class MatchFancyCard extends StatelessWidget {
                           child: Text(
                             data['created'] ?? "N.A.",
                             style: theme.textTheme.bodyText2.copyWith(
-                              fontSize: 18,
+                              fontSize: 14,
                               height: 1.2,
                             ),
                           ),
@@ -831,9 +806,8 @@ class LiveMatchesCard extends StatelessWidget {
 
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
-    var matchBScore = fullData['team_b_score']['1']['score'];
-    print(matchBScore);
+    var teamAScore;
+    var teamBScore;
 
     String handleDate(date) {
       var currDate = DateTime.now();
@@ -849,18 +823,35 @@ class LiveMatchesCard extends StatelessWidget {
       return finalDate;
     }
 
-    String handleResult(result) {
-      var finalResult = "";
-      // if (result.toLowerCase().contains('abandoned')) {
-      //   finalResult = "Match Abandoned";
-      // } else {
-
-      // var data = json.decode(fullData['team_b_score']);
-      // print('$data');
-      //   finalResult = result;
-      // }
-      return finalResult;
+    void handleInnings() {
+      if (fullData.containsKey('team_a_score') &&
+          fullData.containsKey('team_b_score')) {
+        var a = fullData['team_a_score'];
+        var b = fullData['team_b_score'];
+        if (a.containsKey('1')) {
+          teamAScore = a['1'];
+          teamBScore = b['2'];
+        } else {
+          teamAScore = a['2'];
+          teamBScore = b['1'];
+        }
+      } else if (fullData.containsKey('team_a_score') &&
+          !fullData.containsKey('team_b_score')) {
+        teamBScore = {"score": "0", "wicket": "0", "over": "0"};
+        teamAScore = fullData['team_a_score']['1'];
+      } else if (!fullData.containsKey('team_a_score') &&
+          fullData.containsKey('team_b_score')) {
+        teamAScore = {"score": "0", "wicket": "0", "over": "0"};
+        teamBScore = fullData['team_b_score']['1'];
+      } else if (!fullData.containsKey('team_a_score') &&
+          !fullData.containsKey('team_b_score')) {
+        teamAScore = {"score": "0", "wicket": "0", "over": "0"};
+        teamBScore = {"score": "0", "wicket": "0", "over": "0"};
+      }
     }
+
+    handleInnings();
+    print(fullData);
 
     return InkWell(
       onTap: onTap,
@@ -885,9 +876,9 @@ class LiveMatchesCard extends StatelessWidget {
                     child: Text(fullData['matchs'] + " " + fullData['series'],
                         textAlign: TextAlign.left,
                         style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 14,
                             fontWeight: FontWeight.w500,
-                            color: Colors.blueGrey)),
+                            color: theme.accentColor)),
                   ),
                 ),
                 Padding(
@@ -916,7 +907,7 @@ class LiveMatchesCard extends StatelessWidget {
                               child: Text(
                                 fullData['team_a_short'],
                                 style: theme.textTheme.bodyText2.copyWith(
-                                  fontSize: 19,
+                                  fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                   height: 1.2,
                                   // color: Colors.blueGrey.shade900,
@@ -927,20 +918,23 @@ class LiveMatchesCard extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 5.0),
                               child: Text(
-                                fullData['team_a_scores'].toString() ?? "",
+                                teamAScore['score'].toString() ?? "",
                                 style: theme.textTheme.bodyText2.copyWith(
-                                  fontSize: 16,
+                                  fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                   height: 1.2,
                                   // color: Colors.blueGrey.shade900,
                                 ),
                               ),
                             ),
-                            // const EdgeInsets.symmetric(horizontal: 0),
                             Text(
-                              fullData['team_a_over'].toString() ?? "",
+                              teamAScore['wicket'].toString() +
+                                      "-" +
+                                      teamAScore['over'].toString() ??
+                                  "",
                               style: theme.textTheme.bodyText2.copyWith(
-                                fontSize: 15,
+                                fontSize: 14,
+                                height: 1.2,
                                 // color: Colors.blueGrey.shade900,
                               ),
                             ),
@@ -954,7 +948,7 @@ class LiveMatchesCard extends StatelessWidget {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(12.5),
                                   child: Image.network(
-                                      fullData['team_b_img'].toString(),
+                                      fullData['tearm_b_img'].toString(),
                                       width: 25,
                                       height: 25),
                                 ),
@@ -964,7 +958,7 @@ class LiveMatchesCard extends StatelessWidget {
                                 child: Text(
                                   fullData['team_b_short'],
                                   style: theme.textTheme.bodyText2.copyWith(
-                                    fontSize: 19,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                     height: 1.2,
                                     // color: Colors.blueGrey.shade900,
@@ -975,9 +969,12 @@ class LiveMatchesCard extends StatelessWidget {
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 5.0),
                                 child: Text(
-                                  matchBScore.toString() ?? "",
+                                  teamBScore['score'].toString() +
+                                          "-" +
+                                          teamBScore['wicket'].toString() ??
+                                      "",
                                   style: theme.textTheme.bodyText2.copyWith(
-                                    fontSize: 16,
+                                    fontSize: 15,
                                     fontWeight: FontWeight.bold,
                                     height: 1.2,
                                     // color: Colors.blueGrey.shade900,
@@ -985,9 +982,10 @@ class LiveMatchesCard extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                fullData['team_b_over'].toString() ?? "",
+                                teamBScore['over'].toString() ?? "",
                                 style: theme.textTheme.bodyText2.copyWith(
-                                  fontSize: 18,
+                                  fontSize: 14,
+                                  height: 1.2,
                                   // color: Colors.blueGrey.shade900,
                                 ),
                               ),
@@ -1001,7 +999,7 @@ class LiveMatchesCard extends StatelessWidget {
                           Text(
                             handleDate(fullData['match_date']) ?? '',
                             style: theme.textTheme.bodyText2.copyWith(
-                              fontSize: 24,
+                              fontSize: 20,
                               fontWeight: FontWeight
                                   .bold, // color: Colors.blueGrey.shade900,
                             ),
@@ -1011,19 +1009,18 @@ class LiveMatchesCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                if (fullData['result'] != "")
+                if (fullData['result'] != null)
                   Padding(
                     padding:
                         const EdgeInsets.only(right: 8, left: 8, bottom: 8),
                     child: Container(
                       width: MediaQuery.of(context).size.width,
-                      child: Text(
-                          handleResult(fullData['result']).toString() ?? null,
+                      child: Text(fullData['result'] ?? null,
                           textAlign: TextAlign.left,
                           style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.w900,
-                              color: Colors.blueGrey)),
+                              color: theme.accentColor)),
                     ),
                   ),
               ],
@@ -1034,3 +1031,5 @@ class LiveMatchesCard extends StatelessWidget {
     );
   }
 }
+
+class Dynamic {}

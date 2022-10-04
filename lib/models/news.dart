@@ -18,7 +18,6 @@ class NewsModel {
   });
 
   factory NewsModel.fromJson(Map<String, dynamic> json) {
-    print(json);
     return NewsModel(
       title: json['title'],
       image: json['image'],

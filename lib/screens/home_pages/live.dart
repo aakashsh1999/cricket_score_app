@@ -14,9 +14,12 @@ class LiveMatches extends StatefulWidget {
 class _LiveMatchesState extends State<LiveMatches> {
   final networkHandler = new NetworkHandler();
   var response;
+  var isLoading = false;
 
   void getData() async {
+    isLoading = true;
     response = await networkHandler.get('/get_liveMatchList');
+    isLoading = false;
     response = response['data'];
     setState(() {});
   }
@@ -34,7 +37,10 @@ class _LiveMatchesState extends State<LiveMatches> {
 
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return response != null
+    if (isLoading) {
+      return Center(child: CircularProgressIndicator());
+    }
+    return !response.isEmpty
         ? Padding(
             padding: const EdgeInsets.only(top: 5),
             child: Container(
@@ -69,6 +75,8 @@ class _LiveMatchesState extends State<LiveMatches> {
                         )
                       ]);
                     })))
-        : Center(child: CircularProgressIndicator());
+        : Center(
+            child: Text('No data found',
+                style: TextStyle(color: theme.accentColor)));
   }
 }

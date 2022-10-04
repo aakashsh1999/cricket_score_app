@@ -56,7 +56,7 @@ class DiceAd extends StatelessWidget {
           ),
         ),
         // color: Colors.green,
-        height: 55,
+        height: 75,
         color: Theme.of(context).primaryColor,
       ),
     );
